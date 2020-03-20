@@ -125,7 +125,7 @@ commit;
 --5 Converts Vital status  data into ACT fact data for HPDS.
 insert into TM_CZ.HPDS_DATA_LATEST
 select patient_num,'\Demographics\Vital Status\',null,'Known Deceased'
-from tm_cz.delta_patient_dim 
+from i2b2demodata.patient_dimension
 where death_date is not null;
 
 commit;
