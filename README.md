@@ -1,8 +1,9 @@
-Scripts have to be deployed in listed order to convert i2b2TM data into HPDS ACT ontology format.
+This repo has all the script that can convert i2b2TM data into ACT HPDS data format.
+Scripts have to be deployed in listed order.
 
 1.ACT_HPDS_01_Table_Create.sql 
 
-Creates listed tables
+Creates listed tables which have ACT ontology and mappings to convert to ACT format. 
 
 	TM_CZ.A_NCATS_DEMOGRAPHICS 
 	TM_CZ.A_NCATS_VISIT_DETAILS 
@@ -12,8 +13,7 @@ Creates listed tables
 	
 2.ACT_HPDS_02_Data_Load_Manual.sql	
 
-Loads listed data in above created tables, the csv data has has to be imported, sql scripts loads the data directly into tables. 
-After that validate the data got loaded correctly.
+Loads listed data files in above created tables, the csv data has to be imported, sql scripts loads the data directly into tables. 
 
 	data_A_ACT_ICD10PCS_PX_2018AA_MAP.tar.gz
 	data_A_NCATS_ICD10_ICD9_DX_V1_MAP.tar.gz
@@ -28,17 +28,17 @@ After that validate the data got loaded correctly.
 	
 3.ACT_HPDS_03_Demographics_Data_Load.sql	
 
-Loads Demographics data in HPDS ACT format.
+Loads Demographics fact data in HPDS ACT format.
 
 4.ACT_HPDS_04_Visit_Data_Load.sql	
 
-Loads Visit data in HPDS ACT format.
+Loads Visit fact data in HPDS ACT format.
 
 5.ACT_HPDS_05_Diagnosis_Data_Load.sql	
 
-Loads Diagnosis data in HPDS ACT format.
+Loads Diagnosis fact data in HPDS ACT format.
 
 6.ACT_HPDS_06_Procedures_Data_Load.sql	
 
-Loads Procedures data in HPDS ACT format.
+Loads Procedures fact data in HPDS ACT format.
 	
