@@ -122,4 +122,10 @@ and f1.concept_cd = cd.concept_cd ) fact1
     where fact1.name_char = a.c_name (+);
 
 commit;
+--5 Converts Vital status  data into ACT fact data for HPDS.
+insert into TM_CZ.HPDS_DATA_LATEST
+select patient_num,'\Demographics\Vital Status\',null,'Known Deceased'
+from tm_cz.delta_patient_dim 
+where death_date is not null;
 
+commit;
