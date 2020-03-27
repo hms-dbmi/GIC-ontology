@@ -20,9 +20,11 @@ commit;
 
 --Extract vist data
 
+drop table tm_cz.VISIT_FACT_DETAILS ;
+
 create table tm_cz.VISIT_FACT_DETAILS as
 select distinct vd.patient_num,inout_cd,length_of_stay,
-trunc( (start_date - cast(birth_date as date))/365 ) age_at_visit_yrs
+trunc( (start_date - cast(birth_date as date))/365 ) age_at_visit_yrs ,vd.start_date
 from  i2b2demodata.visit_dimension vd, 
 i2b2demodata.patient_dimension pd
 where vd.patient_num = pd.patient_num 
@@ -30,21 +32,21 @@ where vd.patient_num = pd.patient_num
 
 --Visit Age
 
-insert into TM_CZ.HPDS_DATA_LATEST ( patient_num,concept_path,nval_num,tval_char  )
-select  patient_num,'\VisitInformation\Years\Age' concept_path,age_at_visit_yrs,'E'
+insert into TM_CZ.HPDS_DATA_LATEST ( patient_num,concept_path,nval_num,tval_char,start_date  )
+select  patient_num,'\Visit Details\Years\Age' concept_path,age_at_visit_yrs,'E',start_date
 from tm_cz.VISIT_FACT_DETAILS 
 where age_at_visit_yrs >= 0 ;
 
 --Visit type
-insert into TM_CZ.HPDS_DATA_LATEST ( patient_num,concept_path,tval_char  )
+insert into TM_CZ.HPDS_DATA_LATEST ( patient_num,concept_path,tval_char,start_date  )
 SELECT DISTINCT
     b.patient_num,
     '\Visit Details\Visit type\' ,
-    a.c_name visit_type
+    a.c_name visit_type , start_date
 FROM
     (
         SELECT
-           distinct v.inout_cd , v.patient_num,M.ACT_VISIT_TYPE
+           distinct v.inout_cd , v.patient_num,M.ACT_VISIT_TYPE,start_date
         FROM
             tm_cz.VISIT_FACT_DETAILS V, tm_cz.a_ncats_visit_details_map M
             WHERE v.inout_cd = M.BCH_VISIT_TYPE
@@ -66,12 +68,14 @@ insert into TM_CZ.HPDS_DATA_LATEST ( patient_num,concept_path,tval_char  )
 SELECT DISTINCT
     b.patient_num,
     '\Visit Details\Length of stay\',
-    a.c_name lengthofstay
+    a.c_name lengthofstay,
+    start_date
 FROM
     (
         SELECT
             length_of_stay,
-            patient_num
+            patient_num,
+            start_date
         FROM
             tm_cz.VISIT_FACT_DETAILS
         WHERE
@@ -91,12 +95,13 @@ union all
 SELECT DISTINCT
     b.patient_num,
     '\Visit Details\Length of stay\',
-    a.c_name lengthofstay
+    a.c_name lengthofstay,start_date
 FROM
     (
         SELECT
             length_of_stay,
-            patient_num
+            patient_num,
+            start_date
         FROM
             tm_cz.VISIT_FACT_DETAILS
         WHERE

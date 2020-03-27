@@ -6,8 +6,8 @@
 
 set serveroutput on
 begin
-insert into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR)
-select distinct patient_num,act_concept_path ,null,act_name_char
+insert into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)
+select distinct patient_num,act_concept_path ,null,act_name_char,start_date
 from i2b2demodata.observation_fact   fact1, tm_cz.a_NCATS_ICD10_ICD9_DX_V1_map cd
 where cd.bch_concept_cd = fact1.CONCEPT_CD;
 
