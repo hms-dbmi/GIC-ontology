@@ -78,6 +78,7 @@ docker-compose -f docker-compose-sql-loader.yml up
 after the ETL extract process completes it generates listed 2 new files in /pic-sure-hpds/docker/pic-sure-hpds-etl/hpds/
 
 columnMeta.javabin
+
 allObservationsStore.javabin
 
 
