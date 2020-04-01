@@ -44,7 +44,7 @@ Loads Procedures fact data in HPDS ACT format.
 	
 ***Above steps will populate database table TM_CZ.HPDS_DATA_LATEST with the data in ACT HPDS format***
 
-***Listed are the Steps for extraction of data in javabin format from the database tableand deployment on to App server***
+***Listed are the Steps for extraction of data in javabin format from the database table and deployment on to App server***
 
 Login on to ETL server
 
@@ -52,18 +52,23 @@ clone hpds-etl repo  https://github.com/hms-dbmi/pic-sure-hpds/tree/master/docke
 
 cd /pic-sure-hpds/docker/pic-sure-hpds-etl/hpds/
 
-**Modify listed files 3 files.
+**Modify listed 3 files.
 
-1.sql.properties - with oracle database connect string
+1 sql.properties - with oracle database connect string
 
 datasource.password=< your password >
+
 datasource.user=< your user >
+
 datasource.url=< your db connection string (currently only oracle) sampleformat jdbc:oracle:thin:@aaaabbbb.us-east.rds.amazonaws.com:1521/ORCL >
 
-2.loadQuery.sql - Modify to as listed.
+
+2 loadQuery.sql - Modify to as listed.
+
 SELECT PATIENT_NUM, CONCEPT_PATH, NVAL_NUM, TVAL_CHAR,START_DATE FROM TM_CZ.HPDS_DATA_LATEST  ORDER BY CONCEPT_PATH, PATIENT_NUM
 
-3.Encryption.key- select any 32 character hexadecimal encryption key, lowercase a-f and numerals only
+
+3 Encryption.key- select any 32 character hexadecimal encryption key, lowercase a-f and numerals only
 
 cd ..
 
