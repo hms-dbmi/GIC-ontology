@@ -1,5 +1,5 @@
-This repo has all the script that can convert i2b2TM data into ACT HPDS data format.
-Scripts have to be deployed in listed order.
+This repo has steps to convert i2b2TM data into ACT HPDS data format. 
+Following that picsure hpds data extraction and deployment steps.
 
 1.ACT_HPDS_01_Table_Create.sql 
 
@@ -42,3 +42,51 @@ Loads Diagnosis fact data in HPDS ACT format.
 
 Loads Procedures fact data in HPDS ACT format.
 	
+---*** Above steps will populate database table TM_CZ.HPDS_DATA_LATEST with the data in ACT HPDS format***---
+
+Steps for extraction of data in javabin format from the database table.
+
+clone hpds-etl repo.
+
+https://github.com/hms-dbmi/pic-sure-hpds/tree/master/docker/pic-sure-hpds-etl )
+
+Login on to ETL server
+cd /pic-sure-hpds/docker/pic-sure-hpds-etl/hpds/
+
+Modify listed files 3 files.
+
+1.sql.properties - with oracle database connect string
+
+datasource.password=< your password >
+datasource.user=< your user >
+datasource.url=< your db connection string (currently only oracle) sampleformat jdbc:oracle:thin:@aaaabbbb.us-east.rds.amazonaws.com:1521/ORCL >
+
+2.loadQuery.sql - Modify to as listed.
+SELECT PATIENT_NUM, CONCEPT_PATH, NVAL_NUM, TVAL_CHAR,START_DATE FROM TM_CZ.HPDS_DATA_LATEST  ORDER BY CONCEPT_PATH, PATIENT_NUM
+
+3.Encryption.key- select any 32 character hexadecimal encryption key, lowercase a-f and numerals only
+
+cd ..
+
+docker-compose -f docker-compose-sql-loader.yml up
+
+
+after the ETL extract process completes it generates listed 2 new files in /pic-sure-hpds/docker/pic-sure-hpds-etl/hpds/
+
+columnMeta.javabin
+allObservationsStore.javabin
+
+
+3.Login on App server.
+
+Copy above created new files + encryption_key on to App server eg in /scratch/act/act_test_phenotype_date_1
+
+modify ../hpds-test-dataload/pic-sure-hpds-phenotype-load-example/docker-compose.yml
+to map to these datafile for phenotype data source as listed 
+
+    volumes:
+       - /scratch/act/act_test_phenotype_date_1:/opt/local/hpds
+
+docker-compose up -d
+
+
