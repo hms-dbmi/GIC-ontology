@@ -42,18 +42,17 @@ Loads Diagnosis fact data in HPDS ACT format.
 
 Loads Procedures fact data in HPDS ACT format.
 	
----*** Above steps will populate database table TM_CZ.HPDS_DATA_LATEST with the data in ACT HPDS format***---
+***Above steps will populate database table TM_CZ.HPDS_DATA_LATEST with the data in ACT HPDS format***
 
-Steps for extraction of data in javabin format from the database table.
-
-clone hpds-etl repo.
-
-https://github.com/hms-dbmi/pic-sure-hpds/tree/master/docker/pic-sure-hpds-etl )
+***Listed are the Steps for extraction of data in javabin format from the database tableand deployment on to App server***
 
 Login on to ETL server
+
+clone hpds-etl repo  https://github.com/hms-dbmi/pic-sure-hpds/tree/master/docker/pic-sure-hpds-etl 
+
 cd /pic-sure-hpds/docker/pic-sure-hpds-etl/hpds/
 
-Modify listed files 3 files.
+**Modify listed files 3 files.
 
 1.sql.properties - with oracle database connect string
 
