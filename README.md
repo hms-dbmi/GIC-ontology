@@ -3,7 +3,8 @@ Following that picsure hpds data extraction and deployment steps.
 
 1.ACT_HPDS_01_Table_Create.sql 
 
-Creates listed tables which have ACT ontology and mappings to convert to ACT format. 
+Creates listed tables which have ACT ontology and mappings to convert to ACT format. Other ACT Ontologies and documentation can be downloaded from the ACT dropbox. https://app.box.com/s/x4ab2a1vcgi59c98xcdxbyzlqlthb6g4 
+
 
 	TM_CZ.A_NCATS_DEMOGRAPHICS 
 	TM_CZ.A_NCATS_VISIT_DETAILS 
