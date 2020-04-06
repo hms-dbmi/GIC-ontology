@@ -32,7 +32,7 @@ insert into tm_cz.HPDS_DATA_LATEST ( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR
                         '++++'
                     )
             ) fact1,
-            tm_cz.A_LAB_DATA_ACT_BCH_MAP_PATH1 m
+            tm_cz.A_LAB_DATA_ACT_BCH_MAP_PATH m
         WHERE
             fact1.concept_cd = m.bch_lab_code            
             AND patient_num = r_data.patient_num;
