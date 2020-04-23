@@ -33,7 +33,7 @@ where vd.patient_num = pd.patient_num
 --Visit Age
 
 insert into TM_CZ.HPDS_DATA_LATEST ( patient_num,concept_path,nval_num,tval_char,start_date  )
-select  patient_num,'\Visit Details\Years\Age' concept_path,age_at_visit_yrs,'E',start_date
+select  distinct patient_num,'\Visit Details\Years\Age\' concept_path,age_at_visit_yrs,'E',start_date
 from tm_cz.VISIT_FACT_DETAILS 
 where age_at_visit_yrs >= 0 ;
 
