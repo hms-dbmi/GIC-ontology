@@ -64,7 +64,7 @@ FROM
 
 
 ----Load lengthofstay
-insert into TM_CZ.HPDS_DATA_LATEST ( patient_num,concept_path,tval_char  )
+insert into TM_CZ.HPDS_DATA_LATEST ( patient_num,concept_path,tval_char ,start_date )
 SELECT DISTINCT
     b.patient_num,
     '\Visit Details\Length of stay\',
