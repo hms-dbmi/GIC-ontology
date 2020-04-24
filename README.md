@@ -30,7 +30,7 @@ Loads listed data files in above created tables, the csv data has to be imported
 3.ACT_HPDS_03_Demographics_Data_Load.sql	
 
 Loads Demographics fact data in HPDS ACT format. start_date ( newly added data attribute ) is extracted as system date
-for all the demographics data, for vital_status as date of death.
+for all the demographics data, except for vital_status as date of death.
 
 4.ACT_HPDS_04_Visit_Data_Load.sql	
 
