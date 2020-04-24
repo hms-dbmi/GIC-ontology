@@ -29,19 +29,23 @@ Loads listed data files in above created tables, the csv data has to be imported
 	
 3.ACT_HPDS_03_Demographics_Data_Load.sql	
 
-Loads Demographics fact data in HPDS ACT format.
+Loads Demographics fact data in HPDS ACT format. start_date ( newly added data attribute ) is extracted as system date
+for all the demographics data, for vital_status as date of death.
 
 4.ACT_HPDS_04_Visit_Data_Load.sql	
 
-Loads Visit fact data in HPDS ACT format.
+Loads Visit fact data in HPDS ACT format. start_date ( newly added data attribute ) is extracted as start_date
+ of corresponding encounter_num from the visit_dimension table.
 
 5.ACT_HPDS_05_Diagnosis_Data_Load.sql	
 
-Loads Diagnosis fact data in HPDS ACT format.
+Loads Diagnosis fact data in HPDS ACT format.start_date ( newly added data attribute ) is extracted as start_date
+ of fact row from the observation_fact table.
 
 6.ACT_HPDS_06_Procedures_Data_Load.sql	
 
-Loads Procedures fact data in HPDS ACT format.
+Loads Procedures fact data in HPDS ACT format. start_date ( newly added data attribute ) is extracted as start_date
+ of fact row from the observation_fact table.
 	
 ***Above steps will populate database table TM_CZ.HPDS_DATA_LATEST with the data in ACT HPDS format***
 
