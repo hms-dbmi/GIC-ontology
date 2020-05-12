@@ -164,3 +164,4 @@
 "2";"\ACT\Demographics\Vital Status\";"Vital Status";"N";"FA ";"";"";"";"concept_cd";"concept_dimension";"concept_path";"T";"LIKE";"\ACT\Demographics\Vital Status\";"";"\Demographics\Vital Status";"@";"2007-04-10";"";"";"";"";"";"";"";"\Demographics\Vital Status"
 "3";"\ACT\Demographics\Vital Status\Known Deceased\";"Known Deceased";"N";"LA ";"";"DEM|VITAL STATUS:D";"";"concept_cd";"concept_dimension";"concept_path";"T";"LIKE";"\ACT\Demographics\Vital Status\Known Deceased\";"";"\Demographics\Vital Status\Known Deceased";"@";"2007-04-10";"";"";"";"";"";"";"";"\Demographics\Vital Status\Known Deceased"
 
+
