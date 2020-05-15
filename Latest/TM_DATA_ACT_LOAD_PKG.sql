@@ -22,10 +22,18 @@ Expected Results:
                - If the above data is not populated, it might need code change based on how data is populated in sourcesystem.
                
                - Call to proc TM_DATA_ACT_LOAD_PKG.Run_EXTRCT_HPDS_Data will populate 
-               - table tm_cz.HPDS_DATA_LATEST with HPDS extract in ACT format.                     
+               - table tm_cz.HPDS_DATA_LATEST with HPDS extract in ACT format.  
+               - GIC Version of code 
 */
 
+FUNCTION   PARSE_NTH_VALUE (pValue varchar2, location NUMBER, delimiter VARCHAR2)
+   return varchar2 ; 
    
+PROCEDURE log_msg(
+        p_runid IN NUMBER DEFAULT -9,
+        p_msg      IN VARCHAR2,
+        p_msg_type IN VARCHAR2 DEFAULT 'X');
+        
 PROCEDURE MAP_DATA_LOAD_NCATS_LABS_HPDS (
     p_runid        IN NUMBER )  ;   
 
@@ -75,12 +83,53 @@ END TM_DATA_ACT_LOAD_PKG;
 
 create or replace PACKAGE BODY TM_DATA_ACT_LOAD_PKG AS
 
+FUNCTION   PARSE_NTH_VALUE (pValue varchar2, location NUMBER, delimiter VARCHAR2)
+   return varchar2
+is
+   v_posA number;
+   v_posB number;
+
+begin
+
+   if location = 1 then
+      v_posA := 1; -- Start at the beginning
+   else
+      v_posA := instr (pValue, delimiter, 1, location - 1);
+      if v_posA = 0 then
+         return null; --No values left.
+      end if;
+      v_posA := v_posA + length(delimiter);
+   end if;
+
+   v_posB := instr (pValue, delimiter, 1, location);
+   if v_posB = 0 then -- Use the end of the file
+      return substr (pValue, v_posA);
+   end if;
+
+   return substr (pValue, v_posA, v_posB - v_posA);
+
+end ;
+
+PROCEDURE log_msg(
+      p_runid IN NUMBER DEFAULT -9,
+      p_msg      IN VARCHAR2,
+      p_msg_type IN VARCHAR2 DEFAULT 'X')
+  AS
+    v_logid NUMBER := 0;
+    PRAGMA AUTONOMOUS_TRANSACTION;
+  BEGIN
+    select ETL_LOG_SEQ.nextval into v_logid from dual;
+    INSERT INTO ETL_RUN_LOG VALUES
+      (v_logid, p_runid, p_msg, p_msg_type, CURRENT_TIMESTAMP, DBMS_SESSION.unique_session_id
+      );
+    COMMIT;
+  END;
 
 PROCEDURE MAP_DATA_LOAD_NCATS_LABS_HPDS (
     p_runid        IN NUMBER )  
     AS
   BEGIN
-        TM_LOG_PKG.log_msg(p_runid, 'Start MAP_DATA_LOAD_NCATS_LABS_HPDS: '||sql%rowcount, 'Y'); 
+        log_msg(p_runid, 'Start MAP_DATA_LOAD_NCATS_LABS_HPDS: '||sql%rowcount, 'Y'); 
         DELETE FROM act_bch_ontology_map
         WHERE data_type = 'NCATS_LABS_HPDS';
         
@@ -110,7 +159,7 @@ PROCEDURE MAP_DATA_LOAD_NCATS_LABS_HPDS (
              TM_CZ.NCATS_LABS_HPDS a
         WHERE b.name_char = a.c_name
         AND concept_path like '\i2b2\Lab View\%'; --182 Rows Inserted
-        TM_LOG_PKG.log_msg(p_runid, 'End MAP_DATA_LOAD_NCATS_LABS_HPDS: '||sql%rowcount, 'Y'); 
+        log_msg(p_runid, 'End MAP_DATA_LOAD_NCATS_LABS_HPDS: '||sql%rowcount, 'Y'); 
         COMMIT;
   END;
 
@@ -118,10 +167,10 @@ PROCEDURE MAP_DATA_LOAD_ACT_ICD10CM_HPDS (
     p_runid        IN NUMBER )  
     AS
   BEGIN
-     TM_LOG_PKG.log_msg(p_runid, 'Start MAP_DATA_LOAD_ACT_ICD10CM_HPDS: ', 'Y');  
+     log_msg(p_runid, 'Start MAP_DATA_LOAD_ACT_ICD10CM_HPDS: ', 'Y');  
         DELETE FROM act_bch_ontology_map
         WHERE data_type = 'ACT_ICD10CM_DX_2018AA_HPDS';
-        TM_LOG_PKG.log_msg(p_runid, 'Delete existing data MAP_DATA_LOAD_ACT_ICD10CM_HPDS: '||sql%rowcount, 'Y');        
+        log_msg(p_runid, 'Delete existing data MAP_DATA_LOAD_ACT_ICD10CM_HPDS: '||sql%rowcount, 'Y');        
         -- matched based on ICD cd
         --in addition  nodes are matched based on c_name/name_char too
         
@@ -138,7 +187,7 @@ PROCEDURE MAP_DATA_LOAD_ACT_ICD10CM_HPDS (
             from I2B2DEMODATA.concept_dimension cd, tm_cz.ACT_ICD10CM_DX_2018AA_HPDS a
             where concept_cd like 'ICD9%'
             and concept_path like '%\Diag%'--ICD10:I25.761
-            and  name_char = ltrim(replace ( c_name,tm_cz.parse_nth_value(c_name,1,' ') ,'')) 
+            and  name_char = ltrim(replace ( c_name,parse_nth_value(c_name,1,' ') ,'')) 
             --and replace(C_BASECODE,'ICD10CM','ICD10') <> cd.concept_cd
             --and cd.concept_cd like 'ICD9%'-- 3358
             union 
@@ -151,7 +200,7 @@ PROCEDURE MAP_DATA_LOAD_ACT_ICD10CM_HPDS (
             and replace(C_BASECODE,'ICD10CM','ICD10') = cd.concept_cd ;--95130 rows inserted.
         
            
-     TM_LOG_PKG.log_msg(p_runid, 'End MAP_DATA_LOAD_ACT_ICD10CM_HPDS: Inserted Rows '||sql%rowcount, 'Y');   
+     log_msg(p_runid, 'End MAP_DATA_LOAD_ACT_ICD10CM_HPDS: Inserted Rows '||sql%rowcount, 'Y');   
       COMMIT;
   END;
   
@@ -159,10 +208,10 @@ PROCEDURE MAP_DATA_LOAD_ACT_CPT_PX_HPDS (
     p_runid        IN NUMBER )  
     AS
   BEGIN
-     TM_LOG_PKG.log_msg(p_runid, 'Start MAP_DATA_LOAD_ACT_CPT_PX_HPDS: ', 'Y');  
+     log_msg(p_runid, 'Start MAP_DATA_LOAD_ACT_CPT_PX_HPDS: ', 'Y');  
         DELETE FROM act_bch_ontology_map
         WHERE data_type = 'ACT_CPT_PX_2018AA_HPDS';
-        TM_LOG_PKG.log_msg(p_runid, 'Delete existing data MAP_DATA_LOAD_ACT_CPT_PX_HPDS: '||sql%rowcount, 'Y');   
+        log_msg(p_runid, 'Delete existing data MAP_DATA_LOAD_ACT_CPT_PX_HPDS: '||sql%rowcount, 'Y');   
         
         --AND matched based on CPT cd
         --IN ADDITION  nodes are matched based on c_name/name_char too
@@ -179,7 +228,7 @@ PROCEDURE MAP_DATA_LOAD_ACT_CPT_PX_HPDS (
                 ( select *
                 from I2B2DEMODATA.concept_dimension
                 WHERE concept_path like '%\Procedures\%'
-                and  tm_cz.parse_nth_value(concept_cd,1,':')  in ('CPT4' ) ) b, tm_cz.ACT_CPT_PX_2018AA_HPDS a
+                and  parse_nth_value(concept_cd,1,':')  in ('CPT4' ) ) b, tm_cz.ACT_CPT_PX_2018AA_HPDS a
                 where b.concept_cd = a.c_basecode--7599/8725 in cd
                 union
                 select 'ACT_CPT_PX_2018AA_HPDS' src, b.concept_path bch_concept_path,b.name_char bch_name_char,b.concept_cd bch_concept_cd,
@@ -188,11 +237,11 @@ PROCEDURE MAP_DATA_LOAD_ACT_CPT_PX_HPDS (
                 (select *
                 from I2B2DEMODATA.concept_dimension
                 WHERE concept_path like '%\Procedures\%'
-                and  tm_cz.parse_nth_value(concept_cd,1,':')  in ('CPT4' ) ) b, tm_cz.ACT_CPT_PX_2018AA_HPDS a
+                and  parse_nth_value(concept_cd,1,':')  in ('CPT4' ) ) b, tm_cz.ACT_CPT_PX_2018AA_HPDS a
                 where b.name_char = a.c_name--2586/8725 in cd
                 and b.concept_cd <> a.c_basecode ;--7,824 rows inserted.
 
-     TM_LOG_PKG.log_msg(p_runid, 'End MAP_DATA_LOAD_ACT_CPT_PX_HPDS: Inserted Rows '||sql%rowcount, 'Y');        
+     log_msg(p_runid, 'End MAP_DATA_LOAD_ACT_CPT_PX_HPDS: Inserted Rows '||sql%rowcount, 'Y');        
      COMMIT;
   END;
 
@@ -200,10 +249,10 @@ PROCEDURE MAP_DATA_LOAD_VISIT_HPDS (
     p_runid        IN NUMBER )  
     AS
   BEGIN
-     TM_LOG_PKG.log_msg(p_runid, 'Start MAP_DATA_LOAD_VISIT_HPDS: ', 'Y');  
+     log_msg(p_runid, 'Start MAP_DATA_LOAD_VISIT_HPDS: ', 'Y');  
         DELETE FROM act_bch_ontology_map
         WHERE data_type in ( 'Visit type','Length of stay');
-        TM_LOG_PKG.log_msg(p_runid, 'Delete existing data MAP_DATA_LOAD_VISIT_HPDS: '||sql%rowcount, 'Y');  
+        log_msg(p_runid, 'Delete existing data MAP_DATA_LOAD_VISIT_HPDS: '||sql%rowcount, 'Y');  
         
         --Loads mapping for visit type and length of stay   
         --tm_cz.a_ncats_visit_details_map has source system visit type (inout_cd visit_dimension ) 
@@ -227,7 +276,7 @@ PROCEDURE MAP_DATA_LOAD_VISIT_HPDS (
             from tm_cz.a_ncats_visit_details_map m,  tm_cz.NCATS_VISIT_DETAILS_HPDS a
             where c_fullname like '\ACT\Visit Details\Visit type\%'
             and a.c_name = m.act_visit_type; --11 rows inserted.
-        TM_LOG_PKG.log_msg(p_runid, 'Inserted Visit type  data MAP_DATA_LOAD_VISIT_HPDS: '||sql%rowcount, 'Y'); 
+        log_msg(p_runid, 'Inserted Visit type  data MAP_DATA_LOAD_VISIT_HPDS: '||sql%rowcount, 'Y'); 
             --Populating data for '\ACT Visit Details\Length of stay
             
             Insert into TM_CZ.ACT_BCH_ONTOLOGY_MAP (ACT_CONCEPT_PATH,ACT_NAME_CHAR,ACT_CONCEPT_CD,BCH_CONCEPT_PATH,BCH_NAME_CHAR,BCH_CONCEPT_CD,DATA_TYPE) values ('\ACT Visit Details\Length of stay\','> 10 days',null,null,'> 10 days',null,'Length of stay');
@@ -242,8 +291,8 @@ PROCEDURE MAP_DATA_LOAD_VISIT_HPDS (
             Insert into TM_CZ.ACT_BCH_ONTOLOGY_MAP (ACT_CONCEPT_PATH,ACT_NAME_CHAR,ACT_CONCEPT_CD,BCH_CONCEPT_PATH,BCH_NAME_CHAR,BCH_CONCEPT_CD,DATA_TYPE) values ('\ACT Visit Details\Length of stay\','10','10',null,'10',null,'Length of stay');
             Insert into TM_CZ.ACT_BCH_ONTOLOGY_MAP (ACT_CONCEPT_PATH,ACT_NAME_CHAR,ACT_CONCEPT_CD,BCH_CONCEPT_PATH,BCH_NAME_CHAR,BCH_CONCEPT_CD,DATA_TYPE) values ('\ACT Visit Details\Length of stay\','1','1',null,'1',null,'Length of stay');
              --11 rows inserted.
-            TM_LOG_PKG.log_msg(p_runid, 'Inserted Length of stay  data MAP_DATA_LOAD_VISIT_HPDS: 11', 'Y'); 
-     TM_LOG_PKG.log_msg(p_runid, 'End MAP_DATA_LOAD_VISIT_HPDS: ', 'Y');        
+            log_msg(p_runid, 'Inserted Length of stay  data MAP_DATA_LOAD_VISIT_HPDS: 11', 'Y'); 
+     log_msg(p_runid, 'End MAP_DATA_LOAD_VISIT_HPDS: ', 'Y');        
      COMMIT;
   END;
 --
@@ -251,10 +300,10 @@ PROCEDURE MAP_DATA_LOAD_DEMOGRAPHCS_HPDS (
     p_runid        IN NUMBER )  
     AS
   BEGIN
-     TM_LOG_PKG.log_msg(p_runid, 'Start MAP_DATA_LOAD_DEMOGRAPHCS_HPDS: ', 'Y');  
+     log_msg(p_runid, 'Start MAP_DATA_LOAD_DEMOGRAPHCS_HPDS: ', 'Y');  
         DELETE FROM act_bch_ontology_map
         WHERE data_type in ( 'Hispanic','Race' );
-        TM_LOG_PKG.log_msg(p_runid, 'Delete existing data MAP_DATA_LOAD_DEMOGRAPHCS_HPDS: '||sql%rowcount, 'Y'); 
+        log_msg(p_runid, 'Delete existing data MAP_DATA_LOAD_DEMOGRAPHCS_HPDS: '||sql%rowcount, 'Y'); 
         --Loads mapping for Hispanic and Race flag from Observation_Fact table.
         --
         
@@ -357,7 +406,7 @@ PROCEDURE MAP_DATA_LOAD_DEMOGRAPHCS_HPDS (
                     'Haitian',
                     'Puerto Rican',
                     'Caribbean Islander')    );--170
-            TM_LOG_PKG.log_msg(p_runid, 'Inserted Hispanic rows MAP_DATA_LOAD_DEMOGRAPHCS_HPDS: '||sql%rowcount, 'Y');      
+            log_msg(p_runid, 'Inserted Hispanic rows MAP_DATA_LOAD_DEMOGRAPHCS_HPDS: '||sql%rowcount, 'Y');      
             INSERT INTO act_bch_ontology_map (
                 bch_concept_path,
                 bch_name_char,
@@ -377,9 +426,9 @@ PROCEDURE MAP_DATA_LOAD_DEMOGRAPHCS_HPDS (
              ( select * from I2B2DEMODATA.concept_dimension cd
                             WHERE   cd.concept_cd LIKE 'DEM|RACE:%' ) r
                              where r.name_char = a.c_name (+); --12 rows inserted.
-             TM_LOG_PKG.log_msg(p_runid, 'Inserted Race rows MAP_DATA_LOAD_DEMOGRAPHCS_HPDS: '||sql%rowcount, 'Y');           
+             log_msg(p_runid, 'Inserted Race rows MAP_DATA_LOAD_DEMOGRAPHCS_HPDS: '||sql%rowcount, 'Y');           
 
-     TM_LOG_PKG.log_msg(p_runid, 'End MAP_DATA_LOAD_DEMOGRAPHCS_HPDS: ', 'Y');        
+     log_msg(p_runid, 'End MAP_DATA_LOAD_DEMOGRAPHCS_HPDS: ', 'Y');        
      COMMIT;
   END;
   
@@ -393,27 +442,27 @@ PROCEDURE MAP_DATA_LOAD_DEMOGRAPHCS_HPDS (
     v_sqlerrm      VARCHAR2(400);
 BEGIN
 
-    tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics Start  ','X'); 
+    log_msg(p_runid,'EXTRCT_HPDS_Demographics Start  ','X'); 
         
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics Age Start  ','X'); 
+        log_msg(p_runid,'EXTRCT_HPDS_Demographics Age Start  ','X'); 
         
             insert into  TM_CZ.HPDS_DATA_LATEST( PATIENT_NUM ,CONCEPT_PATH , NVAL_NUM , TVAL_CHAR ,START_DATE )
             SELECT patient_num, '\ACT Demographics\Years\Age\' concept_path ,trunc((sysdate - (cast(birth_date as date )) )/365)  years ,'E',trunc(sysdate)
             from I2B2DEMODATA.patient_dimension
             where  trunc((sysdate - (cast(birth_date as date )) )/365) >= 0;
 
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics Age End  '||sql%rowcount,'X');                   
+        log_msg(p_runid,'EXTRCT_HPDS_Demographics Age End  '||sql%rowcount,'X');                   
 
         
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics Gender Start ','X'); 
+        log_msg(p_runid,'EXTRCT_HPDS_Demographics Gender Start ','X'); 
 
             insert into  TM_CZ.HPDS_DATA_LATEST( PATIENT_NUM ,CONCEPT_PATH , NVAL_NUM , TVAL_CHAR ,START_DATE )
             select patient_num ,'\ACT Demographics\Sex\',null,decode(sex_cd,'Unknown','No Information',sex_cd) ,trunc(sysdate)
             from I2B2DEMODATA.patient_dimension ;
 
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics Gender End  '||sql%rowcount,'X');                   
+        log_msg(p_runid,'EXTRCT_HPDS_Demographics Gender End  '||sql%rowcount,'X');                   
 
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics HipanicFlag Start  ','X'); 
+        log_msg(p_runid,'EXTRCT_HPDS_Demographics HipanicFlag Start  ','X'); 
 
             INSERT INTO  TM_CZ.HPDS_DATA_LATEST( PATIENT_NUM ,CONCEPT_PATH , NVAL_NUM , TVAL_CHAR ,START_DATE )
             SELECT  DISTINCT patient_num,m.act_concept_path ,null,m.act_name_char, trunc(sysdate)
@@ -422,9 +471,9 @@ BEGIN
             AND  m.data_type = 'Hispanic';
 
             
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics HipanicFlag End  '||sql%rowcount,'X');                   
+        log_msg(p_runid,'EXTRCT_HPDS_Demographics HipanicFlag End  '||sql%rowcount,'X');                   
 
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics Race Start  ','X'); 
+        log_msg(p_runid,'EXTRCT_HPDS_Demographics Race Start  ','X'); 
         
                 INSERT INTO  TM_CZ.HPDS_DATA_LATEST( PATIENT_NUM ,CONCEPT_PATH , NVAL_NUM , TVAL_CHAR ,START_DATE )
                 SELECT distinct patient_num,act_concept_path,null,act_name_char,trunc(sysdate)
@@ -433,16 +482,16 @@ BEGIN
                 AND m.DATA_TYPE = 'Race' ;
 
                     
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics Race End  '||sql%rowcount,'X'); 
+        log_msg(p_runid,'EXTRCT_HPDS_Demographics Race End  '||sql%rowcount,'X'); 
              
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics Vital Status Start  ','X');
+        log_msg(p_runid,'EXTRCT_HPDS_Demographics Vital Status Start  ','X');
              insert into  TM_CZ.HPDS_DATA_LATEST ( PATIENT_NUM ,CONCEPT_PATH , NVAL_NUM , TVAL_CHAR ,START_DATE )
              select patient_num,'\ACT Demographics\Vital Status\',null,'Known Deceased' ,death_date
              from I2B2DEMODATA.patient_dimension 
              where death_date is not null;
                 
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics Vital Status End  '||sql%rowcount,'X');    
-    tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Demographics End  ','X'); 
+        log_msg(p_runid,'EXTRCT_HPDS_Demographics Vital Status End  '||sql%rowcount,'X');    
+    log_msg(p_runid,'EXTRCT_HPDS_Demographics End  ','X'); 
     commit;
 
 END;
@@ -460,13 +509,13 @@ PROCEDURE EXTRCT_HPDS_Visit_data  (
     /* Pre requesite table tm_cz.a_ncats_visit_details_map  should be populated with mapping data   */
 BEGIN
 
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Visit_data Start  ','X'); 
+        log_msg(p_runid,'EXTRCT_HPDS_Visit_data Start  ','X'); 
         v_sql := 'TRUNCATE TABLE tm_cz.visit_fact_details ';
 
-        tm_log_pkg.log_msg(p_runid,'Load tm_cz.visit_fact_details Start  ','X'); 
+        log_msg(p_runid,'Load tm_cz.visit_fact_details Start  ','X'); 
         execute immediate v_sql;
 
-        tm_log_pkg.log_msg(p_runid,'Refresh data tm_cz.visit_fact_details Start ','X'); 
+        log_msg(p_runid,'Refresh data tm_cz.visit_fact_details Start ','X'); 
             v_sql := 'INSERT INTO tm_cz.visit_fact_details ( patient_num,inout_cd,length_of_stay,age_at_visit_yrs,start_date) '||
             'SELECT patient_num, inout_cd, length_of_stay, trunc( (start_date - birth_date) / 365) age_at_visit_yrs, start_date '||
             'FROM ( SELECT DISTINCT '||
@@ -487,16 +536,16 @@ BEGIN
               '  ) WHERE trunc( (start_date - birth_date) / 365) >= 0 ';
                execute immediate v_sql;
               dbms_output.put_line(v_sql);
-        tm_log_pkg.log_msg(p_runid,'Refresh data tm_cz.visit_fact_details End '||SQL%ROWCOUNT,'X'); 
+        log_msg(p_runid,'Refresh data tm_cz.visit_fact_details End '||SQL%ROWCOUNT,'X'); 
 
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Visit_data Age Start  ','X'); 
+        log_msg(p_runid,'EXTRCT_HPDS_Visit_data Age Start  ','X'); 
         
             insert into TM_CZ.HPDS_DATA_LATEST ( patient_num,concept_path,nval_num,tval_char,start_date  )
             select  distinct patient_num,'\ACT Visit Details\Years\Age\' concept_path,age_at_visit_yrs,'E',start_date
             from tm_cz.VISIT_FACT_DETAILS ;
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Visit_data Age End  '||SQL%ROWCOUNT,'X'); 
+        log_msg(p_runid,'EXTRCT_HPDS_Visit_data Age End  '||SQL%ROWCOUNT,'X'); 
 
-        tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Visit_data Visit type Start  ','X'); 
+        log_msg(p_runid,'EXTRCT_HPDS_Visit_data Visit type Start  ','X'); 
 
             insert into TM_CZ.HPDS_DATA_LATEST ( patient_num,concept_path,tval_char,start_date  )                    
             SELECT  distinct v.patient_num, m.act_concept_path, m.act_name_char,start_date
@@ -504,8 +553,8 @@ BEGIN
             where m.data_type =   'Visit type' -- 'visit_details_map'
             and  v.inout_cd = M.BCH_name_char;
    
-       tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Visit_data Visit type End  '||SQL%ROWCOUNT,'X');    
-       tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Visit_data Length of stay Start  ','X'); 
+       log_msg(p_runid,'EXTRCT_HPDS_Visit_data Visit type End  '||SQL%ROWCOUNT,'X');    
+       log_msg(p_runid,'EXTRCT_HPDS_Visit_data Length of stay Start  ','X'); 
 
 
         insert into TM_CZ.HPDS_DATA_LATEST ( patient_num,concept_path,tval_char ,start_date )
@@ -557,8 +606,8 @@ BEGIN
                         AND  act_name_char = '> 10 days'
                     ) a ;
    
-      tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Visit_data Length of stay Start  '||SQL%ROWCOUNT,'X'); 
-      tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_Visit_data End  ','X'); 
+      log_msg(p_runid,'EXTRCT_HPDS_Visit_data Length of stay Start  '||SQL%ROWCOUNT,'X'); 
+      log_msg(p_runid,'EXTRCT_HPDS_Visit_data End  ','X'); 
       commit;
 END;
 
@@ -569,14 +618,14 @@ PROCEDURE EXTRCT_HPDS_ICD10_9 (
 ) AS
 
 BEGIN
-    tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_ICD10_9 Start  ','X'); 
+    log_msg(p_runid,'EXTRCT_HPDS_ICD10_9 Start  ','X'); 
 
             INSERT into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
             SELECT distinct patient_num,act_concept_path ,null,act_name_char,  to_timestamp(start_date,'DD-MON-RR HH.MI.SSXFF AM') start_date
             FROM I2B2DEMODATA.observation_fact   fact1, act_bch_ontology_map m
             WHERE fact1.concept_cd = m.bch_concept_cd 
             AND data_type =   'a_ncats_icd10_icd9_dx_v1_map';
-    tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_ICD10_9 End  '||sql%rowcount,'X'); 
+    log_msg(p_runid,'EXTRCT_HPDS_ICD10_9 End  '||sql%rowcount,'X'); 
     commit;
 end;
 ---ICD10
@@ -586,14 +635,14 @@ PROCEDURE EXTRCT_HPDS_ICD10 (
 ) AS
 
 BEGIN
-    tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_ICD10 Start  ','X'); 
+    log_msg(p_runid,'EXTRCT_HPDS_ICD10 Start  ','X'); 
 
             INSERT into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
             SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast (start_date as date)   --to_timestamp(start_date,'DD-MON-RR HH.MI.SSXFF AM') start_date
             FROM I2B2DEMODATA.observation_fact   fact1, act_bch_ontology_map m
             WHERE fact1.concept_cd = m.bch_concept_cd 
             AND data_type =  'ACT_ICD10CM_DX_2018AA_HPDS';
-    tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_ICD10 End  '||sql%rowcount,'X'); 
+    log_msg(p_runid,'EXTRCT_HPDS_ICD10 End  '||sql%rowcount,'X'); 
     commit;
 end;
 
@@ -604,7 +653,7 @@ PROCEDURE EXTRCT_HPDS_ICD10PCS_2018AA (
 
 Begin
 
-  tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_ICD10PCS_2018AA Start  ','X'); 
+  log_msg(p_runid,'EXTRCT_HPDS_ICD10PCS_2018AA Start  ','X'); 
         /*insert into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)
         select  distinct fact1.patient_num, replace(cd.act_concept_path,'\ACT','') ,null,cd.act_name_char c_name ,start_date
         from i2b2demodata.observation_fact fact1, tm_cz.a_ACT_ICD10PCS_PX_2018AA_map cd
@@ -615,7 +664,7 @@ Begin
         WHERE fact1.concept_cd = m.bch_concept_cd  
         AND data_type =   'ACT_ICD10CM_DX_2018AA_HPDS';
         
-  tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_ICD10PCS_2018AA End  '||sql%rowcount,'X'); 
+  log_msg(p_runid,'EXTRCT_HPDS_ICD10PCS_2018AA End  '||sql%rowcount,'X'); 
   commit;
 end;
 --
@@ -625,7 +674,7 @@ PROCEDURE EXTRCT_HPDS_CPT_PX_2018AA (
 
 Begin
 
-  tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_CPT_PX_2018AA Start  ','X'); 
+  log_msg(p_runid,'EXTRCT_HPDS_CPT_PX_2018AA Start  ','X'); 
 
         INSERT into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
         SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast( start_date as date) start_date
@@ -633,7 +682,7 @@ Begin
         WHERE fact1.concept_cd = m.bch_concept_cd  
         AND data_type =   'ACT_CPT_PX_2018AA_HPDS';
         
-  tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_CPT_PX_2018AA End  '||sql%rowcount,'X'); 
+  log_msg(p_runid,'EXTRCT_HPDS_CPT_PX_2018AA End  '||sql%rowcount,'X'); 
   commit;
 end;
 
@@ -643,11 +692,11 @@ PROCEDURE EXTRCT_HPDS_LAB_Results (
 
  begin
 
-  tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_LAB_Results Start  ','X'); 
+  log_msg(p_runid,'EXTRCT_HPDS_LAB_Results Start  ','X'); 
        insert into tm_cz.HPDS_DATA_LATEST ( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)
-       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num,act_name_char,start_date
+       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num,'E',start_date
         FROM
-            (   SELECT patient_num, concept_cd,nval_num,tval_char,start_date
+            (   SELECT patient_num, concept_cd,nval_num,start_date
                 FROM I2B2DEMODATA.observation_fact
                 WHERE concept_cd LIKE 'LAB:%'
                 AND tval_char NOT IN (
@@ -668,7 +717,7 @@ PROCEDURE EXTRCT_HPDS_LAB_Results (
         AND data_type =  'NCATS_LABS_HPDS'  ;
         
         
-  tm_log_pkg.log_msg(p_runid,'EXTRCT_HPDS_LAB_Results Start  '||sql%rowcount,'X'); 
+  log_msg(p_runid,'EXTRCT_HPDS_LAB_Results Start  '||sql%rowcount,'X'); 
   commit;
  end;
 
@@ -676,7 +725,7 @@ PROCEDURE  Run_EXTRCT_HPDS_Data  (
     p_runid        IN NUMBER ) AS
     v_sql          VARCHAR2(4000) ;
 BEGIN
-     tm_log_pkg.log_msg(p_runid,'Run_EXTRCT_HPDS_Data Start  ','X'); 
+     log_msg(p_runid,'Run_EXTRCT_HPDS_Data Start  ','X'); 
      v_sql := 'Create table tm_cz.HPDS_DATA_LATEST_'||to_char(sysdate,'MMDD') ||' AS select * from tm_cz.HPDS_DATA_LATEST ';
      execute immediate v_sql;
      dbms_output.put_line(v_sql);
@@ -697,14 +746,14 @@ BEGIN
      EXTRCT_HPDS_CPT_PX_2018AA ( p_runid   ) ;
     
      EXTRCT_HPDS_LAB_Results ( p_runid ) ;
-     tm_log_pkg.log_msg(p_runid,'Run_EXTRCT_HPDS_Data End  ','X'); 
+     log_msg(p_runid,'Run_EXTRCT_HPDS_Data End  ','X'); 
  
 END;
     
 PROCEDURE Run_MAP_Data_Load (p_runid  IN NUMBER ) AS
 
 BEGIN
-tm_log_pkg.log_msg(p_runid,'Start Run_MAP_Data_Load   ','X');   
+log_msg(p_runid,'Start Run_MAP_Data_Load   ','X');   
          execute immediate 'Truncate table tm_cz.act_bch_ontology_map '; 
          MAP_DATA_LOAD_NCATS_LABS_HPDS ( p_runid   ); 
           
@@ -715,11 +764,14 @@ tm_log_pkg.log_msg(p_runid,'Start Run_MAP_Data_Load   ','X');
          MAP_DATA_LOAD_VISIT_HPDS ( p_runid);
         
          MAP_DATA_LOAD_DEMOGRAPHCS_HPDS ( p_runid ) ;
-tm_log_pkg.log_msg(p_runid,'End Run_MAP_Data_Load   ','X');   
+log_msg(p_runid,'End Run_MAP_Data_Load   ','X');   
 END;
 
 END TM_DATA_ACT_LOAD_PKG;
 /
+
+
+
 
 
 
