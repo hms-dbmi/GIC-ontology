@@ -33,7 +33,7 @@ Expected Results: Creates listed Objects needed for ACT HPDS data load
 	'CONCEPT_PATH VARCHAR2(4000),  '||
 	'NVAL_NUM NUMBER,  '||
 	'TVAL_CHAR VARCHAR2(2000),  '||
-	'START_DATE DATE '||
+	'START_DATE TIMESTAMP '||
     ')  NOCOMPRESS LOGGING ';
     dbms_output.put_line( v_sql);
 
