@@ -1,4 +1,4 @@
-HPDS data extraction in database in ACT format .
+HPDS data extraction in ACT format .
 ----------------------------------------------
 This repo has steps to convert i2b2TM data into ACT HPDS data format, following that picsure hpds javabin data extraction and deployment steps are there.
 
