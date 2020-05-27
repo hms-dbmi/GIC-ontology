@@ -2,7 +2,7 @@ At High level listed are the steps to Populate data in HPDS in ACT format.
 
 1. Data from ACT Drop box are loaded into staging table, also some source system specific mappings are populated.
 2. Database table TM_CZ.HPDS_DATA_LATEST is populated with your source data using ACT ontology.
-3.Data from above table can be uploaded in HPDS using SQL Load or a CSV file loader.
+3. Data from above table can be uploaded in HPDS using SQL Load or a CSV file loader.
 
 Step 1 & 2
 Staging Ontology data & HPDS data extraction in ACT format .
