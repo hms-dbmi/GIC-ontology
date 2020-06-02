@@ -40,6 +40,9 @@ PROCEDURE MAP_DATA_LOAD_NCATS_LABS_HPDS (
 PROCEDURE MAP_DATA_LOAD_ACT_ICD10CM_HPDS (
     p_runid        IN NUMBER )  ; 
 
+PROCEDURE MAP_DATA_LOAD_ICD10_ICD9_HPDS (
+    p_runid        IN NUMBER )  ;
+    
 PROCEDURE MAP_DATA_LOAD_ACT_CPT_PX_HPDS (
     p_runid        IN NUMBER )  ;    
 
@@ -49,15 +52,15 @@ PROCEDURE MAP_DATA_LOAD_VISIT_HPDS (
 PROCEDURE MAP_DATA_LOAD_DEMOGRAPHCS_HPDS (
     p_runid        IN NUMBER )  ;    
     
- 
 PROCEDURE EXTRCT_HPDS_Demographics (
     p_runid        IN NUMBER ) ;
 
 PROCEDURE EXTRCT_HPDS_Visit_data  (
     p_runid        IN NUMBER ) ;
-
-PROCEDURE EXTRCT_HPDS_ICD10_9 (
-    p_runid        IN NUMBER) ;
+    
+PROCEDURE EXTRACT_ICD10_ICD9_DX_HPDS (
+    p_runid        IN NUMBER
+)   ; 
     
 PROCEDURE EXTRCT_HPDS_ICD10 (
     p_runid        IN NUMBER
@@ -203,6 +206,81 @@ PROCEDURE MAP_DATA_LOAD_ACT_ICD10CM_HPDS (
      log_msg(p_runid, 'End MAP_DATA_LOAD_ACT_ICD10CM_HPDS: Inserted Rows '||sql%rowcount, 'Y');   
       COMMIT;
   END;
+ 
+
+PROCEDURE MAP_DATA_LOAD_ICD10_ICD9_HPDS (
+    p_runid        IN NUMBER )  
+    AS
+  BEGIN
+     TM_LOG_PKG.log_msg(p_runid, 'Start MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: ', 'Y');  
+        DELETE FROM act_bch_ontology_map
+        WHERE data_type = 'NCATS_ICD10_ICD9_DX_V1_HPDS';
+        TM_LOG_PKG.log_msg(p_runid, 'Delete existing data MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: '||sql%rowcount, 'Y');        
+        -- matched based on ICD cd
+        --in addition  nodes are matched based on c_name/name_char too
+        -- MAP_NCATS_ICD10_ICD9_DX_V1_HPDS
+        INSERT INTO act_bch_ontology_map (  data_type,
+            bch_concept_path,
+            bch_name_char,
+            bch_concept_cd,
+            act_concept_path,
+            act_name_char,
+            act_concept_cd
+          )
+        select distinct 'NCATS_ICD10_ICD9_DX_V1_HPDS' src ,bch.orig_concept_path bch_concept_path,bch.name_char bch_name_char , bch.concept_cd bch_concept_cd ,act.hpds_path act_concept_path,
+        act.c_name  act_name_char, act.c_basecode act_concept_cd 
+         from 
+         (  select replace(concept_path, '\'||last_node||'\','\') concept_path  ,name_char, concept_cd,orig_concept_path from
+               ( SELECT
+                    tm_cz.tm_data_utility_pkg.parse_nth_value(concept_path, (tm_cz.tm_data_utility_pkg.num_occurances(concept_path,'\') ),'\') last_node ,concept_path
+                    ,name_char, concept_cd,orig_concept_path
+                FROM
+                    (
+                        SELECT
+                            replace(concept_path,'\i2b2\Diagnosis\10\','\') concept_path,name_char, concept_cd,concept_path orig_concept_path
+                        FROM
+                            i2b2demodata.concept_dimension
+                        WHERE
+                            concept_cd like 'ICD9:%'
+                    )  )c  ) bch,
+         (  select replace(c_fullname, '\'||last_node||'\','\') c_fullname  ,c_name, c_basecode, replace(hpds_path,'Diagnoses\','\ACT Diagnoses ICD10-ICD9\')  hpds_path from
+               ( SELECT
+                    tm_cz.tm_data_utility_pkg.parse_nth_value(c_fullname, (tm_cz.tm_data_utility_pkg.num_occurances(c_fullname,'\') ),'\') last_node ,c_fullname
+                    ,c_name, c_basecode,hpds_path
+                FROM
+                    (
+                        SELECT
+                            replace(c_fullname,'\Diagnoses\','\') c_fullname,c_name, c_basecode,hpds_path
+                        FROM
+                            tm_cz.ncats_icd10_icd9_dx_v1_hpds
+                        WHERE
+                            c_basecode like 'ICD9:%'
+                    )) ) act
+                    where tm_cz.tm_data_utility_pkg.parse_nth_value(act.c_fullname, (tm_cz.tm_data_utility_pkg.num_occurances(act.c_fullname,'\') ),'\')   = tm_cz.tm_data_utility_pkg.parse_nth_value( bch.concept_path, (tm_cz.tm_data_utility_pkg.num_occurances(bch.concept_path,'\') ),'\')
+                    and act.c_basecode = bch.concept_cd
+                    and act.c_name = bch.name_char; --24264
+             TM_LOG_PKG.log_msg(p_runid, 'End  ICD9 - MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: Inserted Rows '||sql%rowcount, 'Y');   
+        INSERT INTO act_bch_ontology_map (  data_type,
+            bch_concept_path,
+            bch_name_char,
+            bch_concept_cd,
+            act_concept_path,
+            act_name_char,
+            act_concept_cd
+          )
+        select distinct 'NCATS_ICD10_ICD9_DX_V1_HPDS' src ,cd.concept_path bch_concept_path,cd.name_char bch_name_char , cd.concept_cd bch_concept_cd ,
+        replace(a.hpds_path,'Diagnoses\','\ACT Diagnoses ICD10-ICD9\') act_concept_path,
+        a.c_name  act_name_char, a.c_basecode act_concept_cd 
+        from i2b2demodata.concept_dimension cd, tm_cz.NCATS_ICD10_ICD9_DX_V1_hpds a
+        where concept_cd like 'ICD10%'
+        and concept_path like '%\Diag%'
+        and C_BASECODE = cd.concept_cd ;-- 102428
+
+
+     TM_LOG_PKG.log_msg(p_runid, 'End  ICD10 - MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: Inserted Rows '||sql%rowcount, 'Y');   
+      COMMIT;
+  END;
+ 
   
 PROCEDURE MAP_DATA_LOAD_ACT_CPT_PX_HPDS (
     p_runid        IN NUMBER )  
@@ -612,22 +690,22 @@ BEGIN
 END;
 
 ---ICD10-9
-
-PROCEDURE EXTRCT_HPDS_ICD10_9 (
+PROCEDURE EXTRACT_ICD10_ICD9_DX_HPDS (
     p_runid        IN NUMBER
 ) AS
 
 BEGIN
-    log_msg(p_runid,'EXTRCT_HPDS_ICD10_9 Start  ','X'); 
+    tm_log_pkg.log_msg(p_runid,'EXTRACT_ICD10_ICD9_DX_HPDS Start  ','X'); 
 
             INSERT into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-            SELECT distinct patient_num,act_concept_path ,null,act_name_char,  to_timestamp(start_date,'DD-MON-RR HH.MI.SSXFF AM') start_date
+            SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast (start_date as date)   
             FROM I2B2DEMODATA.observation_fact   fact1, act_bch_ontology_map m
             WHERE fact1.concept_cd = m.bch_concept_cd 
-            AND data_type =   'a_ncats_icd10_icd9_dx_v1_map';
-    log_msg(p_runid,'EXTRCT_HPDS_ICD10_9 End  '||sql%rowcount,'X'); 
+            AND data_type =  'NCATS_ICD10_ICD9_DX_V1_HPDS' ;
+    tm_log_pkg.log_msg(p_runid,'EXTRACT_ICD10_ICD9_DX_HPDS End  '||sql%rowcount,'X'); 
     commit;
 end;
+
 ---ICD10
 
 PROCEDURE EXTRCT_HPDS_ICD10 (
@@ -638,7 +716,7 @@ BEGIN
     log_msg(p_runid,'EXTRCT_HPDS_ICD10 Start  ','X'); 
 
             INSERT into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-            SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast (start_date as date)   --to_timestamp(start_date,'DD-MON-RR HH.MI.SSXFF AM') start_date
+            SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast (start_date as date)   
             FROM I2B2DEMODATA.observation_fact   fact1, act_bch_ontology_map m
             WHERE fact1.concept_cd = m.bch_concept_cd 
             AND data_type =  'ACT_ICD10CM_DX_2018AA_HPDS';
@@ -654,12 +732,9 @@ PROCEDURE EXTRCT_HPDS_ICD10PCS_2018AA (
 Begin
 
   log_msg(p_runid,'EXTRCT_HPDS_ICD10PCS_2018AA Start  ','X'); 
-        /*insert into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)
-        select  distinct fact1.patient_num, replace(cd.act_concept_path,'\ACT','') ,null,cd.act_name_char c_name ,start_date
-        from i2b2demodata.observation_fact fact1, tm_cz.a_ACT_ICD10PCS_PX_2018AA_map cd
-        where cd.bch_concept_cd = fact1.CONCEPT_CD;*/
+
         INSERT into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-        SELECT distinct patient_num,act_concept_path ,null,act_name_char,  to_timestamp(start_date,'DD-MON-RR HH.MI.SSXFF AM') start_date
+        SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast( start_date as date) start_date
         FROM I2B2DEMODATA.observation_fact   fact1, act_bch_ontology_map m
         WHERE fact1.concept_cd = m.bch_concept_cd  
         AND data_type =   'ACT_ICD10CM_DX_2018AA_HPDS';
@@ -694,7 +769,7 @@ PROCEDURE EXTRCT_HPDS_LAB_Results (
 
   log_msg(p_runid,'EXTRCT_HPDS_LAB_Results Start  ','X'); 
        insert into tm_cz.HPDS_DATA_LATEST ( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)
-       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num,'E',start_date
+       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num,'E',cast( start_date as date) start_date
         FROM
             (   SELECT patient_num, concept_cd,nval_num,start_date
                 FROM I2B2DEMODATA.observation_fact
@@ -739,7 +814,7 @@ BEGIN
     
      EXTRCT_HPDS_Visit_data  ( p_runid  ) ;
     
-     --EXTRCT_HPDS_ICD10_9 ( p_runid  ) ;
+     EXTRACT_ICD10_ICD9_DX_HPDS ( p_runid )   ; 
          
      EXTRCT_HPDS_ICD10 ( p_runid  ) ;
     
@@ -758,6 +833,8 @@ log_msg(p_runid,'Start Run_MAP_Data_Load   ','X');
          MAP_DATA_LOAD_NCATS_LABS_HPDS ( p_runid   ); 
           
          MAP_DATA_LOAD_ACT_ICD10CM_HPDS ( p_runid );
+         
+         MAP_DATA_LOAD_ICD10_ICD9_HPDS( p_runid );
         
          MAP_DATA_LOAD_ACT_CPT_PX_HPDS ( p_runid ) ;
         
