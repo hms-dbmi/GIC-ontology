@@ -13,6 +13,7 @@ Expected Results:
                - Mapping data from source system to ACT format for various nodes in table - act_bch_ontology_map
                - Check mapping data is populated with listed data_types 
                - LABS - NCATS_LABS_HPDS 
+               - ICD10-ICD9 - 
                - ICD10 - ACT_ICD10CM_DX_2018AA_HPDS 
                - CPT - ACT_CPT_PX_2018AA_HPDS 
                - DEMOGRAPHICS - Hispanic
@@ -26,8 +27,14 @@ Expected Results:
                - GIC Version of code 
 */
 
+FUNCTION   NUM_OCCURANCES (
+  input_str nvarchar2,
+  search_str nvarchar2
+) return number ;
+
+
 FUNCTION   PARSE_NTH_VALUE (pValue varchar2, location NUMBER, delimiter VARCHAR2)
-   return varchar2 ; 
+return varchar2 ; 
    
 PROCEDURE log_msg(
         p_runid IN NUMBER DEFAULT -9,
@@ -85,6 +92,20 @@ END TM_DATA_ACT_LOAD_PKG;
 /
 
 create or replace PACKAGE BODY TM_DATA_ACT_LOAD_PKG AS
+
+FUNCTION   NUM_OCCURANCES (
+  input_str nvarchar2,
+  search_str nvarchar2
+) return number
+as
+  num number;
+begin
+  num := 0;
+  while instr(input_str, search_str, 1, num + 1) > 0 loop
+    num := num + 1;
+  end loop;
+  return num;
+end;
 
 FUNCTION   PARSE_NTH_VALUE (pValue varchar2, location NUMBER, delimiter VARCHAR2)
    return varchar2
@@ -212,10 +233,10 @@ PROCEDURE MAP_DATA_LOAD_ICD10_ICD9_HPDS (
     p_runid        IN NUMBER )  
     AS
   BEGIN
-     TM_LOG_PKG.log_msg(p_runid, 'Start MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: ', 'Y');  
+     log_msg(p_runid, 'Start MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: ', 'Y');  
         DELETE FROM act_bch_ontology_map
         WHERE data_type = 'NCATS_ICD10_ICD9_DX_V1_HPDS';
-        TM_LOG_PKG.log_msg(p_runid, 'Delete existing data MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: '||sql%rowcount, 'Y');        
+        log_msg(p_runid, 'Delete existing data MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: '||sql%rowcount, 'Y');        
         -- matched based on ICD cd
         --in addition  nodes are matched based on c_name/name_char too
         -- MAP_NCATS_ICD10_ICD9_DX_V1_HPDS
@@ -232,7 +253,7 @@ PROCEDURE MAP_DATA_LOAD_ICD10_ICD9_HPDS (
          from 
          (  select replace(concept_path, '\'||last_node||'\','\') concept_path  ,name_char, concept_cd,orig_concept_path from
                ( SELECT
-                    tm_cz.tm_data_utility_pkg.parse_nth_value(concept_path, (tm_cz.tm_data_utility_pkg.num_occurances(concept_path,'\') ),'\') last_node ,concept_path
+                    parse_nth_value(concept_path, (num_occurances(concept_path,'\') ),'\') last_node ,concept_path
                     ,name_char, concept_cd,orig_concept_path
                 FROM
                     (
@@ -245,7 +266,7 @@ PROCEDURE MAP_DATA_LOAD_ICD10_ICD9_HPDS (
                     )  )c  ) bch,
          (  select replace(c_fullname, '\'||last_node||'\','\') c_fullname  ,c_name, c_basecode, replace(hpds_path,'Diagnoses\','\ACT Diagnoses ICD10-ICD9\')  hpds_path from
                ( SELECT
-                    tm_cz.tm_data_utility_pkg.parse_nth_value(c_fullname, (tm_cz.tm_data_utility_pkg.num_occurances(c_fullname,'\') ),'\') last_node ,c_fullname
+                    parse_nth_value(c_fullname, (num_occurances(c_fullname,'\') ),'\') last_node ,c_fullname
                     ,c_name, c_basecode,hpds_path
                 FROM
                     (
@@ -256,10 +277,10 @@ PROCEDURE MAP_DATA_LOAD_ICD10_ICD9_HPDS (
                         WHERE
                             c_basecode like 'ICD9:%'
                     )) ) act
-                    where tm_cz.tm_data_utility_pkg.parse_nth_value(act.c_fullname, (tm_cz.tm_data_utility_pkg.num_occurances(act.c_fullname,'\') ),'\')   = tm_cz.tm_data_utility_pkg.parse_nth_value( bch.concept_path, (tm_cz.tm_data_utility_pkg.num_occurances(bch.concept_path,'\') ),'\')
+                    where parse_nth_value(act.c_fullname, (num_occurances(act.c_fullname,'\') ),'\')   = parse_nth_value( bch.concept_path, (num_occurances(bch.concept_path,'\') ),'\')
                     and act.c_basecode = bch.concept_cd
                     and act.c_name = bch.name_char; --24264
-             TM_LOG_PKG.log_msg(p_runid, 'End  ICD9 - MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: Inserted Rows '||sql%rowcount, 'Y');   
+             log_msg(p_runid, 'End  ICD9 - MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: Inserted Rows '||sql%rowcount, 'Y');   
         INSERT INTO act_bch_ontology_map (  data_type,
             bch_concept_path,
             bch_name_char,
@@ -277,7 +298,7 @@ PROCEDURE MAP_DATA_LOAD_ICD10_ICD9_HPDS (
         and C_BASECODE = cd.concept_cd ;-- 102428
 
 
-     TM_LOG_PKG.log_msg(p_runid, 'End  ICD10 - MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: Inserted Rows '||sql%rowcount, 'Y');   
+     log_msg(p_runid, 'End  ICD10 - MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: Inserted Rows '||sql%rowcount, 'Y');   
       COMMIT;
   END;
  
@@ -510,6 +531,209 @@ PROCEDURE MAP_DATA_LOAD_DEMOGRAPHCS_HPDS (
      COMMIT;
   END;
   
+---
+PROCEDURE MAP_DATA_LOAD_COVID_HPDS (
+    p_runid        IN NUMBER )  
+    AS
+  BEGIN
+     log_msg(p_runid, 'Start MAP_ACT_COVID_HPDS: ', 'Y');  
+        DELETE FROM act_bch_ontology_map
+        WHERE data_type = 'ACT_COVID_DERIVED';
+        log_msg(p_runid, 'Delete existing data MAP_ACT_COVID_HPDS: '||sql%rowcount, 'Y');        
+
+        ---Diagnosis UMLS_C0037088
+        
+        INSERT INTO act_bch_ontology_map (  data_type,
+            bch_concept_path,
+            bch_name_char,
+            bch_concept_cd,
+            act_concept_path,
+            act_name_char,
+            act_concept_cd
+          )
+        SELECT distinct 'ACT_COVID_DERIVED' src , 
+          b.concept_path bch_concept_path,
+          b.name_char bch_name_char,
+          b.concept_cd bch_concept_cd,
+          a.hpds_path  act_concept_path,
+          a.c_name  act_name_char,
+          a.c_basecode  act_concept_cd
+         from
+        ( SELECT c_fullname,c_name,c_basecode,replace(hpds_path,'ACT Phenotype\COVID-19 Related Terms\','\ACT COVID-19\') hpds_path
+        FROM tm_cz.act_covid_hpds
+        WHERE   C_FULLNAME LIKE '\ACT\UMLS_C0031437\SNOMED_3947185011\UMLS_C0037088\%' ) a,i2b2demodata.concept_dimension b
+        where replace(a.c_basecode,'ICD10CM','ICD10') = b.concept_cd ;
+                log_msg(p_runid, 'End  ICD10 Diagnosis C0037088 - MAP_ACT_COVID_HPDS: Inserted Rows '||sql%rowcount, 'Y'); 
+        -- Course Of Illness	UMLS:C0242656 
+        --Vaccination 1 row inserted.
+
+        INSERT INTO act_bch_ontology_map (  data_type,
+            bch_concept_path,
+            bch_name_char,
+            bch_concept_cd,
+            act_concept_path,
+            act_name_char,
+            act_concept_cd
+          )
+        SELECT distinct 'ACT_COVID_DERIVED' src , 
+          b.concept_path bch_concept_path,
+          b.name_char bch_name_char,
+          b.concept_cd bch_concept_cd,
+          a.hpds_path  act_concept_path,
+          a.c_name  act_name_char,
+          a.c_basecode  act_concept_cd
+         from
+        ( SELECT c_fullname,c_name,c_basecode,replace(hpds_path,'ACT Phenotype\COVID-19 Related Terms\','\ACT COVID-19\') hpds_path
+        FROM tm_cz.act_covid_hpds
+        WHERE c_fullname LIKE '\ACT\UMLS_C0031437\SNOMED_3947185011\UMLS_C0242656\%'
+        AND parse_nth_value(c_fullname, 6,'\'  ) = 'UMLS_C0042196' ) a,i2b2demodata.concept_dimension b
+        where   concept_cd = 'ICD10:R50-R69';-- Found this match based on CUI
+                log_msg(p_runid, 'End  vaccination - MAP_ACT_COVID_HPDS: Inserted Rows '||sql%rowcount, 'Y'); 
+        --UMLS:C0478147
+        --ICD10 diagnosis 29 rows inserted.
+        INSERT INTO act_bch_ontology_map (  data_type,
+            bch_concept_path,
+            bch_name_char,
+            bch_concept_cd,
+            act_concept_path,
+            act_name_char,
+            act_concept_cd
+          )
+        SELECT distinct 'ACT_COVID_DERIVED' src , 
+          b.concept_path bch_concept_path,
+          b.name_char bch_name_char,
+          b.concept_cd bch_concept_cd,
+          a.hpds_path  act_concept_path,
+          a.c_name  act_name_char,
+          a.c_basecode  act_concept_cd
+         from
+        ( SELECT c_fullname,c_name,c_basecode,replace(hpds_path,'ACT Phenotype\COVID-19 Related Terms\','\ACT COVID-19\') hpds_path
+        FROM tm_cz.act_covid_hpds
+        WHERE c_fullname LIKE '\ACT\UMLS_C0031437\SNOMED_3947185011\UMLS_C0242656\%'
+        AND parse_nth_value(c_fullname, 6,'\'  ) = 'UMLS_C0348080' ) a,i2b2demodata.concept_dimension b
+        where replace(a.c_basecode,'ICD10CM','ICD10') = b.concept_cd ;
+                log_msg(p_runid, 'End  ICD10 Diagnosis C0348080 - MAP_ACT_COVID_HPDS: Inserted Rows '||sql%rowcount, 'Y'); 
+        --CPT codes 29 rows inserted.
+        
+        INSERT INTO act_bch_ontology_map (  data_type,
+            bch_concept_path,
+            bch_name_char,
+            bch_concept_cd,
+            act_concept_path,
+            act_name_char,
+            act_concept_cd
+          )
+        select distinct 'ACT_COVID_DERIVED' src , 
+          b.concept_path bch_concept_path,
+          b.name_char bch_name_char,
+          b.concept_cd bch_concept_cd,
+          a.hpds_path  act_concept_path,
+          a.c_name  act_name_char,
+          a.c_basecode  act_concept_cd
+         from
+        ( SELECT c_fullname,c_name,c_basecode,replace(hpds_path,'ACT Phenotype\COVID-19 Related Terms\','\ACT COVID-19\') hpds_path
+        FROM tm_cz.act_covid_hpds
+        WHERE c_fullname LIKE '\ACT\UMLS_C0031437\SNOMED_3947185011\UMLS_C0242656\%'
+        AND parse_nth_value(c_fullname, 6,'\'  ) = 'UMLS_C1510665'
+        ) a,i2b2demodata.concept_dimension b
+        where a.c_basecode = b.concept_cd ;-- 29 of 56
+                log_msg(p_runid, 'End  CPT Procedure code - MAP_ACT_COVID_HPDS: Inserted Rows '||sql%rowcount, 'Y'); 
+            
+        --Procedures
+        --ICD10 Proc 28 rows inserted.
+            
+        INSERT INTO act_bch_ontology_map (  data_type,
+                    bch_concept_path,
+                    bch_name_char,
+                    bch_concept_cd,
+                    act_concept_path,
+                    act_name_char,
+                    act_concept_cd
+                  )
+        SELECT distinct 'ACT_COVID_DERIVED' src , 
+                  b.concept_path bch_concept_path,
+                  b.name_char bch_name_char,
+                  b.concept_cd bch_concept_cd,
+                  a.hpds_path  act_concept_path,
+                  a.c_name  act_name_char,
+                  a.c_basecode  act_concept_cd
+                 from
+                ( SELECT c_fullname,c_name,c_basecode,replace(hpds_path,'ACT Phenotype\COVID-19 Related Terms\','\ACT COVID-19\') hpds_path
+                FROM tm_cz.act_covid_hpds
+                WHERE c_fullname LIKE '\ACT\UMLS_C0031437\SNOMED_3947185011\UMLS_C0242656\%'
+                AND parse_nth_value(c_fullname, 6,'\'  ) = 'UML_C1444343' ) a,i2b2demodata.concept_dimension b
+                where replace(a.c_basecode,'ICD10PROC','ICD10PCS') = b.concept_cd--
+        UNION ALL
+        SELECT distinct 'ACT_COVID_DERIVED' src , 
+                  b.concept_path bch_concept_path,
+                  b.name_char bch_name_char,
+                  b.concept_cd bch_concept_cd,
+                  a.hpds_path  act_concept_path,
+                  a.c_name  act_name_char,
+                  a.c_basecode  act_concept_cd
+                 from
+                ( SELECT c_fullname,c_name,c_basecode,replace(hpds_path,'ACT Phenotype\COVID-19 Related Terms\','\ACT COVID-19\') hpds_path
+                FROM tm_cz.act_covid_hpds
+                WHERE c_fullname LIKE '\ACT\UMLS_C0031437\SNOMED_3947185011\UMLS_C0242656\%'
+                AND parse_nth_value(c_fullname, 6,'\'  ) = 'UML_C1444343' ) a,i2b2demodata.concept_dimension b
+                where replace(a.c_basecode,'ICD10CM','ICD10') = b.concept_cd;-- 21 out of 56
+    
+        log_msg(p_runid, 'End  ICD Procedure codes - MAP_ACT_COVID_HPDS: Inserted Rows '||sql%rowcount, 'Y'); 
+        --Labs 52 rows inserted.
+        INSERT INTO act_bch_ontology_map (  data_type,
+                    bch_concept_path,
+                    bch_name_char,
+                    bch_concept_cd,
+                    act_concept_path,
+                    act_name_char,
+                    act_concept_cd
+                  )
+        SELECT distinct 'ACT_COVID_DERIVED' src , 
+                  null bch_concept_path,
+                  null bch_name_char,
+                  b.bch_concept_cd,
+                  a.hpds_path  act_concept_path,
+                  a.c_name  act_name_char,
+                  a.c_basecode  act_concept_cd from
+                (SELECT c_fullname,c_name,c_basecode, replace(hpds_path,'ACT Phenotype\COVID-19 Related Terms\','\ACT COVID-19\') hpds_path
+                FROM tm_cz.act_covid_hpds
+                WHERE c_fullname LIKE '\ACT\UMLS_C0031437\SNOMED_3947185011\UMLS_C0242656\%'
+                AND parse_nth_value(c_fullname, 6,'\'  ) = 'LABS_OF_INTEREST' ) a, 
+                ( select  bch_lab_code bch_concept_cd, 
+                'LOINC:'||loinc_lab_code bch_loinc_cd
+                from TM_CZ.A_LAB_CD_ACT_BCH_MAP  m where  loinc_lab_code is not null ) b
+                where  a.c_basecode = b.bch_loinc_cd ; --
+        log_msg(p_runid, 'End  Lab results - MAP_ACT_COVID_HPDS: Inserted Rows '||sql%rowcount, 'Y'); 
+        
+        --Other variables of interest--627 rows inserted.
+        INSERT INTO act_bch_ontology_map (  data_type,
+                bch_concept_path,
+                bch_name_char,
+                bch_concept_cd,
+                act_concept_path,
+                act_name_char,
+                act_concept_cd
+              )
+        SELECT distinct 'ACT_COVID_DERIVED' src , 
+              b.concept_path bch_concept_path,
+              b.name_char  bch_name_char,
+              b.concept_cd bch_concept_cd,
+              a.hpds_path  act_concept_path,
+              a.c_name  act_name_char,
+              a.c_basecode  act_concept_cd from
+            (SELECT c_fullname,c_name,c_basecode, replace(hpds_path,'ACT Phenotype\COVID-19 Related Terms\','\ACT COVID-19\') hpds_path
+            FROM tm_cz.act_covid_hpds
+            WHERE c_fullname LIKE '\ACT\UMLS_C0031437\SNOMED_3947185011\UMLS_C0242656\%'
+            AND parse_nth_value(c_fullname, 6,'\'  ) = 'ACT_COVID_DERIVED_VARIABLES' ) a,i2b2demodata.concept_dimension b
+            where replace(a.c_basecode,'ICD10CM','ICD10') = b.concept_cd ;--627 out of 707 --ICDcode
+                      
+        log_msg(p_runid, 'End  Other variables of interest - MAP_ACT_COVID_HPDS: Inserted Rows '||sql%rowcount, 'Y');  
+        log_msg(p_runid, 'End MAP_ACT_COVID_HPDS: ', 'Y'); 
+        COMMIT;
+  END;
+
+---
+
 
  PROCEDURE EXTRCT_HPDS_Demographics (
     p_runid        IN NUMBER
@@ -695,14 +919,14 @@ PROCEDURE EXTRACT_ICD10_ICD9_DX_HPDS (
 ) AS
 
 BEGIN
-    tm_log_pkg.log_msg(p_runid,'EXTRACT_ICD10_ICD9_DX_HPDS Start  ','X'); 
+    log_msg(p_runid,'EXTRACT_ICD10_ICD9_DX_HPDS Start  ','X'); 
 
             INSERT into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
             SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast (start_date as date)   
             FROM I2B2DEMODATA.observation_fact   fact1, act_bch_ontology_map m
             WHERE fact1.concept_cd = m.bch_concept_cd 
             AND data_type =  'NCATS_ICD10_ICD9_DX_V1_HPDS' ;
-    tm_log_pkg.log_msg(p_runid,'EXTRACT_ICD10_ICD9_DX_HPDS End  '||sql%rowcount,'X'); 
+    log_msg(p_runid,'EXTRACT_ICD10_ICD9_DX_HPDS End  '||sql%rowcount,'X'); 
     commit;
 end;
 
@@ -795,6 +1019,23 @@ PROCEDURE EXTRCT_HPDS_LAB_Results (
   log_msg(p_runid,'EXTRCT_HPDS_LAB_Results Start  '||sql%rowcount,'X'); 
   commit;
  end;
+ 
+PROCEDURE EXTRACT_COVID_DATA_HPDS (
+    p_runid        IN NUMBER
+) AS
+
+BEGIN
+    log_msg(p_runid,'EXTRACT_COVID_DATA_HPDS Start  ','X'); 
+
+            INSERT into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+            SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast (start_date as date)   
+            FROM I2B2DEMODATA.observation_fact   fact1, act_bch_ontology_map m
+            WHERE fact1.concept_cd = m.bch_concept_cd 
+            AND data_type =  'ACT_COVID_DERIVED'  ;
+            
+    log_msg(p_runid,'EXTRACT_COVID_DATA_HPDS End  '||sql%rowcount,'X'); 
+    commit;
+end; 
 
 PROCEDURE  Run_EXTRCT_HPDS_Data  (
     p_runid        IN NUMBER ) AS
@@ -821,6 +1062,9 @@ BEGIN
      EXTRCT_HPDS_CPT_PX_2018AA ( p_runid   ) ;
     
      EXTRCT_HPDS_LAB_Results ( p_runid ) ;
+     
+     EXTRACT_COVID_DATA_HPDS ( p_runid  ) ;
+     
      log_msg(p_runid,'Run_EXTRCT_HPDS_Data End  ','X'); 
  
 END;
@@ -841,14 +1085,11 @@ log_msg(p_runid,'Start Run_MAP_Data_Load   ','X');
          MAP_DATA_LOAD_VISIT_HPDS ( p_runid);
         
          MAP_DATA_LOAD_DEMOGRAPHCS_HPDS ( p_runid ) ;
+         
+         MAP_DATA_LOAD_COVID_HPDS ( p_runid   ) ;
+         
 log_msg(p_runid,'End Run_MAP_Data_Load   ','X');   
 END;
 
 END TM_DATA_ACT_LOAD_PKG;
 /
-
-
-
-
-
-
