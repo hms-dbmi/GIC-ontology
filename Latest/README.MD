@@ -2,7 +2,7 @@ Below are the general steps to populate data in HPDS in ACT format.
 
 1. Load data from the ACT drop box into the staging table. In addition, populate some source system specific mappings.
 2. Populate the database table TM_CZ.HPDS_DATA_LATEST with your source data using ACT ontology.
-3. Upload data from the table above into HPDS using either SQL Load or a CSV file loader.
+3. Upload data from the table above into HPDS using either a CSV file loader or a SQL Load.
 
 ## Steps 1 & 2
 ### Staging Ontology Data & HPDS Data Extraction in ACT Format.
@@ -32,7 +32,7 @@ Then, run TM_DATA_ACT_LOAD_PKG.Run_EXTRCT_HPDS_Data (p_runid IN NUMBER ), which 
 ### Upload Data into HPDS 
 To upload data into HPDS, there are two options:
 
-1. Project Load HPDS Data from CSV using the Jenkins job - "Load HPDS Data From CSV" in [https://github.com/hms-dbmi/pic-sure-all-in-one](https://github.com/hms-dbmi/pic-sure-all-in-one) 
+1. Load HPDS Data from CSV using the Jenkins job - "Load HPDS Data From CSV" in [https://github.com/hms-dbmi/pic-sure-all-in-one](https://github.com/hms-dbmi/pic-sure-all-in-one) 
 
 Generate the source file from the TM_CZ.HPDS_DATA_LATEST database table, which is populated with ACT data in steps 1 and 2. 
 
@@ -55,7 +55,7 @@ The corresponding columns are:
 - TIMESTAMP: A timestamp for the observation fact, this should be expressed as the number of milliseconds since January 1, 1970 GMT. This is equivalent to the Unix Epoch time value for the time of the observation multiplied by 1000.
 
 
-2. Project Load HPDS Data Using SQL Loader
+2. Load HPDS Data Using SQL Loader
 
 Login on to ETL server
 clone hpds-etl repo https://github.com/hms-dbmi/pic-sure-hpds/tree/master/docker/pic-sure-hpds-etl
