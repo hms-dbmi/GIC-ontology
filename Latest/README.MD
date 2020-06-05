@@ -76,7 +76,7 @@ SELECT PATIENT_NUM, CONCEPT_PATH, NVAL_NUM, TVAL_CHAR,START_DATE FROM TM_CZ.HPDS
 - Encryption_key- select any 32 character hexadecimal encryption key, lowercase a-f and numerals only
 cd ..
 docker-compose -f docker-compose-sql-loader.yml up
-after the ETL extract process completes it generates listed 2 new files in /pic-sure-hpds/docker/pic-sure-hpds-etl/hpds/
+after the ETL extract process completes, it generates 2 new files in /pic-sure-hpds/docker/pic-sure-hpds-etl/hpds/
 columnMeta.javabin
 allObservationsStore.javabin
 
