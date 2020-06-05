@@ -1,6 +1,6 @@
 Below are the general steps to populate data in HPDS in ACT format.
 
-1. Load data from the ACT drop box into the staging table. In addition, populate some source system specific mappings.
+1. Load data from the ACT drop box into the staging table. In addition, populate source system specific mappings with lab result and visit type as provided by BCH.
 2. Populate the database table TM_CZ.HPDS_DATA_LATEST with your source data using ACT ontology.
 3. Upload data from the TM_CZ.HPDS_DATA_LATEST table into HPDS using either a CSV file loader or a SQL Load.
 
@@ -18,6 +18,8 @@ There are two database scripts:
 - tm_cz.NCATS_DEMOGRAPHICS_HPDS 
 - tm_cz.NCATS_LABS_HPDS 
 - tm_cz.NCATS_VISIT_DETAILS_HPDS 
+- tm_cz.act_covid_hpds
+- tm_cz.ncats_icd10_icd9_dx_v1_hpds
 
 2. There are additional source system specific data mapping files located in the folder Latest/Datafiles_HPDS/SQL that should load data into the following tables:
 
@@ -49,7 +51,7 @@ The corresponding columns are:
 
 - PATIENT_NUM: This is an integer value identifying the subject of the recorded observation fact.
 
-- CONCEPT_PATH: This is an identifier for the concept of the observation fact. For compatibility with the PIC-SURE UI this path should represent a location in a hierarchy where each level is separated by a backslash and with a leading and trailing backslash. For example "\demographics\AGE\" would be the age in the default NHANES dataset. In general this can be any string value, HPDS doesn't care what you put there, but the UI does. If this HPDS instance is part of a PIC-SURE networked environment the same concept paths should be used in all sites involved in the network so that queries can be federated across the network.
+- CONCEPT_PATH: This is an identifier for the concept of the observation fact. For compatibility with the PIC-SURE UI this path should represent a location in a hierarchy where each level is separated by a backslash and with a leading and trailing backslash. For example "\demographics\AGE\" would be the age in the default NHANES dataset. In general this can be any string value, so the UI will display whatever is inside HPDS. If this HPDS instance is part of a PIC-SURE networked environment the same concept paths should be used in all sites involved in the network so that queries can be federated across the network.
 
 - NVAL_NUM: A numeric value if this is a numeric concept, otherwise blank.
 
