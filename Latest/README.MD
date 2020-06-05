@@ -8,7 +8,7 @@ Below are the general steps to populate data in HPDS in ACT format.
 ### Load data from the ACT drop box into the staging table.
 
 There are two database scripts:
-- PRC_CRT_TABLES_ACT_HPDS_LOAD.sql - This script creates objects needed for the compilation of database package. 
+- PRC_CRT_TABLES_ACT_HPDS_LOAD.sql - This script creates objects needed for the compilation of the database package. 
 - TM_DATA_ACT_LOAD_PKG.TM_DATA_ACT_LOAD_PKG.sql - This package contains database scripts to create BCH to ACT ontology mapping, and then extracts HPDS data in ACT format.
 
 1. Before you can extract ACT HPDS data, you must stage data files from the folder Latest/ACT_HPDS_Datafiles, which are orignally from the ACT drop box, into the following database tables:
