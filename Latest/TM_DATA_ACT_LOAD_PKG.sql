@@ -5,23 +5,26 @@ Created        - May 2020
 Prerequisites  - Standard i2b2 schema, TM_CZ user having DML permissions on i2b2 tables.
                - Procedure PRC_CRT_TABLES_ACT_HPDS_LOAD has to be run to create objects needed.
                - ACT data tables have to be loaded with the data from the DropBox script in listed tables 
-               - tm_cz.NCATS_VISIT_DETAILS_HPDS,tm_cz.NCATS_DEMOGRAPHICS_HPDS,tm_cz.NCATS_LABS_HPDS,tm_cz.ACT_ICD10CM_DX_2018AA_HPDS,tm_cz.ACT_CPT_PX_2018AA_HPDS 
+               - tm_cz.NCATS_VISIT_DETAILS_HPDS,tm_cz.NCATS_DEMOGRAPHICS_HPDS,tm_cz.NCATS_LABS_HPDS,
+               - tm_cz.ACT_ICD10CM_DX_2018AA_HPDS,tm_cz.ACT_CPT_PX_2018AA_HPDS, 
+               - tm_cz.ncats_icd10_icd9_dx_v1_hpds, tm_cz.act_covid_hpds
                - tm_cz.a_lab_cd_act_bch_map - should be populated with source system lab_cd to Loinc_cd 
                - tm_cz.a_ncats_visit_details_map - should be populated with source system visit_type cd to ACT visit_type code.
 Expected Results:
                - Call to proc TM_DATA_ACT_LOAD_PKG.Run_MAP_Data_Load will populate 
                - Mapping data from source system to ACT format for various nodes in table - act_bch_ontology_map
                - Check mapping data is populated with listed data_types 
-               - LABS - NCATS_LABS_HPDS 
-               - ICD10-ICD9 - 
-               - ICD10 - ACT_ICD10CM_DX_2018AA_HPDS 
-               - CPT - ACT_CPT_PX_2018AA_HPDS 
-               - DEMOGRAPHICS - Hispanic
-               - DEMOGRAPHICS - Race
-               - VISIT - Length of stay
-               - VISIT - Visit type 
+                      ACT_COVID_DERIVED
+                      ACT_CPT_PX_2018AA_HPDS
+                      ACT_ICD10CM_DX_2018AA_HPDS
+                      Hispanic
+                      Length of stay
+                      NCATS_ICD10_ICD9_DX_V1_HPDS
+                      NCATS_LABS_HPDS
+                      Race
+                      Visit type
+
                - If the above data is not populated, it might need code change based on how data is populated in sourcesystem.
-               
                - Call to proc TM_DATA_ACT_LOAD_PKG.Run_EXTRCT_HPDS_Data will populate 
                - table tm_cz.HPDS_DATA_LATEST with HPDS extract in ACT format.  
                - GIC Version of code 
