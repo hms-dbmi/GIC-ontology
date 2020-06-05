@@ -9,17 +9,17 @@ Created        - May 2020
 Prerequisites  -  
 
 Expected Results: Creates listed Objects needed for ACT HPDS data load
-                
+
 */
   --TM_LOG_PKG.log_msg(p_runid, 'Start PROC_CREATE_TABLES ', 'Y');
   --tm_cz.HPDS_DATA_LATEST
-  
+
   --tm_cz.VISIT_FACT_DETAILS
-    
+
   --tm_cz.ACT_BCH_ONTOLOGY_MAP
   --tm_cz.A_NCATS_VISIT_DETAILS_MAP   
   --tm_cz.A_LAB_CD_ACT_BCH_MAP
-  
+
   --tm_cz.NCATS_VISIT_DETAILS_HPDS
   --tm_cz.ACT_COVID_V3_HPDS
   --tm_cz.NCATS_LABS_HPDS
@@ -163,12 +163,12 @@ dbms_output.put_line( v_sql);
     execute immediate v_sql;
     --TM_LOG_PKG.log_msg(p_runid, 'Create Table NCATS_VISIT_DETAILS_HPDS '||sql%rowcount, 'Y'); 
     END IF;
- 
-    
-  
+
+
+
     v_sql := 'create table tm_cz.NCATS_DEMOGRAPHICS_HPDS as select * from tm_cz.NCATS_VISIT_DETAILS_HPDS where 0 > 1';
-     
-    
+
+
     select count(*) into v_counts 
     from dba_tables 
     where table_name = 'NCATS_DEMOGRAPHICS_HPDS' 
@@ -179,7 +179,7 @@ dbms_output.put_line( v_sql);
     END IF;
 
     v_sql := 'create table tm_cz.NCATS_LABS_HPDS as select * from tm_cz.NCATS_VISIT_DETAILS_HPDS where 0 > 1';
-    
+
     select count(*) into v_counts 
     from dba_tables 
     where table_name = 'NCATS_LABS_HPDS' 
@@ -188,10 +188,10 @@ dbms_output.put_line( v_sql);
     execute immediate v_sql;
     --TM_LOG_PKG.log_msg(p_runid, 'Create Table NCATS_LABS_HPDS '||sql%rowcount, 'Y'); 
     END IF;
-    
-    
+
+
     v_sql := 'create table tm_cz.ACT_ICD10CM_DX_2018AA_HPDS as select * from tm_cz.NCATS_VISIT_DETAILS_HPDS where 0 > 1';
-    
+
     select count(*) into v_counts 
     from dba_tables 
     where table_name = 'ACT_ICD10CM_DX_2018AA_HPDS' 
@@ -200,10 +200,10 @@ dbms_output.put_line( v_sql);
     execute immediate v_sql;
     --TM_LOG_PKG.log_msg(p_runid, 'Create Table ACT_ICD10CM_DX_2018AA_HPDS '||sql%rowcount, 'Y'); 
     END IF;
-    
-    
+
+
     v_sql := 'create table tm_cz.ACT_CPT_PX_2018AA_HPDS as select * from tm_cz.NCATS_VISIT_DETAILS_HPDS where 0 > 1';
-    
+
     select count(*) into v_counts 
     from dba_tables 
     where table_name = 'ACT_CPT_PX_2018AA_HPDS' 
@@ -212,7 +212,7 @@ dbms_output.put_line( v_sql);
     execute immediate v_sql;
     --TM_LOG_PKG.log_msg(p_runid, 'Create Table ACT_CPT_PX_2018AA_HPDS '||sql%rowcount, 'Y'); 
     END IF;
-    
+
     v_sql := 'create table tm_cz.ACT_COVID_V3_HPDS as select * from tm_cz.NCATS_VISIT_DETAILS_HPDS where 0 > 1';
     select count(*) into v_counts 
     from dba_tables 
@@ -222,7 +222,7 @@ dbms_output.put_line( v_sql);
     execute immediate v_sql;
     --TM_LOG_PKG.log_msg(p_runid, 'Create Table ACT_COVID_V3_HPDS '||sql%rowcount, 'Y'); 
     END IF;
-    
+
     --TM_LOG_PKG.log_msg(p_runid, 'End ACT_COVID_V3_HPDS ', 'Y');     
     v_sql := '  CREATE TABLE TM_CZ.ETL_RUN_LOG '||
     '(	LOG_ID NUMBER NOT NULL ENABLE, '||
@@ -232,7 +232,89 @@ dbms_output.put_line( v_sql);
 	'LOG_TIMESTAMP TIMESTAMP (6) WITH LOCAL TIME ZONE NOT NULL ENABLE, '||
 	'LOG_SESSION_ID VARCHAR2(32 BYTE) '||
     ' ) NOCOMPRESS LOGGING ' ;
-    
+
+    ---
+
+    v_sql := 'CREATE TABLE TM_CZ.NCATS_ICD10_ICD9_DX_V1_HPDS  '||
+   '(C_HLEVEL VARCHAR2(20 BYTE),  '||
+	'C_FULLNAME VARCHAR2(4000 BYTE),  '||
+	'C_NAME VARCHAR2(2000 BYTE),  '||
+	'C_SYNONYM_CD CHAR(1 BYTE),  '||
+	'C_VISUALATTRIBUTES CHAR(3 BYTE),  '||
+	'C_TOTALNUM VARCHAR2(200 BYTE),  '||
+	'C_BASECODE VARCHAR2(50 BYTE), '|| 
+	--'C_METADATAXML CLOB,  '||
+	'C_FACTTABLECOLUMN VARCHAR2(50 BYTE),  '||
+	'C_TABLENAME VARCHAR2(50 BYTE), '|| 
+	'C_COLUMNNAME VARCHAR2(50 BYTE),  '||
+	'C_COLUMNDATATYPE VARCHAR2(50 BYTE),  '||
+	'C_OPERATOR VARCHAR2(10 BYTE),  '||
+	'C_DIMCODE VARCHAR2(4000 BYTE),  '||
+	--'C_COMMENT CLOB,  '||
+	'C_TOOLTIP VARCHAR2(4000 BYTE),  '||
+	'M_APPLIED_PATH VARCHAR2(4000 BYTE),  '||
+	'UPDATE_DATE DATE,  '||
+	'DOWNLOAD_DATE DATE,  '||
+	'IMPORT_DATE DATE,  '||
+	'SOURCESYSTEM_CD VARCHAR2(50 BYTE),  '||
+	'VALUETYPE_CD VARCHAR2(50 BYTE),  '||
+	'M_EXCLUSION_CD VARCHAR2(25 BYTE),  '||
+	'C_PATH VARCHAR2(4000 BYTE),  '||
+	'C_SYMBOL VARCHAR2(50 BYTE),  '||
+	'HPDS_PATH VARCHAR2(4000 BYTE)  '||
+    ') NOCOMPRESS NOLOGGING  ';
+   dbms_output.put_line( v_sql);
+
+    select count(*) into v_counts 
+    from dba_tables 
+    where table_name = 'NCATS_ICD10_ICD9_DX_V1_HPDS' 
+    and owner = 'TM_CZ';
+    IF  v_counts = 0 THEN
+    execute immediate v_sql;
+    --TM_LOG_PKG.log_msg(p_runid, 'Create Table NCATS_VISIT_DETAILS_HPDS '||sql%rowcount, 'Y'); 
+    END IF;
+
+ v_sql :=   'CREATE TABLE TM_CZ.ACT_COVID_HPDS  '||
+   '(C_HLEVEL VARCHAR2(20 BYTE),  '||
+	'C_FULLNAME VARCHAR2(4000 BYTE),  '||
+	'C_NAME VARCHAR2(2000 BYTE),  '||
+	'C_SYNONYM_CD CHAR(1 BYTE),  '||
+	'C_VISUALATTRIBUTES CHAR(3 BYTE),  '||
+	'C_TOTALNUM VARCHAR2(200 BYTE),  '||
+	'C_BASECODE VARCHAR2(50 BYTE), '|| 
+	--'C_METADATAXML CLOB,  '||
+	'C_FACTTABLECOLUMN VARCHAR2(50 BYTE),  '||
+	'C_TABLENAME VARCHAR2(50 BYTE), '|| 
+	'C_COLUMNNAME VARCHAR2(50 BYTE),  '||
+	'C_COLUMNDATATYPE VARCHAR2(50 BYTE),  '||
+	'C_OPERATOR VARCHAR2(10 BYTE),  '||
+	'C_DIMCODE VARCHAR2(4000 BYTE),  '||
+	--'C_COMMENT CLOB,  '||
+	'C_TOOLTIP VARCHAR2(4000 BYTE),  '||
+	'M_APPLIED_PATH VARCHAR2(4000 BYTE),  '||
+	'UPDATE_DATE DATE,  '||
+	'DOWNLOAD_DATE DATE,  '||
+	'IMPORT_DATE DATE,  '||
+	'SOURCESYSTEM_CD VARCHAR2(50 BYTE),  '||
+	'VALUETYPE_CD VARCHAR2(50 BYTE),  '||
+	'M_EXCLUSION_CD VARCHAR2(25 BYTE),  '||
+	'C_PATH VARCHAR2(4000 BYTE),  '||
+	'C_SYMBOL VARCHAR2(50 BYTE),  '||
+	'HPDS_PATH VARCHAR2(4000 BYTE)  '||
+    ') NOCOMPRESS NOLOGGING  ';
+
+dbms_output.put_line( v_sql);
+
+    select count(*) into v_counts 
+    from dba_tables 
+    where table_name = 'ACT_COVID_HPDS' 
+    and owner = 'TM_CZ';
+    IF  v_counts = 0 THEN
+    execute immediate v_sql;
+    --TM_LOG_PKG.log_msg(p_runid, 'Create Table NCATS_VISIT_DETAILS_HPDS '||sql%rowcount, 'Y'); 
+    END IF;
+
+    ---
     select count(*) into v_counts 
     from dba_tables 
     where table_name = 'ETL_RUN_LOG' 
@@ -244,7 +326,7 @@ dbms_output.put_line( v_sql);
 
     v_sql := '  CREATE SEQUENCE  TM_CZ.ETL_LOG_SEQ  MINVALUE 1 '||
     ' MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOCYCLE ORDER ';
-    
+
     select count(*) into v_counts 
     from dba_objects
     where object_name = 'ETL_LOG_SEQ' 
