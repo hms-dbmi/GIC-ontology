@@ -11,7 +11,7 @@ There are two database scripts:
 - PRC_CRT_TABLES_ACT_HPDS_LOAD.sql - This script creates objects needed for the compilation of the database package. 
 - TM_DATA_ACT_LOAD_PKG.TM_DATA_ACT_LOAD_PKG.sql - This package contains database scripts to create BCH to ACT ontology mapping, and then extracts HPDS data in ACT format.
 
-1. Before you can extract ACT HPDS data, you must stage data files from the folder Latest/ACT_HPDS_Datafiles, which are orignally from the ACT drop box, into the following database tables:
+1. Before you can extract ACT HPDS data, you must stage data files from the folder Latest/ACT_HPDS_Datafiles, which are originally from the ACT drop box, into the following database tables:
 
 - tm_cz.ACT_CPT_PX_2018AA_HPDS 
 - tm_cz.ACT_ICD10CM_DX_2018AA_HPDS 
