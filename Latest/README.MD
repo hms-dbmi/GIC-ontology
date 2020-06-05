@@ -21,7 +21,7 @@ There are two database scripts:
 - tm_cz.act_covid_hpds
 - tm_cz.ncats_icd10_icd9_dx_v1_hpds
 
-2. There are additional source system specific data mapping files located in the folder Latest/Datafiles_HPDS/SQL that should load data into the following tables:
+2. There are additional source system specific data mapping files located in the folder Latest/Datafiles_HPDS/SQL that load data into the following tables:
 
 - tm_cz.a_lab_cd_act_bch_map: should be populated with source system lab_cd to Loinc_cd.
 - tm_cz.a_ncats_visit_details_map: should be populated with source system visit_type cd to ACT visit_type code.
