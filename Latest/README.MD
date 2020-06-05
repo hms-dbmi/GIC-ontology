@@ -2,16 +2,16 @@ Below are the general steps to populate data in HPDS in ACT format.
 
 1. Load data from the ACT drop box into the staging table. In addition, populate some source system specific mappings.
 2. Populate the database table TM_CZ.HPDS_DATA_LATEST with your source data using ACT ontology.
-3. Upload data from the table above into HPDS using either a CSV file loader or a SQL Load.
+3. Upload data from the TM_CZ.HPDS_DATA_LATEST table into HPDS using either a CSV file loader or a SQL Load.
 
-## Steps 1 & 2
-### Staging Ontology Data & HPDS Data Extraction in ACT Format.
+## Step 1 
+### Load data from the ACT drop box into the staging table.
 
 There are two database scripts:
-- PRC_CRT_TABLES_ACT_HPDS_LOAD.sql - Creates objects needed for the compilation of database package. 
-- TM_DATA_ACT_LOAD_PKG.TM_DATA_ACT_LOAD_PKG.sql - This Package contains database scripts to create BCH to ACT ontology mapping, and then extracts HPDS data in ACT format.
+- PRC_CRT_TABLES_ACT_HPDS_LOAD.sql - This script creates objects needed for the compilation of database package. 
+- TM_DATA_ACT_LOAD_PKG.TM_DATA_ACT_LOAD_PKG.sql - This package contains database scripts to create BCH to ACT ontology mapping, and then extracts HPDS data in ACT format.
 
-Before you can extract ACT HPDS data, you must stage data files from the folder Latest/ACT_HPDS_Datafiles, which are orignally from the ACT drop box, into the following database tables:
+1. Before you can extract ACT HPDS data, you must stage data files from the folder Latest/ACT_HPDS_Datafiles, which are orignally from the ACT drop box, into the following database tables:
 
 - tm_cz.ACT_CPT_PX_2018AA_HPDS 
 - tm_cz.ACT_ICD10CM_DX_2018AA_HPDS 
@@ -19,14 +19,17 @@ Before you can extract ACT HPDS data, you must stage data files from the folder 
 - tm_cz.NCATS_LABS_HPDS 
 - tm_cz.NCATS_VISIT_DETAILS_HPDS 
 
-There are additional source system specific data mapping files located in the folder Latest/Datafiles_HPDS/SQL that should load data into the following tables:
+2. There are additional source system specific data mapping files located in the folder Latest/Datafiles_HPDS/SQL that should load data into the following tables:
 
 - tm_cz.a_lab_cd_act_bch_map: should be populated with source system lab_cd to Loinc_cd.
 - tm_cz.a_ncats_visit_details_map: should be populated with source system visit_type cd to ACT visit_type code.
 
-Next, run TM_DATA_ACT_LOAD_PKG.Run_MAP_Data_Load (p_runid IN NUMBER ) to populate the data mapping table tm_cz.ACT_BCH_ONTOLOGY_MAP, which creates mapping between your source system and ACT ontology mapping, depending upon the concept_cd naming convention used in your source system you might have to tweak the matching logic if no match is found for any of the ontology nodes.
+## Step 2
+### Populate the database table TM_CZ.HPDS_DATA_LATEST with your source data using ACT ontology
 
-Then, run TM_DATA_ACT_LOAD_PKG.Run_EXTRCT_HPDS_Data (p_runid IN NUMBER ), which extracts HPDS data in ACT format to the TM_CZ.HPDS_DATA_LATEST table.
+1. Run TM_DATA_ACT_LOAD_PKG.Run_MAP_Data_Load to populate the data mapping table tm_cz.ACT_BCH_ONTOLOGY_MAP, which creates mapping between your source system and ACT ontology mapping, depending upon the concept_cd naming convention used in your source system you might have to tweak the matching logic if no match is found for any of the ontology nodes.
+
+2. Run TM_DATA_ACT_LOAD_PKG.Run_EXTRCT_HPDS_Data, which extracts HPDS data in ACT format to the TM_CZ.HPDS_DATA_LATEST table.
 
 ## Step 3
 ### Upload Data into HPDS 
