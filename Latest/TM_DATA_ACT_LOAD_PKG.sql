@@ -5,26 +5,25 @@ Created        - May 2020
 Prerequisites  - Standard i2b2 schema, TM_CZ user having DML permissions on i2b2 tables.
                - Procedure PRC_CRT_TABLES_ACT_HPDS_LOAD has to be run to create objects needed.
                - ACT data tables have to be loaded with the data from the DropBox script in listed tables 
-               - tm_cz.NCATS_VISIT_DETAILS_HPDS,tm_cz.NCATS_DEMOGRAPHICS_HPDS,tm_cz.NCATS_LABS_HPDS,
-               - tm_cz.ACT_ICD10CM_DX_2018AA_HPDS,tm_cz.ACT_CPT_PX_2018AA_HPDS, 
-               - tm_cz.ncats_icd10_icd9_dx_v1_hpds, tm_cz.act_covid_hpds
+               - tm_cz.NCATS_VISIT_DETAILS_HPDS,tm_cz.NCATS_DEMOGRAPHICS_HPDS,tm_cz.NCATS_LABS_HPDS,tm_cz.ACT_ICD10CM_DX_2018AA_HPDS,tm_cz.ACT_CPT_PX_2018AA_HPDS 
                - tm_cz.a_lab_cd_act_bch_map - should be populated with source system lab_cd to Loinc_cd 
                - tm_cz.a_ncats_visit_details_map - should be populated with source system visit_type cd to ACT visit_type code.
 Expected Results:
                - Call to proc TM_DATA_ACT_LOAD_PKG.Run_MAP_Data_Load will populate 
                - Mapping data from source system to ACT format for various nodes in table - act_bch_ontology_map
                - Check mapping data is populated with listed data_types 
-                      ACT_COVID_DERIVED
-                      ACT_CPT_PX_2018AA_HPDS
-                      ACT_ICD10CM_DX_2018AA_HPDS
-                      Hispanic
-                      Length of stay
-                      NCATS_ICD10_ICD9_DX_V1_HPDS
-                      NCATS_LABS_HPDS
-                      Race
-                      Visit type
-
+               - LABS - NCATS_LABS_HPDS 
+               - ICD10-ICD9 - 
+               - ICD10 - ACT_ICD10CM_DX_2018AA_HPDS 
+               - CPT - ACT_CPT_PX_2018AA_HPDS 
+               - DEMOGRAPHICS - Hispanic
+               - DEMOGRAPHICS - Race
+               - VISIT - Length of stay
+               - VISIT - Visit type 
+               - ACT_COVID_HPDS  -- ACT_COVID_DERIVED
+               - ACT_COVID_HPDS  -- ACT_COVID_DERIVED_LAB
                - If the above data is not populated, it might need code change based on how data is populated in sourcesystem.
+               
                - Call to proc TM_DATA_ACT_LOAD_PKG.Run_EXTRCT_HPDS_Data will populate 
                - table tm_cz.HPDS_DATA_LATEST with HPDS extract in ACT format.  
                - GIC Version of code 
@@ -60,6 +59,9 @@ PROCEDURE MAP_DATA_LOAD_VISIT_HPDS (
     p_runid        IN NUMBER )  ;
 
 PROCEDURE MAP_DATA_LOAD_DEMOGRAPHCS_HPDS (
+    p_runid        IN NUMBER )  ;  
+    
+PROCEDURE MAP_DATA_LOAD_COVID_HPDS (
     p_runid        IN NUMBER )  ;    
     
 PROCEDURE EXTRCT_HPDS_Demographics (
@@ -75,9 +77,6 @@ PROCEDURE EXTRACT_ICD10_ICD9_DX_HPDS (
 PROCEDURE EXTRCT_HPDS_ICD10 (
     p_runid        IN NUMBER
 ) ;    
-
-PROCEDURE EXTRCT_HPDS_ICD10PCS_2018AA (
-    p_runid        IN NUMBER ) ;
     
 PROCEDURE EXTRCT_HPDS_CPT_PX_2018AA (
     p_runid        IN NUMBER
@@ -85,7 +84,7 @@ PROCEDURE EXTRCT_HPDS_CPT_PX_2018AA (
 
 PROCEDURE EXTRCT_HPDS_LAB_Results (
     p_runid        IN NUMBER) ;
---===============     
+    
 PROCEDURE  Run_EXTRCT_HPDS_Data  (
     p_runid        IN NUMBER );
 
@@ -541,7 +540,8 @@ PROCEDURE MAP_DATA_LOAD_COVID_HPDS (
   BEGIN
      log_msg(p_runid, 'Start MAP_ACT_COVID_HPDS: ', 'Y');  
         DELETE FROM act_bch_ontology_map
-        WHERE data_type = 'ACT_COVID_DERIVED';
+        WHERE data_type in( 'ACT_COVID_DERIVED','ACT_COVID_DERIVED_LAB') ;
+        
         log_msg(p_runid, 'Delete existing data MAP_ACT_COVID_HPDS: '||sql%rowcount, 'Y');        
 
         ---Diagnosis UMLS_C0037088
@@ -691,7 +691,7 @@ PROCEDURE MAP_DATA_LOAD_COVID_HPDS (
                     act_name_char,
                     act_concept_cd
                   )
-        SELECT distinct 'ACT_COVID_DERIVED' src , 
+        SELECT distinct 'ACT_COVID_DERIVED_LAB' src , --Modified for lab results
                   null bch_concept_path,
                   null bch_name_char,
                   b.bch_concept_cd,
@@ -951,25 +951,6 @@ BEGIN
     commit;
 end;
 
----ICD10PCS
-PROCEDURE EXTRCT_HPDS_ICD10PCS_2018AA (
-    p_runid        IN NUMBER
-) AS
-
-Begin
-
-  log_msg(p_runid,'EXTRCT_HPDS_ICD10PCS_2018AA Start  ','X'); 
-
-        INSERT into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-        SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast( start_date as date) start_date
-        FROM I2B2DEMODATA.observation_fact   fact1, act_bch_ontology_map m
-        WHERE fact1.concept_cd = m.bch_concept_cd  
-        AND data_type =   'ACT_ICD10CM_DX_2018AA_HPDS';
-        
-  log_msg(p_runid,'EXTRCT_HPDS_ICD10PCS_2018AA End  '||sql%rowcount,'X'); 
-  commit;
-end;
---
 PROCEDURE EXTRCT_HPDS_CPT_PX_2018AA (
     p_runid        IN NUMBER
 ) AS
@@ -1035,6 +1016,12 @@ BEGIN
             FROM I2B2DEMODATA.observation_fact   fact1, act_bch_ontology_map m
             WHERE fact1.concept_cd = m.bch_concept_cd 
             AND data_type =  'ACT_COVID_DERIVED'  ;
+            
+            INSERT into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+            SELECT distinct patient_num,act_concept_path , nval_num,'E',  cast (start_date as date)   
+            FROM I2B2DEMODATA.observation_fact   fact1, act_bch_ontology_map m
+            WHERE fact1.concept_cd = m.bch_concept_cd 
+            AND data_type =  'ACT_COVID_DERIVED_LAB'  ;
             
     log_msg(p_runid,'EXTRACT_COVID_DATA_HPDS End  '||sql%rowcount,'X'); 
     commit;
