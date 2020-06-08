@@ -13,21 +13,19 @@ Expected Results: Creates listed Objects needed for ACT HPDS data load
 */
   --TM_LOG_PKG.log_msg(p_runid, 'Start PROC_CREATE_TABLES ', 'Y');
   --tm_cz.HPDS_DATA_LATEST
-
   --tm_cz.VISIT_FACT_DETAILS
-
   --tm_cz.ACT_BCH_ONTOLOGY_MAP
   --tm_cz.A_NCATS_VISIT_DETAILS_MAP   
   --tm_cz.A_LAB_CD_ACT_BCH_MAP
-
   --tm_cz.NCATS_VISIT_DETAILS_HPDS
-  --tm_cz.ACT_COVID_V3_HPDS
   --tm_cz.NCATS_LABS_HPDS
   --tm_cz.ACT_ICD10CM_DX_2018AA_HPDS
   --tm_cz.ACT_CPT_PX_2018AA_HPDS
   --tm_cz.ETL_RUN_LOG
   --tm_cz.ETL_LOG_SEQ
-
+  --TM_CZ.ACT_COVID_HPDS
+  --TM_CZ.NCATS_ICD10_ICD9_DX_V1_HPDS
+  
   v_sql := 'CREATE TABLE TM_CZ.HPDS_DATA_LATEST '||
    '(PATIENT_NUM NUMBER,  '||
 	'CONCEPT_PATH VARCHAR2(4000),  '||
@@ -213,15 +211,6 @@ dbms_output.put_line( v_sql);
     --TM_LOG_PKG.log_msg(p_runid, 'Create Table ACT_CPT_PX_2018AA_HPDS '||sql%rowcount, 'Y'); 
     END IF;
 
-    v_sql := 'create table tm_cz.ACT_COVID_V3_HPDS as select * from tm_cz.NCATS_VISIT_DETAILS_HPDS where 0 > 1';
-    select count(*) into v_counts 
-    from dba_tables 
-    where table_name = 'ACT_COVID_V3_HPDS' 
-    and owner = 'TM_CZ';
-    IF  v_counts = 0 THEN
-    execute immediate v_sql;
-    --TM_LOG_PKG.log_msg(p_runid, 'Create Table ACT_COVID_V3_HPDS '||sql%rowcount, 'Y'); 
-    END IF;
 
     --TM_LOG_PKG.log_msg(p_runid, 'End ACT_COVID_V3_HPDS ', 'Y');     
     v_sql := '  CREATE TABLE TM_CZ.ETL_RUN_LOG '||
@@ -233,6 +222,15 @@ dbms_output.put_line( v_sql);
 	'LOG_SESSION_ID VARCHAR2(32 BYTE) '||
     ' ) NOCOMPRESS LOGGING ' ;
 
+    select count(*) into v_counts 
+    from dba_tables 
+    where table_name = 'ETL_RUN_LOG' 
+    and owner = 'TM_CZ';
+    IF  v_counts = 0 THEN
+    execute immediate v_sql;
+    --TM_LOG_PKG.log_msg(p_runid, 'Create Table ETL_RUN_LOG '||sql%rowcount, 'Y'); 
+    END IF;
+
     ---
 
     v_sql := 'CREATE TABLE TM_CZ.NCATS_ICD10_ICD9_DX_V1_HPDS  '||
@@ -243,14 +241,12 @@ dbms_output.put_line( v_sql);
 	'C_VISUALATTRIBUTES CHAR(3 BYTE),  '||
 	'C_TOTALNUM VARCHAR2(200 BYTE),  '||
 	'C_BASECODE VARCHAR2(50 BYTE), '|| 
-	--'C_METADATAXML CLOB,  '||
 	'C_FACTTABLECOLUMN VARCHAR2(50 BYTE),  '||
 	'C_TABLENAME VARCHAR2(50 BYTE), '|| 
 	'C_COLUMNNAME VARCHAR2(50 BYTE),  '||
 	'C_COLUMNDATATYPE VARCHAR2(50 BYTE),  '||
 	'C_OPERATOR VARCHAR2(10 BYTE),  '||
 	'C_DIMCODE VARCHAR2(4000 BYTE),  '||
-	--'C_COMMENT CLOB,  '||
 	'C_TOOLTIP VARCHAR2(4000 BYTE),  '||
 	'M_APPLIED_PATH VARCHAR2(4000 BYTE),  '||
 	'UPDATE_DATE DATE,  '||
@@ -271,7 +267,7 @@ dbms_output.put_line( v_sql);
     and owner = 'TM_CZ';
     IF  v_counts = 0 THEN
     execute immediate v_sql;
-    --TM_LOG_PKG.log_msg(p_runid, 'Create Table NCATS_VISIT_DETAILS_HPDS '||sql%rowcount, 'Y'); 
+    --TM_LOG_PKG.log_msg(p_runid, 'Create Table NCATS_ICD10_ICD9_DX_V1_HPDS '||sql%rowcount, 'Y'); 
     END IF;
 
  v_sql :=   'CREATE TABLE TM_CZ.ACT_COVID_HPDS  '||
@@ -282,14 +278,12 @@ dbms_output.put_line( v_sql);
 	'C_VISUALATTRIBUTES CHAR(3 BYTE),  '||
 	'C_TOTALNUM VARCHAR2(200 BYTE),  '||
 	'C_BASECODE VARCHAR2(50 BYTE), '|| 
-	--'C_METADATAXML CLOB,  '||
 	'C_FACTTABLECOLUMN VARCHAR2(50 BYTE),  '||
 	'C_TABLENAME VARCHAR2(50 BYTE), '|| 
 	'C_COLUMNNAME VARCHAR2(50 BYTE),  '||
 	'C_COLUMNDATATYPE VARCHAR2(50 BYTE),  '||
 	'C_OPERATOR VARCHAR2(10 BYTE),  '||
 	'C_DIMCODE VARCHAR2(4000 BYTE),  '||
-	--'C_COMMENT CLOB,  '||
 	'C_TOOLTIP VARCHAR2(4000 BYTE),  '||
 	'M_APPLIED_PATH VARCHAR2(4000 BYTE),  '||
 	'UPDATE_DATE DATE,  '||
@@ -311,18 +305,11 @@ dbms_output.put_line( v_sql);
     and owner = 'TM_CZ';
     IF  v_counts = 0 THEN
     execute immediate v_sql;
-    --TM_LOG_PKG.log_msg(p_runid, 'Create Table NCATS_VISIT_DETAILS_HPDS '||sql%rowcount, 'Y'); 
+    --TM_LOG_PKG.log_msg(p_runid, 'Create Table ACT_COVID_HPDS '||sql%rowcount, 'Y'); 
     END IF;
 
     ---
-    select count(*) into v_counts 
-    from dba_tables 
-    where table_name = 'ETL_RUN_LOG' 
-    and owner = 'TM_CZ';
-    IF  v_counts = 0 THEN
-    execute immediate v_sql;
-    --TM_LOG_PKG.log_msg(p_runid, 'Create Table ACT_COVID_V3_HPDS '||sql%rowcount, 'Y'); 
-    END IF;
+
 
     v_sql := '  CREATE SEQUENCE  TM_CZ.ETL_LOG_SEQ  MINVALUE 1 '||
     ' MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOCYCLE ORDER ';
@@ -334,7 +321,7 @@ dbms_output.put_line( v_sql);
     and owner = 'TM_CZ';
     IF  v_counts = 0 THEN
     execute immediate v_sql;
-    --TM_LOG_PKG.log_msg(p_runid, 'Create Table ACT_COVID_V3_HPDS '||sql%rowcount, 'Y'); 
+    --TM_LOG_PKG.log_msg(p_runid, 'Create Seq ETL_LOG_SEQ '||sql%rowcount, 'Y'); 
     END IF;
 
   END;
