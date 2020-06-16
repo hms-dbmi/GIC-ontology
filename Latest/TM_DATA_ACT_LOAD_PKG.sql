@@ -22,8 +22,9 @@ Expected Results:
                - VISIT - Visit type 
                - ACT_COVID_HPDS  -- ACT_COVID_DERIVED
                - ACT_COVID_HPDS  -- ACT_COVID_DERIVED_LAB
+               - MED_ALPHA_HPDS
                - If the above data is not populated, it might need code change based on how data is populated in sourcesystem.
-               
+
                - Call to proc TM_DATA_ACT_LOAD_PKG.Run_EXTRCT_HPDS_Data will populate 
                - table tm_cz.HPDS_DATA_LATEST with HPDS extract in ACT format.  
                - GIC Version of code 
@@ -64,6 +65,9 @@ PROCEDURE MAP_DATA_LOAD_DEMOGRAPHCS_HPDS (
 PROCEDURE MAP_DATA_LOAD_COVID_HPDS (
     p_runid        IN NUMBER )  ;    
     
+PROCEDURE MAP_DATA_LOAD_MED_ALPHA_HPDS (
+    p_runid        IN NUMBER )  ;     
+    
 PROCEDURE EXTRCT_HPDS_Demographics (
     p_runid        IN NUMBER ) ;
 
@@ -85,6 +89,12 @@ PROCEDURE EXTRCT_HPDS_CPT_PX_2018AA (
 PROCEDURE EXTRCT_HPDS_LAB_Results (
     p_runid        IN NUMBER) ;
     
+PROCEDURE  EXTRACT_COVID_DATA_HPDS ( 
+    p_runid   IN NUMBER) ;
+    
+PROCEDURE  EXTRCT_HPDS_MED_ALPHA     (
+    p_runid        IN NUMBER );     
+
 PROCEDURE  Run_EXTRCT_HPDS_Data  (
     p_runid        IN NUMBER );
 
@@ -235,10 +245,10 @@ PROCEDURE MAP_DATA_LOAD_ICD10_ICD9_HPDS (
     p_runid        IN NUMBER )  
     AS
   BEGIN
-     log_msg(p_runid, 'Start MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: ', 'Y');  
+     log_msg(p_runid, 'Start MAP_DATA_LOAD_ICD10_ICD9_HPDS: ', 'Y');  
         DELETE FROM act_bch_ontology_map
         WHERE data_type = 'NCATS_ICD10_ICD9_DX_V1_HPDS';
-        log_msg(p_runid, 'Delete existing data MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: '||sql%rowcount, 'Y');        
+        log_msg(p_runid, 'Delete existing data MAP_DATA_LOAD_ICD10_ICD9_HPDS: '||sql%rowcount, 'Y');        
         -- matched based on ICD cd
         --in addition  nodes are matched based on c_name/name_char too
         -- MAP_NCATS_ICD10_ICD9_DX_V1_HPDS
@@ -300,8 +310,10 @@ PROCEDURE MAP_DATA_LOAD_ICD10_ICD9_HPDS (
         and C_BASECODE = cd.concept_cd ;-- 102428
 
 
-     log_msg(p_runid, 'End  ICD10 - MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: Inserted Rows '||sql%rowcount, 'Y');   
+      log_msg(p_runid, 'End  ICD10 - MAP_NCATS_ICD10_ICD9_DX_V1_HPDS: Inserted Rows '||sql%rowcount, 'Y');   
       COMMIT;
+      log_msg(p_runid, 'End  MAP_DATA_LOAD_ICD10_ICD9_HPDS '||sql%rowcount, 'Y');   
+      
   END;
  
   
@@ -532,17 +544,19 @@ PROCEDURE MAP_DATA_LOAD_DEMOGRAPHCS_HPDS (
      log_msg(p_runid, 'End MAP_DATA_LOAD_DEMOGRAPHCS_HPDS: ', 'Y');        
      COMMIT;
   END;
+
+  
   
 ---
 PROCEDURE MAP_DATA_LOAD_COVID_HPDS (
     p_runid        IN NUMBER )  
     AS
   BEGIN
-     log_msg(p_runid, 'Start MAP_ACT_COVID_HPDS: ', 'Y');  
+     log_msg(p_runid, 'Start MAP_DATA_LOAD_COVID_HPDS: ', 'Y');  
         DELETE FROM act_bch_ontology_map
         WHERE data_type in( 'ACT_COVID_DERIVED','ACT_COVID_DERIVED_LAB') ;
         
-        log_msg(p_runid, 'Delete existing data MAP_ACT_COVID_HPDS: '||sql%rowcount, 'Y');        
+        log_msg(p_runid, 'Delete existing data MAP_DATA_LOAD_COVID_HPDS: '||sql%rowcount, 'Y');        
 
         ---Diagnosis UMLS_C0037088
         
@@ -731,13 +745,40 @@ PROCEDURE MAP_DATA_LOAD_COVID_HPDS (
             where replace(a.c_basecode,'ICD10CM','ICD10') = b.concept_cd ;--627 out of 707 --ICDcode
                       
         log_msg(p_runid, 'End  Other variables of interest - MAP_ACT_COVID_HPDS: Inserted Rows '||sql%rowcount, 'Y');  
-        log_msg(p_runid, 'End MAP_ACT_COVID_HPDS: ', 'Y'); 
+        log_msg(p_runid, 'End MAP_DATA_LOAD_COVID_HPDS: ', 'Y'); 
         COMMIT;
   END;
 
 ---
 
+PROCEDURE MAP_DATA_LOAD_MED_ALPHA_HPDS (
+    p_runid        IN NUMBER )  
+    AS
+  BEGIN
+        log_msg(p_runid, 'Start MAP_DATA_LOAD_MED_ALPHA_HPDS: '||sql%rowcount, 'Y'); 
+        DELETE FROM act_bch_ontology_map
+        WHERE data_type = 'MED_ALPHA_HPDS';
+        log_msg(p_runid, 'Delete existing data MAP_DATA_LOAD_MED_ALPHA_HPDS: '||sql%rowcount, 'Y'); 
+        INSERT INTO act_bch_ontology_map (  data_type,
+            act_concept_path,
+            act_name_char,
+            act_concept_cd,
+            bch_concept_path,
+            bch_name_char,
+            bch_concept_cd
+          )
+        select distinct 'MED_ALPHA_HPDS' src, REPLACE(a.hpds_path,'Medications\'  ,'\ACT Medications Alphabetical\') act_concept_path,a.c_name act_name_char,a.c_basecode act_concept_cd,
+         bch_concept_path, bch_name_char, bch_concept_cd
+        from tm_cz.A_MED_CD_ACT_BCH_MAP b,
+         tm_cz.MED_ALPHA_HPDS a
+         where  a.c_basecode = b.act_concept_cd
+         AND a.hpds_path LIKE 'Medications%';
 
+        COMMIT;
+        log_msg(p_runid, 'End MAP_DATA_LOAD_MED_ALPHA_HPDS: '||sql%rowcount, 'Y'); 
+  END;    
+
+---
  PROCEDURE EXTRCT_HPDS_Demographics (
     p_runid        IN NUMBER
 ) AS
@@ -1027,6 +1068,24 @@ BEGIN
     commit;
 end; 
 
+PROCEDURE EXTRCT_HPDS_MED_ALPHA (
+    p_runid        IN NUMBER
+) AS
+
+Begin
+
+  log_msg(p_runid,'EXTRCT_HPDS_MED_ALPHA Start  ','X'); 
+
+        INSERT into tm_cz.HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+        SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast( start_date as date) start_date
+        FROM I2B2DEMODATA.observation_fact   fact1, act_bch_ontology_map m
+        WHERE fact1.concept_cd = m.bch_concept_cd  
+        AND data_type =   'MED_ALPHA_HPDS';
+        
+  log_msg(p_runid,'EXTRCT_HPDS_MED_ALPHA End  '||sql%rowcount,'X'); 
+  commit;
+end;
+
 PROCEDURE  Run_EXTRCT_HPDS_Data  (
     p_runid        IN NUMBER ) AS
     v_sql          VARCHAR2(4000) ;
@@ -1055,6 +1114,8 @@ BEGIN
      
      EXTRACT_COVID_DATA_HPDS ( p_runid  ) ;
      
+     EXTRCT_HPDS_MED_ALPHA( p_runid  ) ;
+     
      log_msg(p_runid,'Run_EXTRCT_HPDS_Data End  ','X'); 
  
 END;
@@ -1077,6 +1138,8 @@ log_msg(p_runid,'Start Run_MAP_Data_Load   ','X');
          MAP_DATA_LOAD_DEMOGRAPHCS_HPDS ( p_runid ) ;
          
          MAP_DATA_LOAD_COVID_HPDS ( p_runid   ) ;
+         
+         MAP_DATA_LOAD_MED_ALPHA_HPDS ( p_runid );
          
 log_msg(p_runid,'End Run_MAP_Data_Load   ','X');   
 END;

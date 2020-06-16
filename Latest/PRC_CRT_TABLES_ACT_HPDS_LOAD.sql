@@ -23,8 +23,9 @@ Expected Results: Creates listed Objects needed for ACT HPDS data load
   --tm_cz.ACT_CPT_PX_2018AA_HPDS
   --tm_cz.ETL_RUN_LOG
   --tm_cz.ETL_LOG_SEQ
-  --TM_CZ.ACT_COVID_HPDS
-  --TM_CZ.NCATS_ICD10_ICD9_DX_V1_HPDS
+  --tm_cz.ACT_COVID_HPDS
+  --tm_cz.MED_ALPHA_HPDS
+  --tm_cz.NCATS_ICD10_ICD9_DX_V1_HPDS
   
   v_sql := 'CREATE TABLE TM_CZ.HPDS_DATA_LATEST '||
    '(PATIENT_NUM NUMBER,  '||
@@ -85,7 +86,7 @@ dbms_output.put_line( v_sql);
    v_sql := 'CREATE TABLE TM_CZ.A_NCATS_VISIT_DETAILS_MAP  '||
    '(BCH_VISIT_TYPE VARCHAR2(500), '||
 	'ACT_VISIT_TYPE VARCHAR2(500) )  NOCOMPRESS LOGGING ';
-dbms_output.put_line( v_sql);
+    dbms_output.put_line( v_sql);
 
     select count(*) into v_counts 
     from dba_tables 
@@ -95,6 +96,28 @@ dbms_output.put_line( v_sql);
     execute immediate v_sql;
     --TM_LOG_PKG.log_msg(p_runid, 'Create Table A_NCATS_VISIT_DETAILS_MAP '||sql%rowcount, 'Y'); 
     END IF;
+    
+    --
+    v_sql := 'CREATE TABLE TM_CZ.A_MED_CD_ACT_BCH_MAP '||
+    '(	BCH_CONCEPT_CD VARCHAR2(100),  '||
+	'ACT_CONCEPT_CD VARCHAR2(100),  '||
+	'BCH_CONCEPT_PATH VARCHAR2(4000) ,  '|| 
+	'BCH_NAME_CHAR VARCHAR2(2000) )  '||
+    'NOCOMPRESS NOLOGGING ' ;
+    dbms_output.put_line( v_sql);
+
+    select count(*) into v_counts 
+    from dba_tables 
+    where table_name = 'A_MED_CD_ACT_BCH_MAP' 
+    and owner = 'TM_CZ';
+    
+    IF  v_counts = 0 THEN
+    execute immediate v_sql;
+    --TM_LOG_PKG.log_msg(p_runid, 'Create Table A_MED_CD_ACT_BCH_MAP '||sql%rowcount, 'Y'); 
+    END IF;
+
+    
+    ---
 
   v_sql := 'CREATE TABLE TM_CZ.A_LAB_CD_ACT_BCH_MAP   '||
    '( BCH_LAB_CODE VARCHAR2(500),   '||
@@ -269,7 +292,22 @@ dbms_output.put_line( v_sql);
     execute immediate v_sql;
     --TM_LOG_PKG.log_msg(p_runid, 'Create Table NCATS_ICD10_ICD9_DX_V1_HPDS '||sql%rowcount, 'Y'); 
     END IF;
+--
+ v_sql := 'create table tm_cz.MED_ALPHA_HPDS as select * from NCATS_ICD10_ICD9_DX_V1_HPDS where 0 > 1  ';
 
+    dbms_output.put_line( v_sql);
+
+    select count(*) into v_counts 
+    from dba_tables 
+    where table_name = 'MED_ALPHA_HPDS' 
+    and owner = 'TM_CZ';
+    
+    IF  v_counts = 0 THEN
+        execute immediate v_sql;
+        --TM_LOG_PKG.log_msg(p_runid, 'Create Table MED_ALPHA_HPDS '||sql%rowcount, 'Y'); 
+    END IF;
+
+--
  v_sql :=   'CREATE TABLE TM_CZ.ACT_COVID_HPDS  '||
    '(C_HLEVEL VARCHAR2(20 BYTE),  '||
 	'C_FULLNAME VARCHAR2(4000 BYTE),  '||
