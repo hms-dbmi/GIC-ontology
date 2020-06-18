@@ -179,14 +179,10 @@ PROCEDURE MAP_DATA_LOAD_NCATS_LABS_HPDS (
             bch_concept_cd  )
         SELECT DISTINCT 'NCATS_LABS_HPDS' src, replace(a.hpds_path, '\Lab Test Results\', '\ACT Laboratory Tests\')||'\'  act_concept_path,
             a.c_name act_name_char,a.c_basecode act_concept_cd,
-            bch.bch_concept_path,bch.bch_name_char,bch.bch_concept_cd
-        FROM (  SELECT 'LOINC:'||b.loinc_lab_code bch_concept_cd, cd.concept_path bch_concept_path, cd.name_char bch_name_char
-                FROM TM_CZ.A_LAB_CD_ACT_BCH_MAP b,
-                     I2B2DEMODATA.concept_dimension cd
-                WHERE b.bch_lab_code = cd.concept_cd
-                AND b.loinc_lab_code is not null ) bch, 
+            null ,null,bch.bch_lab_code
+        FROM  TM_CZ.A_LAB_CD_ACT_BCH_MAP bch ,
                 TM_CZ.NCATS_LABS_HPDS a
-        WHERE bch.bch_concept_cd = a.c_basecode 
+        WHERE 'LOINC:'||bch.loinc_lab_code = a.c_basecode 
         UNION
         SELECT  DISTINCT 'NCATS_LABS_HPDS' src, replace(a.hpds_path, '\Lab Test Results\', '\ACT Laboratory Tests\')||'\'  act_concept_path,
             a.c_name act_name_char,a.c_basecode act_concept_cd,
@@ -194,7 +190,9 @@ PROCEDURE MAP_DATA_LOAD_NCATS_LABS_HPDS (
         FROM I2B2DEMODATA.concept_dimension b, 
              TM_CZ.NCATS_LABS_HPDS a
         WHERE b.name_char = a.c_name
-        AND concept_path like '\i2b2\Lab View\%'; --182 Rows Inserted
+        AND concept_cd like 'LAB%'  ; 
+        
+        
         log_msg(p_runid, 'End MAP_DATA_LOAD_NCATS_LABS_HPDS: '||sql%rowcount, 'Y'); 
         COMMIT;
   END;
