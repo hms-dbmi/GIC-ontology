@@ -874,7 +874,7 @@ BEGIN
                               '  inout_cd, '||
                               '  length_of_stay, '||
                               '  to_timestamp(start_date,''DD-MON-RR HH.MI.SSXFF AM'') start_date '||
-                            ' FROM I2B2DEMODATA.visit_dimension '||
+                            ' FROM I2B2DEMODATA.visit_dimension where  dbms_lob.substr(visit_blob,9,1) not in ( ''Canceled'',''No Show'')'||
                        ' ) vd, I2B2DEMODATA.patient_dimension pd '||
                    ' WHERE  vd.patient_num = pd.patient_num '||
               '  ) WHERE trunc( (start_date - birth_date) / 365) >= 0 ';
