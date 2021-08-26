@@ -1,3 +1,5 @@
+
+
 # Frequently Asked Questions
 
 <b>Question: What is the difference between the mapping for GIC and the ACT ontology?</b>
