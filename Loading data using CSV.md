@@ -30,7 +30,7 @@ HPDS_PATH|Varchar2(4000)|Expanded standard ontology path for given c_fullname
 * NCATS_VISIT_DETAILS_HPDS.dsv
 
 #### Step 2: Map your institute’s data to the GIC ACT ontology.<br>
-* Map your institute’s ontology to the GIC ACT ontology mapping files listed in Step 1. This process is different for each institution. For an example, visit the  Boston Children’s Hospital mapping here.
+* Map your institute’s ontology to the GIC ACT ontology mapping files listed in Step 1. This process is different for each institution. For an example, visit the  Boston Children’s Hospital mapping [here](https://github.com/hms-dbmi/i2b2ACTtoHPDS/tree/BCH_ACT_Mappings/BCH%20files).
 
 * Using the above created ontology mapping extract your institute’s fact data with GIC ACT ontology into allConcepts.csv file, listed are the details on the data attributes of the file.
 * This file should have a header: "PATIENT_NUM","CONCEPT_PATH","NVAL_NUM","TVAL_CHAR","TIMESTAMP" 
