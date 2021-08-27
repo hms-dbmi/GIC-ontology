@@ -5,7 +5,7 @@ There two options to load the phenotypic data:
 
 # Frequently Asked Questions
 
-<b>Question: What is the difference between the mapping for GIC and the ACT ontology?</b> <>
+<b>Question: What is the difference between the mapping for GIC and the ACT ontology?</b> <br>
 Answer: Below are the differences between the ACT ontology used in GIC:
 
 * Age: Age is a numeric value in GIC, not a categorical value. This allows researchers to search more dynamically. 
