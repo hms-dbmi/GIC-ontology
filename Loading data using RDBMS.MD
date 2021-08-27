@@ -54,7 +54,7 @@ Development Environment: Institute’s should load their data into their institu
 * The Jenkins job expects two local files to be uploaded for data extract:
   * sql.properties: Defines the database connect string. 
      * Example showing Oracle.  Postgres can also be used. 
-
+     ![Example](/image.png)
  
   * loadQuery.sql:
       * SELECT PATIENT_NUM, CONCEPT_PATH, NVAL_NUM, TVAL_CHAR,START_DATE 
