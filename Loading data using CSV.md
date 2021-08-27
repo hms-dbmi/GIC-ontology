@@ -1,6 +1,6 @@
 High level steps required to generate the GIC java bin using CSV loader Jenkins job. 
 
-STEP|DETAILS
+Steps|Details
 -----|-------
 1 | Download the 8 ACT ontology files from this git repo.
 2 | Create mapping between your institutes ontology and these ACT ontology files downloaded from the git repo.
@@ -39,7 +39,7 @@ HPDS_PATH|Varchar2(4000)|Expanded standard ontology path for given c_fullname
 HPDS Header| Details
 ----|----
 PATIENT_NUM| Patient_num corresponding to the fact record.This is an integer value identifying the subject of the recorded observation fact.
-CONCEPT_PATH|HPDS_PATH corresponds to the fact concept_cd from the mapping files listed above. This is an identifier for the concept of the observation fact. For compatibility with the PIC-SURE UI this path should represent a location in a hierarchy where each level is separated by a backslash and with a leading and trailing backslash. For example "\ACT demographics\AGE\" would be the age for GIC. In general this can be any string value, so the UI will display whatever is inside HPDS. If this HPDS instance is part of a PIC-SURE networked environment, such as GIC, the same concept paths need to be used by all sites involved in the network so that queries can be federated across the network.
+CONCEPT_PATH|HPDS_PATH corresponds to the fact concept_cd from the mapping files listed above. This is an identifier for the concept of the observation fact. For compatibility with the PIC-SURE UI this path should represent a location in a hierarchy where each level is separated by a backslash and with a leading and trailing backslash. For example "\ACT demographics\AGE\\" would be the age for GIC. In general this can be any string value, so the UI will display whatever is inside HPDS. If this HPDS instance is part of a PIC-SURE networked environment, such as GIC, the same concept paths need to be used by all sites involved in the network so that queries can be federated across the network.
 NVAL_NUM|A numeric value if this is a numeric concept, otherwise blank.
 TVAL_CHAR|For categorical values: Find the records in the mapping file which matches the concept_path for this record and choose appropriate c_name value. For numerical values: It will always be ‘E’ .
 TIMESTAMP|A timestamp for the observation fact record should be expressed as the number of milliseconds since January 1, 1970 GMT. This is equivalent to the Unix Epoch time value for the time of the observation multiplied by 1000.
