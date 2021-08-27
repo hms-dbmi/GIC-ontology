@@ -1,69 +1,48 @@
-High level steps involved in generating GIC java bin using CSV loader Jenkins job. 
-STEPS
-1
-Download the 8 ACT ontology files from this git repo.
-2
-Create mapping between your institutes ontology and these ACT ontology files downloaded from the git repo.
-3
-Extract your institute's fact data in HPDS format using above created ontology mapping into a csv file.
-4
-Using CSV loader Jenkins job generate java bin files.
-5
-Deploy generated java bins into various pic-sure application environments.
+High level steps required to generate the GIC java bin using CSV loader Jenkins job. 
+
+STEP|DETAILS
+-----|-------
+1 | Download the 8 ACT ontology files from this git repo.
+2 | Create mapping between your institutes ontology and these ACT ontology files downloaded from the git repo.
+3 | Extract your institute's fact data in HPDS format using above created ontology mapping into a csv file.
+4 | Using CSV loader Jenkins job generate java bin files.
+5 | Deploy generated java bins into various pic-sure application environments.
 
 #### Step 1: Load the GIC ACT ontology data files into individual staging tables at your institute’s database. <br>
 Ontology data has following columns:
  
-ColumnName
-OracleDatabaseDataType
-Description
-C_FULLNAME
-Varchar2(4000)
-Has standard ontology path for given c_basecode
-C_NAME
-Varchar2(4000)
-Has standard name string for given c_basecode
-C_BASECODE
-Varchar2(100)
-ACT standard code, which is one of the standard ontology.
-HPDS_PATH
-Varchar2(4000)
-Expanded standard ontology path for given c_fullname
+ColumnName|OracleDatabaseDataType|Description|
+----------|----------|----------
+C_FULLNAME|Varchar2(4000)|Has standard ontology path for given c_basecode
+C_NAME|Varchar2(4000)|Has standard name string for given c_basecode
+C_BASECODE|Varchar2(100)|ACT standard code, which is one of the standard ontology.
+HPDS_PATH|Varchar2(4000)|Expanded standard ontology path for given c_fullname
 
  
-GIC ACT ontology data files
-ACT_COVID_HPDS.dsv
-ACT_CPT_PX_2018AA_HPDS.dsv
-ACT_ICD10CM_DX_2018AA_HPDS.dsv
-ACT_MED_ALPHA_HPDS.dsv
-GIC_BIOSAMPLES_HPDS.dsv
-NCATS_DEMOGRAPHICS_HPDS.dsv
-NCATS_LABS_HPDS.dsv
-NCATS_VISIT_DETAILS_HPDS.dsv
+##### GIC ACT ontology data files:
+* ACT_COVID_HPDS.dsv
+* ACT_CPT_PX_2018AA_HPDS.dsv
+* ACT_ICD10CM_DX_2018AA_HPDS.dsv
+* ACT_MED_ALPHA_HPDS.dsv
+* GIC_BIOSAMPLES_HPDS.dsv
+* NCATS_DEMOGRAPHICS_HPDS.dsv
+* NCATS_LABS_HPDS.dsv
+* NCATS_VISIT_DETAILS_HPDS.dsv
+
 #### Step 2: Map your institute’s data to the GIC ACT ontology.<br>
-Map your institute’s ontology to the GIC ACT ontology mapping files listed in Step 1. This process is different for each institution. For an example, visit the  Boston Children’s Hospital mapping here.
+* Map your institute’s ontology to the GIC ACT ontology mapping files listed in Step 1. This process is different for each institution. For an example, visit the  Boston Children’s Hospital mapping here.
 
-
-Using the above created ontology mapping extract your institute’s fact data with GIC ACT ontology into allConcepts.csv file, listed are the details on the data attributes of the file.
-This file should have a header: "PATIENT_NUM","CONCEPT_PATH","NVAL_NUM","TVAL_CHAR","TIMESTAMP" 
-Data has to be sorted by concept_cd, patient_num,TIMESTAMP
+* Using the above created ontology mapping extract your institute’s fact data with GIC ACT ontology into allConcepts.csv file, listed are the details on the data attributes of the file.
+* This file should have a header: "PATIENT_NUM","CONCEPT_PATH","NVAL_NUM","TVAL_CHAR","TIMESTAMP" 
+* Data has to be sorted by concept_cd, patient_num,TIMESTAMP
  
- HPDS Format
-PATIENT_NUM
-Patient_num corresponding to the fact record.This is an integer value identifying the subject of the recorded observation fact.
-CONCEPT_PATH
-HPDS_PATH corresponds to the fact concept_cd from the mapping files listed above. This is an identifier for the concept of the observation fact. For compatibility with the PIC-SURE UI this path should represent a location in a hierarchy where each level is separated by a backslash and with a leading and trailing backslash. For example "\ACT demographics\AGE\" would be the age for GIC. In general this can be any string value, so the UI will display whatever is inside HPDS. 
-
-If this HPDS instance is part of a PIC-SURE networked environment, such as GIC, the same concept paths need to be used by all sites involved in the network so that queries can be federated across the network.
-
-
-NVAL_NUM
-A numeric value if this is a numeric concept, otherwise blank.
- 
-TVAL_CHAR
-For categorical values: Find the records in the mapping file which matches the concept_path for this record and choose appropriate c_name value. For numerical values: It will always be ‘E’ .
-TIMESTAMP
-A timestamp for the observation fact record should be expressed as the number of milliseconds since January 1, 1970 GMT. This is equivalent to the Unix Epoch time value for the time of the observation multiplied by 1000.
+HPDS Header| Details
+----|----
+PATIENT_NUM| Patient_num corresponding to the fact record.This is an integer value identifying the subject of the recorded observation fact.
+CONCEPT_PATH|HPDS_PATH corresponds to the fact concept_cd from the mapping files listed above. This is an identifier for the concept of the observation fact. For compatibility with the PIC-SURE UI this path should represent a location in a hierarchy where each level is separated by a backslash and with a leading and trailing backslash. For example "\ACT demographics\AGE\" would be the age for GIC. In general this can be any string value, so the UI will display whatever is inside HPDS. If this HPDS instance is part of a PIC-SURE networked environment, such as GIC, the same concept paths need to be used by all sites involved in the network so that queries can be federated across the network.
+NVAL_NUM|A numeric value if this is a numeric concept, otherwise blank.
+TVAL_CHAR|For categorical values: Find the records in the mapping file which matches the concept_path for this record and choose appropriate c_name value. For numerical values: It will always be ‘E’ .
+TIMESTAMP|A timestamp for the observation fact record should be expressed as the number of milliseconds since January 1, 1970 GMT. This is equivalent to the Unix Epoch time value for the time of the observation multiplied by 1000.
 
  
 #### Step 3: Extract / deploy java bin files from CSV file into the institute’s HPDS development environment <br>
