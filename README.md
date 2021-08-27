@@ -1,4 +1,4 @@
-The instructions below describe how to map data and load phenotypic data for GIC using the GIC ACT ontology. 
+The instructions below describe how to map and load phenotypic data for GIC using the GIC ACT ontology. 
 There two options to load the phenotypic data:
 <p>Upload data using CSV
 <p>Upload data using RDBMS
