@@ -1,6 +1,6 @@
 The instructions below describe how to map and load phenotypic data for GIC using the GIC ACT ontology. 
 There two options to load the phenotypic data:
-<p>Upload data using CSV
+<p>[Upload data using CSV] (https://github.com/hms-dbmi/i2b2ACTtoHPDS/blob/directions/Loading%20data%20using%20CSV.md)
 <p>Upload data using RDBMS
 
 # Frequently Asked Questions
