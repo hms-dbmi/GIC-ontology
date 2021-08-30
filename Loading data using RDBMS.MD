@@ -2,11 +2,11 @@ High level steps required to generate the GIC java bin using RDBMS loader Jenkin
 
 Steps|Details
 ---|---
-1|Download the 8 ACT ontology files from this git repo. And stage them into 8 different database tables.
-2|Create mapping between your institutes ontology and the ACT ontology.
-3|Extract your institute's fact data in HPDS format using above created ontology mapping into a database table.
-4|Using RDBMS loader Jenkins job generate java bin files
-5|Deploy generated java bins into various pic-sure application environments.
+1|Download the 8 GIC ACT ontology files from this git repo and stage them into 8 different database tables.
+2|Create mapping between your institute's ontology and the GIC ACT ontology.
+3|Extract your institute's fact data into the HPDS format using the above created ontology mapping into a database table.
+4|Use the RDBMS loader Jenkins job generate java bin files.
+5|Deploy the generated java bins into various PIC-SURE application environments.
 
 #### Step 1: Load the GIC ACT ontology data files into individual staging tables at your institute’s database. <br>
 Staging tables should have following columns:
@@ -53,7 +53,7 @@ Development Environment: Institute’s should load their data into their institu
 ##### Load HPDS Data From RDBMS using Jenkins job
 * The Jenkins job expects two local files to be uploaded for data extract:
   * sql.properties: Defines the database connect string. 
-     * Example showing Oracle.  Postgres can also be used. 
+     * Example showing Oracle.  Postgres can also be used. <br>
      ![Example](/image.png)
  
   * loadQuery.sql:
@@ -75,7 +75,7 @@ Development Environment: Institute’s should load their data into their institu
   * columnMeta.javabin  
   * encryption_key
  
-* Then restart PIC-SURE on the Production server using the Jenkins job “Start PIC-SURE”. This will refresh data in the environment.
+* Then restart PIC-SURE on the application's server using the Jenkins job “Start PIC-SURE”. This will refresh data in the environment.
  
  
 #### Step 5: Quality Assurance Tests <br>
