@@ -2,11 +2,11 @@ High level steps required to generate the GIC java bin using CSV loader Jenkins 
 
 Steps|Details
 -----|-------
-1 | Download the 8 ACT ontology files from this git repo.
-2 | Create mapping between your institutes ontology and these ACT ontology files downloaded from the git repo.
-3 | Extract your institute's fact data in HPDS format using above created ontology mapping into a csv file.
-4 | Using CSV loader Jenkins job generate java bin files.
-5 | Deploy generated java bins into various pic-sure application environments.
+1 | Download the 8 GIC ACT ontology files from this git repo.
+2 | Create mapping between your institutes ontology and the GIC ACT ontology files downloaded from the git repo.
+3 | Extract your institute's fact data into HPDS format using the above created ontology mapping into a csv file.
+4 | Use the CSV loader Jenkins job generate java bin files.
+5 | Deploy generated java bins into various PIC-SURE application environments.
 
 #### Step 1: Load the GIC ACT ontology data files into individual staging tables at your institute’s database. <br>
 Ontology data has following columns:
@@ -65,7 +65,7 @@ Development Environment: Institute’s should load their data into their institu
   * encryption_key
   
  
-* Then restart PIC-SURE on the Production server using the Jenkins job “Start PIC-SURE”. This will refresh data in the environment.
+* Then restart PIC-SURE on the application's server using the Jenkins job “Start PIC-SURE”. This will refresh data in the environment.
  
  
 #### Step 5: Quality Assurance Tests <br>
