@@ -83,9 +83,6 @@ Expected result: Verify negative patient_num do not exist.
 Test: Search race<br>
 Expected result: Confirm race codes other than Hispanic, American Indian or Alaska Native, Asian, Black or African American, Multiple race, Native Hawaiian or Other Pacific Islander, White, or No Information do not exist. 
 
-Test: Search negative patient_num<br>
-Expected result: Verify patient_num with negative numbers does not exist.
-
 Test: Search visit details, age at visit<br>
 Expected result: Verify age at visit returns a numerical value (example: 5), not a categorical value (example: Visit at age 01 months). Verify age is not a negative number. 
 
