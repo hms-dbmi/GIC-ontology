@@ -84,8 +84,11 @@ Below is a list of basic smoke tests institutions should run after the data has 
 Test: Search demographic age<br>
 Expected result: Verify age returns a numerical value (example: 5), not a categorical value (example: Visit at age 01 months). Verify age is not a negative number. Verify there are no invalid birthdates: 01/01/0001 07/18/2096. Verify that there are no patients with NULL age.
 
-Test: Search gender<br>
-Expected result: Verify gender codes other than Male, Female, Ambiguous, Other, and No Information do not exist.
+Test: Search age at visit<br>
+Expected result: Verify age returns a numerical value (example: 5), not a categorical value (example: Visit at age 01 months). Verify age is not a negative number. Verify there are no invalid birthdates: 01/01/0001 07/18/2096. Verify that there are no patients with NULL age.
+
+Test: Search sex<br>
+Expected result: Verify codes other than Male, Female, Ambiguous, Other, and No Information do not exist.
 
 Test: Search negative patient_num<br>
 Expected result: Verify negative patient_num do not exist.
@@ -93,15 +96,8 @@ Expected result: Verify negative patient_num do not exist.
 Test: Search race<br>
 Expected result: Confirm race codes other than Hispanic, American Indian or Alaska Native, Asian, Black or African American, Multiple race, Native Hawaiian or Other Pacific Islander, White, or No Information do not exist. 
 
-Test: Search negative patient_num<br>
-Expected result: Verify patient_num with negative numbers does not exist.
-
 Test: Search visit details, age at visit<br>
 Expected result: Verify age at visit returns a numerical value (example: 5), not a categorical value (example: Visit at age 01 months). Verify age is not a negative number. 
 
 Test: Lab results <br>
 Expected result: Verify that lab results are numeric values. 
-
-
-
-
