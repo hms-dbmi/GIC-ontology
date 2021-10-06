@@ -35,7 +35,6 @@ Expected Results:
                - Call to proc Run_EXTRCT_HPDS_Data will populate 
                - table HPDS_DATA_LATEST with HPDS extract in ACT format. 
                - Modified COVID node to load medication data + removal of schema prefix restructure of code.
-               - GIC Version of data (09/2021)
 */
 
 FUNCTION   NUM_OCCURANCES (
@@ -258,14 +257,6 @@ PROCEDURE MAP_DATA_LOAD_ACT_ICD10CM_HPDS (
               COMMIT;
   END;
 
---PROCEDURE MAP_DATA_LOAD_ICD10_ICD9_HPDS (
---    p_runid        IN NUMBER )  
---    
---BEGIN
---            null;
---            --Deleted
---END;
-    
 
 PROCEDURE MAP_DATA_LOAD_ACT_CPT_PX_HPDS (
     p_runid        IN NUMBER )  
@@ -497,7 +488,7 @@ PROCEDURE MAP_DATA_LOAD_DEMOGRAPHCS_HPDS (
      select   distinct r.concept_path  bch_concept_path,
                 r.name_char bch_name_char,
                 r.concept_cd bch_concept_cd,
-                nvl(hpds_path,'\ACT Demographics\Race\'||'No Information\' )  act_concept_path,
+                nvl(hpds_path,'\ACT Demographics\Race\'||'No Information' )  act_concept_path,
                 nvl(a.c_name , 'No Information') act_name_char,
                 nvl(a.c_basecode,'DEM|RACE:NI') act_concept_cd,
                 'Race' data_type from
@@ -711,12 +702,14 @@ PROCEDURE MAP_DATA_LOAD_MED_ALPHA_HPDS (
         from A_MED_CD_ACT_BCH_MAP b,
          ACT_MED_ALPHA_HPDS a
          where  a.c_basecode = b.act_concept_cd 
-         AND a.hpds_path LIKE '%Medications%';
+         AND a.hpds_path LIKE '%Medications%' 
+         AND bch_concept_cd like 'ADMINMED:%' ;
 
 
         log_msg(p_runid, 'End MAP_DATA_LOAD_MED_ALPHA_HPDS: '||sql%rowcount, 'Y'); 
         COMMIT;
   END;    
+---
 
 PROCEDURE MAP_DNA_GIC_BIOSAMPLES_HPDS (
     p_runid        IN NUMBER )  
@@ -948,11 +941,7 @@ BEGIN
         log_msg(p_runid,'EXTRCT_HPDS_Demographics Age Start  ','X'); 
 
             insert into  HPDS_DATA_LATEST( PATIENT_NUM ,CONCEPT_PATH , NVAL_NUM , TVAL_CHAR ,START_DATE )
-            /*SELECT patient_num, '\ACT Demographics\Age\' concept_path ,trunc((sysdate - (cast(birth_date as date )) )/365)  years ,'E',trunc(sysdate)
-            from patient_dimension
-            where  trunc((sysdate - (cast(birth_date as date )) )/365) >= 0;*/
-            
-            SELECT distinct patient_num, hpds_path concept_path ,trunc((sysdate - (cast(birth_date as date )) )/365)  years ,'E',trunc(sysdate)
+            SELECT distinct patient_num, hpds_path concept_path ,trunc((sysdate - (cast(birth_date as date )) )/365)  years ,null c_name,trunc(sysdate)
             from patient_dimension  pd, ( select * from NCATS_DEMOGRAPHICS_HPDS where hpds_path like '\ACT Demographics\Age' )mp
             where  trunc((sysdate - (cast(birth_date as date )) )/365) >= 0;
 
@@ -960,12 +949,8 @@ BEGIN
 
 
         log_msg(p_runid,'EXTRCT_HPDS_Demographics Gender Start ','X'); 
-
-           /* insert into  HPDS_DATA_LATEST( PATIENT_NUM ,CONCEPT_PATH , NVAL_NUM , TVAL_CHAR ,START_DATE )
-            select patient_num ,'\ACT Demographics\Sex\',null,decode(sex_cd,'Unknown','No Information',sex_cd) ,trunc(sysdate)
-            from patient_dimension ;*/
             insert into  HPDS_DATA_LATEST( PATIENT_NUM ,CONCEPT_PATH , NVAL_NUM , TVAL_CHAR ,START_DATE )
-            select distinct patient_num ,nvl(hpds_path,'\ACT Demographics\Sex\No Information\' ) hpds_path ,null,decode(sex_cd,'Male','Male','Female','Female','No Information') ,trunc(sysdate)
+            select distinct patient_num ,nvl(hpds_path,'\ACT Demographics\Sex\No Information' ) hpds_path ,null,decode(sex_cd,'Male','Male','Female','Female','No Information') ,trunc(sysdate)
             from patient_dimension  pd, ( select * from NCATS_DEMOGRAPHICS_HPDS where hpds_path like '\ACT Demographics\Sex\%' )mp
             where decode(sex_cd,'Male','Male','Female','Female','No Information') = mp.c_name(+);
 
@@ -1017,7 +1002,8 @@ PROCEDURE EXTRCT_HPDS_Visit_data  (
     v_sql          VARCHAR2(4000);
     /* Pre requesite table a_ncats_visit_details_map  should be populated with mapping data   */
 BEGIN
-
+null;
+/*
         log_msg(p_runid,'EXTRCT_HPDS_Visit_data Start  ','X'); 
         v_sql := 'TRUNCATE TABLE visit_fact_details ';
 
@@ -1051,12 +1037,9 @@ BEGIN
         log_msg(p_runid,'EXTRCT_HPDS_Visit_data Age Start  ','X'); 
 
             insert into HPDS_DATA_LATEST ( patient_num,concept_path,nval_num,tval_char,start_date  )
-            /*select  distinct patient_num,'\ACT Visit Details\Years\Age\' concept_path,age_at_visit_yrs,'E',start_date
-            from VISIT_FACT_DETAILS ;*/
-            
-            select  distinct patient_num,  act_concept_path,age_at_visit_yrs,'E',start_date
+            select  distinct patient_num,  act_concept_path,age_at_visit_yrs,act_name_char,start_date
             from VISIT_FACT_DETAILS v, (select * from act_bch_ontology_map m
-            where data_type = 'Visit Age')m ;
+            where data_type = 'Visit Age')m ;-- Modified 'E' to c_name
 
         log_msg(p_runid,'EXTRCT_HPDS_Visit_data Age End  '||SQL%ROWCOUNT,'X'); 
             commit;
@@ -1126,6 +1109,7 @@ BEGIN
       commit;
       log_msg(p_runid,'EXTRCT_HPDS_Visit_data End  ','X'); 
       commit;
+      */
 END;
 
 ---ICD10-9
@@ -1156,23 +1140,36 @@ PROCEDURE EXTRCT_HPDS_ICD10 (
 begin
 
 
-    log_msg(p_runid,'EXTRCT_HPDS_ICD10 Start  ','X'); 
+     log_msg(p_runid,'EXTRCT_HPDS_ICD10 Start  ','X'); 
     
         for r_data in ( select * from act_bch_ontology_map m
                        where data_type =  'ACT_ICD10CM_DX_2018AA_HPDS' ) loop
             
             INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-            SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast (start_date as date)   
+            SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
             FROM observation_fact   fact1, act_bch_ontology_map m
             WHERE fact1.concept_cd = m.bch_concept_cd 
             AND data_type =  'ACT_ICD10CM_DX_2018AA_HPDS'
-            AND M.BCH_CONCEPT_CD = r_data.BCH_CONCEPT_CD ;
+            AND M.BCH_CONCEPT_CD = r_data.BCH_CONCEPT_CD 
+            AND NVAL_NUM is not null ;
             
-    log_msg(p_runid,'EXTRACT_ICD10_ICD9_DX_HPDS End  '||sql%rowcount,'X'); 
+     log_msg(p_runid,'EXTRCT_HPDS_ICD10 End  '||sql%rowcount,'X');             
+            
+            INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date) 
+            SELECT DISTINCT fact1.patient_num,  act_concept_path,null nval_num,  act_name_char,cast( start_date as date) start_date
+            FROM observation_fact   fact1, act_bch_ontology_map m
+            WHERE fact1.concept_cd = m.bch_concept_cd 
+            AND data_type =  'ACT_ICD10CM_DX_2018AA_HPDS'
+            AND M.BCH_CONCEPT_CD = r_data.BCH_CONCEPT_CD 
+            AND NVAL_NUM is  null ;
+            
+            
+     log_msg(p_runid,'EXTRCT_HPDS_ICD10 End  '||sql%rowcount,'X'); 
     
     commit;
     end loop;
     commit;
+   log_msg(p_runid,'EXTRCT_HPDS_ICD10 End  '); 
 end; 
 
 
@@ -1185,18 +1182,30 @@ Begin
   log_msg(p_runid,'EXTRCT_HPDS_CPT_PX_2018AA Start  ','X'); 
         for r_data in (select * from act_bch_ontology_map m
                        where data_type = 'ACT_CPT_PX_2018AA_HPDS' ) loop
+                                          
         INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-        SELECT distinct patient_num,act_concept_path ,null,act_name_char,  cast( start_date as date) start_date
+        SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
         FROM observation_fact   fact1, act_bch_ontology_map m
         WHERE fact1.concept_cd = m.bch_concept_cd  
         AND data_type =   'ACT_CPT_PX_2018AA_HPDS'
         AND m.bch_concept_cd  = r_data.bch_concept_cd
-        ;
+        AND NVAL_NUM IS NOT NULL;
+        
+   log_msg(p_runid,'EXTRCT_HPDS_CPT_PX_2018AA End  '||sql%rowcount,'X');        
+        
+        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+        SELECT DISTINCT fact1.patient_num,  act_concept_path,null nval_num,  act_name_char,cast( start_date as date) start_date
+        FROM observation_fact   fact1, act_bch_ontology_map m
+        WHERE fact1.concept_cd = m.bch_concept_cd  
+        AND data_type =   'ACT_CPT_PX_2018AA_HPDS'
+        AND m.bch_concept_cd  = r_data.bch_concept_cd
+        AND NVAL_NUM IS  NULL;
 
   log_msg(p_runid,'EXTRCT_HPDS_CPT_PX_2018AA End  '||sql%rowcount,'X'); 
           commit;
         end loop;
   commit;
+    log_msg(p_runid,'EXTRCT_HPDS_CPT_PX_2018AA End  ','X'); 
 end;
 
 PROCEDURE EXTRCT_HPDS_LAB_Results (
@@ -1205,39 +1214,13 @@ PROCEDURE EXTRCT_HPDS_LAB_Results (
 
  begin
 
-  --log_msg(p_runid,'EXTRCT_HPDS_LAB_Results Start  ','X'); 
-  
-    /*   insert into HPDS_DATA_LATEST ( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)
-       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num,'E',cast( start_date as date) start_date
-        FROM
-            (   SELECT patient_num, concept_cd,nval_num,start_date
-                FROM observation_fact
-                WHERE concept_cd LIKE 'LAB:%'
-                AND tval_char NOT IN (
-                        '\\',
-                        '|-------',
-                        '--',
-                        '.',
-                        '-',
-                        '#',
-                        '*',
-                        '+',
-                        '+++',
-                        '++',
-                        '++++'  ) ) fact1,
-            act_bch_ontology_map m
-        WHERE fact1.concept_cd = m.bch_concept_cd            
-        --AND fact1.patient_num = pd.Patient_Num 
-        AND data_type =  'NCATS_LABS_HPDS'  ;
-        */
-        
        log_msg(p_runid,'EXTRCT_HPDS_LAB_Results Start  ','X'); 
   
        for r_data in ( select * from act_bch_ontology_map m
                        where data_type =  'NCATS_LABS_HPDS' ) loop
        insert into HPDS_DATA_LATEST ( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)
-       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num,'E',cast( start_date as date) start_date
-        FROM
+        SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
+       FROM
             (   SELECT patient_num, concept_cd,nval_num,start_date
                 FROM observation_fact
                 WHERE concept_cd LIKE 'LAB:%'
@@ -1257,16 +1240,42 @@ PROCEDURE EXTRCT_HPDS_LAB_Results (
         WHERE fact1.concept_cd = m.bch_concept_cd            
         AND data_type =  'NCATS_LABS_HPDS' 
         AND fact1.concept_cd = r_data.bch_concept_cd 
-        ;
+        AND NVAL_NUM IS NOT NULL ;
+      
+      log_msg(p_runid,'EXTRCT_HPDS_LAB_Results End  '||sql%rowcount,'X');         
+            
+       insert into HPDS_DATA_LATEST ( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)
+       SELECT DISTINCT fact1.patient_num,  act_concept_path,null nval_num,  act_name_char,cast( start_date as date) start_date
+       FROM
+            (   SELECT patient_num, concept_cd,nval_num,start_date
+                FROM observation_fact
+                WHERE concept_cd LIKE 'LAB:%'
+                AND tval_char NOT IN (
+                        '\\',
+                        '|-------',
+                        '--',
+                        '.',
+                        '-',
+                        '#',
+                        '*',
+                        '+',
+                        '+++',
+                        '++',
+                        '++++'  ) ) fact1,
+            act_bch_ontology_map m
+        WHERE fact1.concept_cd = m.bch_concept_cd            
+        AND data_type =  'NCATS_LABS_HPDS' 
+        AND fact1.concept_cd = r_data.bch_concept_cd 
+        AND NVAL_NUM IS  NULL ;                       
+    
           
         log_msg(p_runid,'EXTRCT_HPDS_LAB_Results End  '||sql%rowcount,'X'); 
      
         commit;
    end loop;
-
+ commit; 
   log_msg(p_runid,'EXTRCT_HPDS_LAB_Results End  ','X'); 
-  commit; 
-
+ 
 
  end;
 
@@ -1275,6 +1284,8 @@ PROCEDURE EXTRACT_COVID_DATA_HPDS (
 ) AS
 
 BEGIN
+null;
+/*
     log_msg(p_runid,'EXTRACT_COVID_DATA_HPDS Start  ','X'); 
 
             for r_data in (select * from act_bch_ontology_map m
@@ -1299,11 +1310,11 @@ BEGIN
 
 
             INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-            SELECT distinct patient_num,act_concept_path , nval_num,'E',  cast (start_date as date)   
+            SELECT distinct patient_num,act_concept_path , nval_num,act_name_char,  cast (start_date as date)   
             FROM observation_fact   fact1, act_bch_ontology_map m
             WHERE fact1.concept_cd = m.bch_concept_cd 
             AND M.BCH_CONCEPT_CD = r_data.BCH_CONCEPT_CD
-            AND m.data_type =  'ACT_COVID_DERIVED_LAB'  ;
+            AND m.data_type =  'ACT_COVID_DERIVED_LAB'  ;   -- Modified 'E' to c_name/act_name_char
     
             log_msg(p_runid,'ACT_COVID_DERIVED_LAB End  '||sql%rowcount,'X'); 
             commit;
@@ -1312,6 +1323,7 @@ BEGIN
 
     log_msg(p_runid,'EXTRACT_COVID_DATA_HPDS End  '||sql%rowcount,'X'); 
     commit;
+    */
 end; 
 
 
@@ -1321,23 +1333,37 @@ PROCEDURE EXTRCT_HPDS_MED_ALPHA (
 
 Begin
 
-  --delete from HPDS_DATA_LATEST where concept_path like '\ACT Medications Alphabetical\%';
+  delete from HPDS_DATA_LATEST where concept_path like '\ACT Medications\%';
   --commit;
   log_msg(p_runid,'EXTRCT_HPDS_MED_ALPHA Start  ','X'); 
 
   for r_data in ( select * from act_bch_ontology_map m where data_type =   'MED_ALPHA_HPDS' order by bch_concept_cd  ) loop
 
-        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-        SELECT distinct patient_num,r_data.act_concept_path ,null,r_data.act_name_char,  cast( start_date as date) start_date
+       INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
+       FROM observation_fact   fact1, act_bch_ontology_map m
+       WHERE fact1.concept_cd = m.bch_concept_cd 
+       AND M.BCH_CONCEPT_CD = r_data.BCH_CONCEPT_CD
+       AND m.data_type =  'MED_ALPHA_HPDS' 
+       AND NVAL_NUM IS NOT NULL ;
+       
+   log_msg(p_runid,'EXTRCT_HPDS_MED_ALPHA End concept_cd '||r_data.bch_concept_cd||' Rows count '||sql%rowcount,'X');       
+       
+       INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+       SELECT DISTINCT fact1.patient_num,  act_concept_path,null nval_num,  act_name_char,cast( start_date as date) start_date
         FROM observation_fact   fact1, act_bch_ontology_map m
-        WHERE fact1.concept_cd = m.bch_concept_cd 
-        AND M.BCH_CONCEPT_CD = r_data.BCH_CONCEPT_CD
-        AND m.data_type =  'MED_ALPHA_HPDS'  ;
+       WHERE fact1.concept_cd = m.bch_concept_cd 
+       AND M.BCH_CONCEPT_CD = r_data.BCH_CONCEPT_CD
+       AND m.data_type =  'MED_ALPHA_HPDS' 
+       AND NVAL_NUM IS  NULL ;
 
   log_msg(p_runid,'EXTRCT_HPDS_MED_ALPHA End concept_cd '||r_data.bch_concept_cd||' Rows count '||sql%rowcount,'X'); 
   commit;
   end loop;
+  log_msg(p_runid,'EXTRCT_HPDS_MED_ALPHA End concept_cd End'); 
 end;
+
+
 --
 /*
 PROCEDURE EXTRCT_HPDS_MED_VA (
@@ -1365,16 +1391,21 @@ Begin
   log_msg(p_runid,'EXTRCT_HPDS_MED_VA End  ','X'); 
 end;
 */
---
+--   
+
+
 PROCEDURE  Run_EXTRCT_HPDS_Data  (
     p_runid        IN NUMBER ) AS
     v_sql          VARCHAR2(4000) ;
+    v_prf          VARCHAR2(10);
 BEGIN
      log_msg(p_runid,'Run_EXTRCT_HPDS_Data Start  ','X'); 
-     v_sql := 'Create table HPDS_DATA_LATEST_'||to_char(sysdate,'MMDD') ||' AS select * from HPDS_DATA_LATEST ';
+     v_prf := to_char( sysdate,'MMDDHHMISS');
+     v_sql := 'Alter table HPDS_DATA_LATEST rename to HPDS_DATA_LATEST_'||v_prf;
+     
      execute immediate v_sql;
      dbms_output.put_line(v_sql);
-     v_sql := 'Truncate table HPDS_DATA_LATEST ';
+     v_sql := 'Create table HPDS_DATA_LATEST as select * from HPDS_DATA_LATEST_'||v_prf ||' where 0 > 1 ';
 
      execute immediate v_sql;
 
@@ -1382,9 +1413,9 @@ BEGIN
 
      EXTRCT_HPDS_Demographics ( p_runid  ) ;
 
-     EXTRCT_HPDS_Visit_data  ( p_runid  ) ;
+     --EXTRCT_HPDS_Visit_data  ( p_runid  ) ;Commented out for this release
 
-     --EXTRACT_ICD10_ICD9_DX_HPDS ( p_runid )   ; 
+     --EXTRACT_ICD10_ICD9_DX_HPDS ( p_runid )   ; Commented out for this release
 
      EXTRCT_HPDS_ICD10 ( p_runid  ) ;
 
@@ -1392,12 +1423,13 @@ BEGIN
 
      EXTRCT_HPDS_LAB_Results ( p_runid ) ;
 
-    -- EXTRACT_COVID_DATA_HPDS ( p_runid  ) ;
+    --EXTRACT_COVID_DATA_HPDS ( p_runid  ) ; Commented out for this release
 
-     --EXTRCT_HPDS_MED_ALPHA( p_runid  ) ; COmmented out for this release
+    --EXTRCT_HPDS_MED_ALPHA( p_runid  ) ; Commented out for this release
 
     --EXTRCT_HPDS_MED_VA( p_runid  ) ; 
     --Added new for subcounts 
+    
     EXTRCT_HPDS_CSF         ( p_runid );
     EXTRCT_HPDS_EXOMES_IDS  (  p_runid ); 
     EXTRCT_HPDS_HUMANTISSUE ( p_runid );
@@ -1454,19 +1486,16 @@ Begin
 
  log_msg(p_runid,'EXTRCT_HPDS_CSF Start  ','X'); 
 
-        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-
-        select distinct ofact.PATIENT_NUM,act_concept_path, NVAL_NUM, 'True',  cast( START_DATE as date) START_DATE
-        FROM observation_fact ofact
-        JOIN act_bch_ontology_map cd
-        ON cd.bch_concept_cd=ofact.CONCEPT_CD WHERE cd.data_type =  'CSF'
-        and   NVAL_NUM is not null 
-        and TVAL_CHAR ='E' ; 
+       INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
+        FROM observation_fact fact1
+       JOIN act_bch_ontology_map cd
+       ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'CSF'
+       AND   NVAL_NUM is not null ;
 
  log_msg(p_runid,'EXTRCT_HPDS_CSF End  '||sql%rowcount,'X'); 
   commit;
 end;
-
 
 PROCEDURE           EXTRCT_HPDS_EXOMES_IDS (
     p_runid        IN NUMBER
@@ -1475,16 +1504,13 @@ PROCEDURE           EXTRCT_HPDS_EXOMES_IDS (
 Begin
 
  log_msg(p_runid,'EXTRCT_HPDS_EXOMES_IDS Start  ','X'); 
+       INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, 'True' act_name_char,cast( start_date as date) start_date
+       FROM observation_fact fact1
+       JOIN act_bch_ontology_map cd
+       ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'Gnome';
 
-        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-
-        select distinct ofact.PATIENT_NUM,act_concept_path, NVAL_NUM, 'True',  cast( START_DATE as date) START_DATE
-        FROM observation_fact ofact
-        JOIN act_bch_ontology_map cd
-        ON cd.bch_concept_cd=ofact.CONCEPT_CD WHERE cd.data_type =  'Gnome' ;
-
-
-log_msg(p_runid,'EXTRCT_HPDS_EXOMES_IDS End  '||sql%rowcount,'X'); 
+ log_msg(p_runid,'EXTRCT_HPDS_EXOMES_IDS End  '||sql%rowcount,'X'); 
   commit;
 end;
 
@@ -1498,13 +1524,12 @@ Begin
  log_msg(p_runid,'EXTRCT_HPDS_HUMANTISSUE Start  ','X'); 
 
         --\Bio Specimens\HumanTissue\   True
-        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date) 
-        select distinct ofact.PATIENT_NUM,act_concept_path, NVAL_NUM, 'True',  cast( START_DATE as date) START_DATE
-        FROM observation_fact ofact
-        JOIN act_bch_ontology_map cd
-        ON cd.bch_concept_cd=ofact.CONCEPT_CD WHERE cd.data_type =  'HumanTissue'
-        and   NVAL_NUM is not null 
-        and TVAL_CHAR ='E' ; 
+       INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
+       FROM observation_fact fact1
+       JOIN act_bch_ontology_map cd
+       ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'HumanTissue'
+       AND   NVAL_NUM is not null ;
 
         --BIOSPECIMEN:HT.TS.000 Available
 
@@ -1521,14 +1546,12 @@ Begin
 
  log_msg(p_runid,'EXTRCT_HPDS_NUCLEICACID Start  ','X'); 
 
-        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-
-        select distinct ofact.PATIENT_NUM,act_concept_path, NVAL_NUM, 'True',  cast( START_DATE as date) START_DATE
-        FROM observation_fact ofact
-        JOIN act_bch_ontology_map cd
-        ON cd.bch_concept_cd=ofact.CONCEPT_CD WHERE cd.data_type =  'NucleicAcid'
-        and   NVAL_NUM is not null 
-        and TVAL_CHAR ='E' ; 
+       INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
+       FROM observation_fact fact1
+       JOIN act_bch_ontology_map cd
+       ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'NucleicAcid'
+       AND   NVAL_NUM is not null ;
 
  log_msg(p_runid,'EXTRCT_HPDS_NUCLEICACID End  '||sql%rowcount,'X'); 
   commit;
@@ -1543,13 +1566,12 @@ Begin
 
  log_msg(p_runid,'EXTRCT_HPDS_PLASMA Start  ','X'); 
 
-        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-        select distinct ofact.PATIENT_NUM,act_concept_path, NVAL_NUM,TVAL_CHAR,  cast( START_DATE as date) START_DATE
-        FROM observation_fact ofact
-        JOIN act_bch_ontology_map cd
-        ON cd.bch_concept_cd=ofact.CONCEPT_CD WHERE cd.data_type =  'Plasma'
-        and   NVAL_NUM is not null 
-        and TVAL_CHAR ='E' ;  
+       INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
+       FROM observation_fact fact1
+       JOIN act_bch_ontology_map cd
+       ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'Plasma'
+       AND   NVAL_NUM is not null ;
 
  log_msg(p_runid,'EXTRCT_HPDS_PLASMA End  '||sql%rowcount,'X'); 
   commit;
@@ -1565,13 +1587,12 @@ Begin
 log_msg(p_runid,'EXTRCT_HPDS_WHOLE_BLOOD Start  ','X'); 
 
         
-        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-        select distinct ofact.PATIENT_NUM,act_concept_path, NVAL_NUM, TVAL_CHAR,  cast( START_DATE as date) START_DATE
-        FROM observation_fact ofact
-        JOIN act_bch_ontology_map cd
-        ON cd.bch_concept_cd=ofact.CONCEPT_CD WHERE cd.data_type =  'Blood'
-        and   NVAL_NUM is not null 
-        and TVAL_CHAR ='E' ;  
+       INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
+      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
+       FROM observation_fact fact1
+       JOIN act_bch_ontology_map cd
+       ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'Blood'
+       AND   NVAL_NUM is not null ;
 
 log_msg(p_runid,'EXTRCT_HPDS_WHOLE_BLOOD End  '||sql%rowcount,'X'); 
 commit;
@@ -1581,3 +1602,4 @@ END TM_DATA_ACT_LOAD_PKG;
 
 
 /
+
