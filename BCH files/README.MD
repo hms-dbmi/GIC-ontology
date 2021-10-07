@@ -8,7 +8,8 @@
 
 [Download GIC ontology data files](https://github.com/hms-dbmi/i2b2ACTtoHPDS/tree/master/i2b2ACT%20to%20HPDS%20Data)<br> 
 [Download system specific mappings](https://github.com/hms-dbmi/i2b2ACTtoHPDS/tree/BCH_ACT_Mappings/BCH%20files/DataFiles)<br>
-[Script to create database Objects needed](https://github.com/hms-dbmi/i2b2ACTtoHPDS/blob/BCH_ACT_Mappings/BCH%20files/PRC_CRT_TABLES_ACT_HPDS_LOAD.sql)
+[Script to create database Objects needed](https://github.com/hms-dbmi/i2b2ACTtoHPDS/blob/BCH_ACT_Mappings/BCH%20files/PRC_CRT_TABLES_ACT_HPDS_LOAD.sql)<br>
+[Script to create ETL package needed](https://github.com/hms-dbmi/i2b2ACTtoHPDS/blob/BCH_ACT_Mappings/BCH%20files/TM_DATA_ACT_LOAD_PKG.sql)
 
 <b> Listed GIC ontology data files are currently loaded.</b></br>
 
