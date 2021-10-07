@@ -71,4 +71,12 @@ sudo tar xvzf hpds_phenotype_gic_ALS-23456_10_02_2021_07_52_11_963514c.tar.gz
 <b>Re-Start the Start PIC-SURE Jenkins job</b>
 
 
+## Frequntly Asked Questions </br>
+
+<b>Question: Are there any guidelines to load data?</b><br>
+Answer: [Upload data guide lines ](https://github.com/hms-dbmi/i2b2ACTtoHPDS/tree/master)
+
+<b>Question: Are there any issues extracting large dataset?</b><br>
+Answer: If the extraction job runs out of memory, increase heapsize parameter in the Jenkins jobs.
+
 
