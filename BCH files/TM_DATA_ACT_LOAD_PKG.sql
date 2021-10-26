@@ -959,9 +959,10 @@ BEGIN
         log_msg(p_runid,'EXTRCT_HPDS_Demographics HipanicFlag Start  ','X'); 
 
             INSERT INTO  HPDS_DATA_LATEST( PATIENT_NUM ,CONCEPT_PATH , NVAL_NUM , TVAL_CHAR ,START_DATE )
-            SELECT  DISTINCT patient_num,m.act_concept_path ,null,m.act_name_char, trunc(sysdate)
-            FROM  observation_fact fact1 , act_bch_ontology_map m
+            SELECT  DISTINCT fact1.patient_num,m.act_concept_path ,null,m.act_name_char, trunc(sysdate)
+            FROM  observation_fact fact1 , act_bch_ontology_map m ,patient_dimension  pd
             WHERE  fact1.concept_cd = m.bch_concept_cd
+            AND fact1.patient_num = pd.patient_num
             AND  m.data_type = 'Hispanic';
 
 
@@ -970,9 +971,10 @@ BEGIN
         log_msg(p_runid,'EXTRCT_HPDS_Demographics Race Start  ','X'); 
 
                 INSERT INTO  HPDS_DATA_LATEST( PATIENT_NUM ,CONCEPT_PATH , NVAL_NUM , TVAL_CHAR ,START_DATE )
-                SELECT distinct patient_num,act_concept_path,null,act_name_char,trunc(sysdate)
-                FROM observation_fact  fact1, act_bch_ontology_map m
+                SELECT distinct fact1.patient_num,act_concept_path,null,act_name_char,trunc(sysdate)
+                FROM observation_fact  fact1, act_bch_ontology_map m ,patient_dimension  pd
                 WHERE   fact1.concept_cd = m.bch_concept_cd
+                AND fact1.patient_num = pd.patient_num
                 AND m.DATA_TYPE = 'Race' ;
 
 
@@ -1147,8 +1149,9 @@ begin
             
             INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
             SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
-            FROM observation_fact   fact1, act_bch_ontology_map m
+            FROM observation_fact   fact1, act_bch_ontology_map m ,patient_dimension pd
             WHERE fact1.concept_cd = m.bch_concept_cd 
+            AND fact1.patient_num = pd.patient_num
             AND data_type =  'ACT_ICD10CM_DX_2018AA_HPDS'
             AND M.BCH_CONCEPT_CD = r_data.BCH_CONCEPT_CD 
             AND NVAL_NUM is not null ;
@@ -1157,8 +1160,9 @@ begin
             
             INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date) 
             SELECT DISTINCT fact1.patient_num,  act_concept_path,null nval_num,  act_name_char,cast( start_date as date) start_date
-            FROM observation_fact   fact1, act_bch_ontology_map m
+            FROM observation_fact   fact1, act_bch_ontology_map m ,patient_dimension pd
             WHERE fact1.concept_cd = m.bch_concept_cd 
+            AND fact1.patient_num = pd.patient_num
             AND data_type =  'ACT_ICD10CM_DX_2018AA_HPDS'
             AND M.BCH_CONCEPT_CD = r_data.BCH_CONCEPT_CD 
             AND NVAL_NUM is  null ;
@@ -1185,8 +1189,9 @@ Begin
                                           
         INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
         SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
-        FROM observation_fact   fact1, act_bch_ontology_map m
+        FROM observation_fact   fact1, act_bch_ontology_map m,patient_dimension pd
         WHERE fact1.concept_cd = m.bch_concept_cd  
+        AND fact1.patient_num = pd.patient_num       
         AND data_type =   'ACT_CPT_PX_2018AA_HPDS'
         AND m.bch_concept_cd  = r_data.bch_concept_cd
         AND NVAL_NUM IS NOT NULL;
@@ -1195,8 +1200,9 @@ Begin
         
         INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
         SELECT DISTINCT fact1.patient_num,  act_concept_path,null nval_num,  act_name_char,cast( start_date as date) start_date
-        FROM observation_fact   fact1, act_bch_ontology_map m
+        FROM observation_fact   fact1, act_bch_ontology_map m, patient_dimension pd
         WHERE fact1.concept_cd = m.bch_concept_cd  
+        AND fact1.patient_num = pd.patient_num        
         AND data_type =   'ACT_CPT_PX_2018AA_HPDS'
         AND m.bch_concept_cd  = r_data.bch_concept_cd
         AND NVAL_NUM IS  NULL;
@@ -1236,8 +1242,9 @@ PROCEDURE EXTRCT_HPDS_LAB_Results (
                         '+++',
                         '++',
                         '++++'  ) ) fact1,
-            act_bch_ontology_map m
-        WHERE fact1.concept_cd = m.bch_concept_cd            
+            act_bch_ontology_map m, patient_dimension pd
+        WHERE fact1.concept_cd = m.bch_concept_cd  
+        AND fact1.patient_num = pd.patient_num
         AND data_type =  'NCATS_LABS_HPDS' 
         AND fact1.concept_cd = r_data.bch_concept_cd 
         AND NVAL_NUM IS NOT NULL ;
@@ -1262,8 +1269,9 @@ PROCEDURE EXTRCT_HPDS_LAB_Results (
                         '+++',
                         '++',
                         '++++'  ) ) fact1,
-            act_bch_ontology_map m
-        WHERE fact1.concept_cd = m.bch_concept_cd            
+            act_bch_ontology_map m ,patient_dimension pd
+        WHERE fact1.concept_cd = m.bch_concept_cd  
+        AND fact1.patient_num = pd.patient_num        
         AND data_type =  'NCATS_LABS_HPDS' 
         AND fact1.concept_cd = r_data.bch_concept_cd 
         AND NVAL_NUM IS  NULL ;                       
@@ -1341,8 +1349,9 @@ Begin
 
        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
        SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
-       FROM observation_fact   fact1, act_bch_ontology_map m
+       FROM observation_fact   fact1, act_bch_ontology_map m , patient_dimension pd
        WHERE fact1.concept_cd = m.bch_concept_cd 
+       AND fact1.patient_num = pd.patient_num         
        AND M.BCH_CONCEPT_CD = r_data.BCH_CONCEPT_CD
        AND m.data_type =  'MED_ALPHA_HPDS' 
        AND NVAL_NUM IS NOT NULL ;
@@ -1351,8 +1360,9 @@ Begin
        
        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
        SELECT DISTINCT fact1.patient_num,  act_concept_path,null nval_num,  act_name_char,cast( start_date as date) start_date
-        FROM observation_fact   fact1, act_bch_ontology_map m
+        FROM observation_fact   fact1, act_bch_ontology_map m, patient_dimension pd
        WHERE fact1.concept_cd = m.bch_concept_cd 
+        AND fact1.patient_num = pd.patient_num         
        AND M.BCH_CONCEPT_CD = r_data.BCH_CONCEPT_CD
        AND m.data_type =  'MED_ALPHA_HPDS' 
        AND NVAL_NUM IS  NULL ;
@@ -1487,8 +1497,8 @@ Begin
  log_msg(p_runid,'EXTRCT_HPDS_CSF Start  ','X'); 
 
        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
-        FROM observation_fact fact1
+       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
+       FROM observation_fact fact1 JOIN PATIENT_DIMENSION pd ON fact1.patient_num = pd.patient_num
        JOIN act_bch_ontology_map cd
        ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'CSF'
        AND   NVAL_NUM is not null ;
@@ -1505,8 +1515,8 @@ Begin
 
  log_msg(p_runid,'EXTRCT_HPDS_EXOMES_IDS Start  ','X'); 
        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, 'True' act_name_char,cast( start_date as date) start_date
-       FROM observation_fact fact1
+       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, 'True' act_name_char,cast( start_date as date) start_date
+       FROM observation_fact fact1 JOIN PATIENT_DIMENSION pd ON fact1.patient_num = pd.patient_num
        JOIN act_bch_ontology_map cd
        ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'Gnome';
 
@@ -1525,8 +1535,8 @@ Begin
 
         --\Bio Specimens\HumanTissue\   True
        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
-       FROM observation_fact fact1
+       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
+       FROM observation_fact fact1 JOIN PATIENT_DIMENSION pd ON fact1.patient_num = pd.patient_num
        JOIN act_bch_ontology_map cd
        ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'HumanTissue'
        AND   NVAL_NUM is not null ;
@@ -1547,8 +1557,8 @@ Begin
  log_msg(p_runid,'EXTRCT_HPDS_NUCLEICACID Start  ','X'); 
 
        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
-       FROM observation_fact fact1
+       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, 'True' act_name_char,cast( start_date as date) start_date
+       FROM observation_fact fact1 JOIN PATIENT_DIMENSION pd ON fact1.patient_num = pd.patient_num
        JOIN act_bch_ontology_map cd
        ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'NucleicAcid'
        AND   NVAL_NUM is not null ;
@@ -1567,8 +1577,8 @@ Begin
  log_msg(p_runid,'EXTRCT_HPDS_PLASMA Start  ','X'); 
 
        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
-       FROM observation_fact fact1
+       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
+       FROM observation_fact fact1 JOIN PATIENT_DIMENSION pd ON fact1.patient_num = pd.patient_num
        JOIN act_bch_ontology_map cd
        ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'Plasma'
        AND   NVAL_NUM is not null ;
@@ -1588,8 +1598,8 @@ log_msg(p_runid,'EXTRCT_HPDS_WHOLE_BLOOD Start  ','X');
 
         
        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-      SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
-       FROM observation_fact fact1
+       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, null act_name_char,cast( start_date as date) start_date
+       FROM observation_fact fact1 JOIN PATIENT_DIMENSION pd ON fact1.patient_num = pd.patient_num
        JOIN act_bch_ontology_map cd
        ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'Blood'
        AND   NVAL_NUM is not null ;
