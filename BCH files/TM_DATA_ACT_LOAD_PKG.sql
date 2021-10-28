@@ -1435,7 +1435,7 @@ BEGIN
 
     --EXTRACT_COVID_DATA_HPDS ( p_runid  ) ; Commented out for this release
 
-    --EXTRCT_HPDS_MED_ALPHA( p_runid  ) ; Commented out for this release
+    EXTRCT_HPDS_MED_ALPHA( p_runid  ) ; 
 
     --EXTRCT_HPDS_MED_VA( p_runid  ) ; 
     --Added new for subcounts 
