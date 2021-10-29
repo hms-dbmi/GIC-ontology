@@ -83,16 +83,17 @@ Answer: If the extraction job runs out of memory, increase heapsize parameter in
 
 GIC	Node|Filter type	|Search Criteria 
 ------------|---------------|----------------
-ACT_CPT_PX_2018AA_HPDS	|all are categorical values	|search "Acetaminophen level" - retired CPT code - select ACT_Procedures_CPT tab
-ACT_ICD10CM_DX_2018AA_HPDS	|all are categorical values	|search  "J00 Acute nasopharyngitis [common cold]" - select ACT_Diagnosis_ICD_10 tab
-MED_ALPHA_HPDS	|has both numeric and categorical values	|search for "Histrelin" in ACT_Medications tab, select "H [Preparations], Restrict By Value Histrelin" - shows with categorical filter.search for  "Aspirin" in ACT_Medications shows up as a numeric filter
-NCATS_LABS_HPDS	|has both numeric and categorical values	|search for "GGT" in ACT_Lab_Test_Results - shows with categorical filter.search for  "Albumin" in ACT_Lab_Test_Results shows up as a numeric filter
+ACT Procedures CPT	|All are categorical values	|search "Acetaminophen level" - retired CPT code - select ACT_Procedures_CPT tab
+ACT Diagnosis ICD-10	|All are categorical values	|search  "J00 Acute nasopharyngitis [common cold]" - select ACT_Diagnosis_ICD_10 tab
+ACT Medications	|Both numeric and categorical values	|search for "Histrelin" in ACT_Medications tab, select "H [Preparations], Restrict By Value Histrelin" - shows with categorical filter.search for  "Aspirin" in ACT_Medications shows up as a numeric filter
+ACT Lab Test Results	|Both numeric and categorical values	|search for "GGT" in ACT_Lab_Test_Results - shows with categorical filter.search for  "Albumin" in ACT_Lab_Test_Results shows up as a numeric filter
 NucleicAcid	|Numeric filter 	|search "NucleicAcid" select bio_specimens tab
 Plasma	|Numeric filter 	|search "plasma" select bio_specimens tab
 Blood	|Numeric filter 	|search "Blood" select bio_specimens tab
 CSF	|Numeric filter 	|search "CSF" select bio_specimens tab
 HumanTissue	|Numeric filter 	|search "Tissue" select bio_specimens tab
-Gnome	|all are categorical values	|search "True"
-Hispanic	|all are categorical values	|search "Hispanic" and select act_demographics tab
-Race	|categorical values	|search "race" and select act_demographics tab.
+Gnome	|All are categorical values	|search "True"
+Hispanic	|All are categorical values	|search "Hispanic" and select act_demographics tab
+Race	|All are categorical values	|search "race" and select act_demographics tab.
 Demographic Age	|Numeric filter 	|search "Age" and select act_demographics tab
+
