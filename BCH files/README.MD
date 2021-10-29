@@ -85,8 +85,8 @@ GIC	Node|Filter type	|Search Criteria
 ------------|---------------|----------------
 ACT Procedures CPT	|All are categorical values	|search "Acetaminophen level" - retired CPT code - select ACT_Procedures_CPT tab
 ACT Diagnosis ICD-10	|All are categorical values	|search  "J00 Acute nasopharyngitis [common cold]" - select ACT_Diagnosis_ICD_10 tab
-ACT Medications	|Both numeric and categorical values	|search for "Histrelin" in ACT_Medications tab, select "H [Preparations], Restrict By Value Histrelin" - shows with categorical filter.search for  "Aspirin" in ACT_Medications shows up as a numeric filter
-ACT Lab Test Results	|Both numeric and categorical values	|search for "GGT" in ACT_Lab_Test_Results - shows with categorical filter.search for  "Albumin" in ACT_Lab_Test_Results shows up as a numeric filter
+ACT Medications	|Both numeric and categorical values	|search for "Histrelin" in ACT_Medications tab, select "H [Preparations], Restrict By Value Histrelin" - shows with categorical filter. Search for  "Aspirin" in ACT_Medications shows up as a numeric filter
+ACT Lab Test Results	|Both numeric and categorical values	|search for "GGT" in ACT_Lab_Test_Results -select option"GGT: GGT in Serum or Plasma" -it shows with categorical filter. Search for  "Albumin" in ACT_Lab_Test_Results shows up as a numeric filter
 NucleicAcid	|Numeric filter 	|search "NucleicAcid" select bio_specimens tab
 Plasma	|Numeric filter 	|search "plasma" select bio_specimens tab
 Blood	|Numeric filter 	|search "Blood" select bio_specimens tab
