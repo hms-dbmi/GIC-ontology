@@ -84,4 +84,4 @@ Test: Search race<br>
 Expected result: Confirm race codes other than Hispanic, American Indian or Alaska Native, Asian, Black or African American, Multiple race, Native Hawaiian or Other Pacific Islander, White, or No Information do not exist. 
 
 Test: Lab results <br>
-Expected result: Verify that lab results are numeric values. 
+Expected result: Verify that lab results are numeric and categorical values. 
