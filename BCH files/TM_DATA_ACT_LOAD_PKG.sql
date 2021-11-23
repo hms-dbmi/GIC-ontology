@@ -1557,7 +1557,7 @@ Begin
  log_msg(p_runid,'EXTRCT_HPDS_NUCLEICACID Start  ','X'); 
 
        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
-       SELECT DISTINCT fact1.patient_num,  act_concept_path, nval_num, 'True' act_name_char,cast( start_date as date) start_date
+       SELECT DISTINCT fact1.patient_num,  act_concept_path, null nval_num, 'True' act_name_char,cast( start_date as date) start_date
        FROM observation_fact fact1 JOIN PATIENT_DIMENSION pd ON fact1.patient_num = pd.patient_num
        JOIN act_bch_ontology_map cd
        ON cd.bch_concept_cd=fact1.CONCEPT_CD WHERE cd.data_type =  'NucleicAcid'
