@@ -27,7 +27,8 @@ Expected Results: Creates listed Objects needed for ACT HPDS data load
   --ETL_RUN_LOG
   --ETL_LOG_SEQ
   --ACT_COVID_HPDS
-  --MED_ALPHA_HPDS
+  --ACT_MED_ALPHA_HPDS
+  --GIC_BIOSAMPLES_HPDS
   --NCATS_ICD10_ICD9_DX_V1_HPDS
 
   v_sql := 'CREATE TABLE HPDS_DATA_LATEST '||
@@ -226,7 +227,9 @@ Expected Results: Creates listed Objects needed for ACT HPDS data load
     IF  v_counts = 0 THEN
     execute immediate v_sql;
     END IF;
-     v_sql := 'CREATE TABLE MED_ALPHA_HPDS ( '||
+    
+    
+     v_sql := 'CREATE TABLE ACT_MED_ALPHA_HPDS ( '||
     'C_FULLNAME VARCHAR2(4000), '||
 	'C_NAME VARCHAR2(4000), '|| 
 	'C_BASECODE VARCHAR2(100),  '||
@@ -235,12 +238,30 @@ Expected Results: Creates listed Objects needed for ACT HPDS data load
 
     select count(*) into v_counts 
     from dba_tables 
-    where table_name = 'MED_ALPHA_HPDS' 
+    where table_name = 'ACT_MED_ALPHA_HPDS' 
     and owner = 'I2B2_BLUE';
 
     IF  v_counts = 0 THEN
         execute immediate v_sql;
     END IF;
+    
+    v_sql := 'CREATE TABLE GIC_BIOSAMPLES_HPDS ( '||
+    'C_FULLNAME VARCHAR2(4000), '||
+	'C_NAME VARCHAR2(4000), '|| 
+	'C_BASECODE VARCHAR2(100),  '||
+	'HPDS_PATH VARCHAR2(4000) )  '||
+    'NOCOMPRESS NOLOGGING ';
+
+    select count(*) into v_counts 
+    from dba_tables 
+    where table_name = 'GIC_BIOSAMPLES_HPDS' 
+    and owner = 'I2B2_BLUE';
+
+    IF  v_counts = 0 THEN
+        execute immediate v_sql;
+    END IF;
+    
+    
 
       v_sql := 'CREATE TABLE ACT_COVID_HPDS ( '||
     'C_FULLNAME VARCHAR2(4000), '||
