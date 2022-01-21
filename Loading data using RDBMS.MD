@@ -2,7 +2,7 @@ High level steps required to generate the GIC java bin using RDBMS loader Jenkin
 
 Steps|Details
 ---|---
-1|Download the 7 GIC ACT ontology files from this git repo and stage them into 8 different database tables.
+1|Download the 7 GIC ACT ontology files from this git repo and stage them into 7 different database tables.
 2|Create mapping between your institute's ontology and the GIC ACT ontology.
 3|Extract your institute's fact data into the HPDS format using the above created ontology mapping into a database table.
 4|Use the RDBMS loader Jenkins job generate java bin files.
