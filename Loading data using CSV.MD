@@ -2,7 +2,7 @@ High level steps required to generate the GIC java bin using CSV loader Jenkins 
 
 Steps|Details
 -----|-------
-1 | Download the 8 GIC ACT ontology files from this git repo.
+1 | Download the 7 GIC ACT ontology files from this git repo.
 2 | Create mapping between your institute's ontology and the GIC ACT ontology files downloaded from the git repo.
 3 | Extract your institute's fact data into HPDS format using the above created ontology mapping into a csv file.
 4 | Use the CSV loader Jenkins job generate java bin files.
@@ -27,7 +27,6 @@ HPDS_PATH|Varchar2(4000)|Expanded standard ontology path for given c_fullname
 * GIC_BIOSAMPLES_HPDS.dsv
 * NCATS_DEMOGRAPHICS_HPDS.dsv
 * NCATS_LABS_HPDS.dsv
-* NCATS_VISIT_DETAILS_HPDS.dsv
 
 #### Step 2: Map your institute’s data to the GIC ACT ontology.<br>
 * Map your institute’s ontology to the GIC ACT ontology mapping files listed in Step 1. This process is different for each institution. For an example, visit the  Boston Children’s Hospital mapping [here](https://github.com/hms-dbmi/i2b2ACTtoHPDS/tree/BCH_ACT_Mappings/BCH%20files).
