@@ -2,7 +2,7 @@ High level steps required to generate the GIC java bin using RDBMS loader Jenkin
 
 Steps|Details
 ---|---
-1|Download the 8 GIC ACT ontology files from this git repo and stage them into 8 different database tables.
+1|Download the 7 GIC ACT ontology files from this git repo and stage them into 8 different database tables.
 2|Create mapping between your institute's ontology and the GIC ACT ontology.
 3|Extract your institute's fact data into the HPDS format using the above created ontology mapping into a database table.
 4|Use the RDBMS loader Jenkins job generate java bin files.
@@ -19,7 +19,7 @@ C_BASECODE|Varchar2(100)|ACT standard code, which is one of the standard ontolog
 HPDS_PATH|Varchar2(4000)|Expanded standard ontology path for above mentioned c_fullname
 
  
-* Load each of these 8 files in separate staging tables.
+* Load each of these 7 files in separate staging tables.
 * GIC ACT ontology data files:
   * ACT_COVID_HPDS.dsv
   * ACT_CPT_PX_2018AA_HPDS.dsv
@@ -28,7 +28,6 @@ HPDS_PATH|Varchar2(4000)|Expanded standard ontology path for above mentioned c_f
   * GIC_BIOSAMPLES_HPDS.dsv
   * NCATS_DEMOGRAPHICS_HPDS.dsv
   * NCATS_LABS_HPDS.dsv
-  * NCATS_VISIT_DETAILS_HPDS.dsv
 
 #### Step 2: Map your institute’s data to the GIC ACT ontology. <br>
 
