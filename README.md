@@ -39,3 +39,15 @@ Answer: The phenotypic data should be loaded first. The genomic data should be l
 
 <b>Question: Can I load additional columns to HPDS for my institute to assist with mapping, etc?</b><br>
 Answer: Yes, you can load additional columns into your institute’s instance of HPDS. 
+
+<b>Question: What are the values for the biosamples mapping?</b><br>
+Biosample | Path | Value
+:--- | :--- | :--- 
+WGS | \Variant Data Type\WGS\ | True
+WES | \Variant Data Type\WES\ | True
+Genotype array |  \Variant Data Type\Genotype array\ | True
+Extracted DNA | \Bio Specimens\NucleicAcid\DNA\ | True
+Wholeblood | \Bio Specimens\HumanFluid\Blood (Whole)\SPECIMENS:HF.BLD.000 Quantity\ | Quantity
+Plasma | \Bio Specimens\HumanFluid\Plasma\SPECIMENS:HF.PLS.000 Quantity\ | Quantity
+Tissue | \Bio Specimens\HumanTissue\ | True
+CSF | \Bio Specimens\HumanFluid\Brain\Cerebro-Spinal Fluid (CSF)\SPECIMENS:HF.BRN.004\ |True
