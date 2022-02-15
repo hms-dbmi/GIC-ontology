@@ -1,0 +1,62 @@
+ACT_C_FULLNAME	OMOP_S_CONCEPT_ID	OMOP_NS_CONCEPT_ID	C_NAME	C_BASECODE	HPDS_PATH
+\ACT\Demographics\Hispanic\No Information\	0	0	No Information	DEM|HISP:NI	\ACT Demographics\Hispanic\No Information
+\ACT\Demographics\Hispanic\No\	38003564	38003564	No	DEM|HISP:N	\ACT Demographics\Hispanic\No
+\ACT\Demographics\Hispanic\Yes\	38003563	38003563	Yes	DEM|HISP:Y	\ACT Demographics\Hispanic\Yes
+\ACT\Demographics\Race\American Indian or Alaska Native\	8657	8657	American Indian or Alaska Native	DEM|RACE:NA	\ACT Demographics\Race\American Indian or Alaska Native
+\ACT\Demographics\Race\American Indian or Alaska Native\	38003572	38003572	American Indian or Alaska Native	DEM|RACE:NA	\ACT Demographics\Race\American Indian or Alaska Native
+\ACT\Demographics\Race\American Indian or Alaska Native\	38003573	38003573	American Indian or Alaska Native	DEM|RACE:NA	\ACT Demographics\Race\American Indian or Alaska Native
+\ACT\Demographics\Race\Asian\	8515	8515	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003574	38003574	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003575	38003575	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003576	38003576	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003577	38003577	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003578	38003578	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003579	38003579	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003580	38003580	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003581	38003581	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003582	38003582	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003583	38003583	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003584	38003584	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003585	38003585	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003586	38003586	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003587	38003587	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003588	38003588	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003589	38003589	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003590	38003590	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003591	38003591	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003592	38003592	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003593	38003593	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003594	38003594	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003595	38003595	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003596	38003596	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Asian\	38003597	38003597	Asian	DEM|RACE:AS	\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Black or African American\	8516	8516	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003598	38003598	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003599	38003599	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003600	38003600	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003601	38003601	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003602	38003602	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003603	38003603	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003604	38003604	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003605	38003605	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003606	38003606	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003607	38003607	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003608	38003608	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Black or African American\	38003609	38003609	Black or African American	DEM|RACE:B	\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Multiple race\	-1	-1	Multiple race	DEM|RACE:M	\ACT Demographics\Race\Multiple race
+\ACT\Demographics\Race\Native Hawaiian or Other Pacific Islander\	8557	8557	Native Hawaiian or Other Pacific Islander	DEM|RACE:H	\ACT Demographics\Race\Native Hawaiian or Other Pacific Islander
+\ACT\Demographics\Race\Native Hawaiian or Other Pacific Islander\	38003610	38003610	Native Hawaiian or Other Pacific Islander	DEM|RACE:H	\ACT Demographics\Race\Native Hawaiian or Other Pacific Islander
+\ACT\Demographics\Race\Native Hawaiian or Other Pacific Islander\	38003611	38003611	Native Hawaiian or Other Pacific Islander	DEM|RACE:H	\ACT Demographics\Race\Native Hawaiian or Other Pacific Islander
+\ACT\Demographics\Race\Native Hawaiian or Other Pacific Islander\	38003612	38003612	Native Hawaiian or Other Pacific Islander	DEM|RACE:H	\ACT Demographics\Race\Native Hawaiian or Other Pacific Islander
+\ACT\Demographics\Race\Native Hawaiian or Other Pacific Islander\	38003613	38003613	Native Hawaiian or Other Pacific Islander	DEM|RACE:H	\ACT Demographics\Race\Native Hawaiian or Other Pacific Islander
+\ACT\Demographics\Race\No Information\	0	0	No Information	DEM|RACE:NI	\ACT Demographics\Race\No Information
+\ACT\Demographics\Race\White\	8527	8527	White	DEM|RACE:W	\ACT Demographics\Race\White
+\ACT\Demographics\Race\White\	38003614	38003614	White	DEM|RACE:W	\ACT Demographics\Race\White
+\ACT\Demographics\Race\White\	38003615	38003615	White	DEM|RACE:W	\ACT Demographics\Race\White
+\ACT\Demographics\Race\White\	38003616	38003616	White	DEM|RACE:W	\ACT Demographics\Race\White
+\ACT\Demographics\Sex\Ambiguous\	8570	8570	Ambiguous	DEM|SEX:A	\ACT Demographics\Sex\Ambiguous
+\ACT\Demographics\Sex\Female\	8532	8532	Female	DEM|SEX:F	\ACT Demographics\Sex\Female
+\ACT\Demographics\Sex\Male\	8507	8507	Male	DEM|SEX:M	\ACT Demographics\Sex\Male
+\ACT\Demographics\Sex\No Information\	8551	8551	No Information	DEM|SEX:NI	\ACT Demographics\Sex\No Information
+\ACT\Demographics\Sex\Other\	8521	8521	Other	DEM|SEX:O	\ACT Demographics\Sex\Other
+\ACT\Demographics\Vital Status\Known Deceased\	45885033	45885033	Known Deceased	DEM|VITAL STATUS:D	\ACT Demographics\Vital Status\Known Deceased
