@@ -14,6 +14,7 @@ Columns in each file are:
 - C_BASECODE	- Standard terminology code with prefix, i.e. ICD10CM:C50, LOINC:1988-5.
 - HPDS_PATH - Path used in HPDS which is comprised of parent hierarchy of C_NAME strings
 
+The CreateOMOPViewsToObsFactFormat.sql file can be used to transform OMOP tables into a long skinny table like the i2b2 observation_fact table. The view ALL_SOURCE_CONCEPTS unions all the domain tables together and places the \*_source_concept_id in the concept_cd field. The concept_cd field can be linked to the OMOP_NS_CONCEPT_ID in the above mapping tables to translate to the appropriate hpds_path.
 
 
 
