@@ -63,7 +63,7 @@ PROCEDURE MAP_BLOOD_GIC_BIOSAMPLES_HPDS (
  PROCEDURE MAP_CSF_GIC_BIOSAMPLES_HPDS (
     p_runid        IN NUMBER )  ;
 
- PROCEDURE MAP_GNOME_GIC_BIOSAMPLES_HPDS (
+ PROCEDURE MAP_VARIANT_BIOSAMPLES_HPDS (
     p_runid        IN NUMBER )  ;
 
   PROCEDURE MAP_PLASMA_GIC_BIOSAMPLES_HPDS (
@@ -601,14 +601,14 @@ PROCEDURE MAP_TISSUE_GIC_BIOSAMPLES_HPDS (
         COMMIT;
   END; 
 
- PROCEDURE MAP_GNOME_GIC_BIOSAMPLES_HPDS (
+ PROCEDURE MAP_VARIANT_BIOSAMPLES_HPDS (
     p_runid        IN NUMBER )  
     AS
   BEGIN
-  log_msg(p_runid, 'Start MAP_GNOME_GIC_BIOSAMPLES_HPDS '||sql%rowcount, 'Y'); 
+  log_msg(p_runid, 'Start MAP_VARIANT_BIOSAMPLES_HPDS '||sql%rowcount, 'Y'); 
         DELETE FROM act_bch_ontology_map
         WHERE data_type = 'Variant';
-        log_msg(p_runid, 'Delete existing data MAP_GNOME_GIC_BIOSAMPLES_HPDS '||sql%rowcount, 'Y'); 
+        log_msg(p_runid, 'Delete existing data MAP_VARIANT_BIOSAMPLES_HPDS '||sql%rowcount, 'Y'); 
                 INSERT INTO act_bch_ontology_map (  data_type,
                     act_concept_path,
                     act_name_char,
@@ -630,7 +630,7 @@ PROCEDURE MAP_TISSUE_GIC_BIOSAMPLES_HPDS (
                     FROM gic_biosamples_hpds
                     WHERE c_fullname like '\Variant Data Type\WES%' ) hpds ;
 
-        log_msg(p_runid, 'End MAP_GNOME_GIC_BIOSAMPLES_HPDS WES '||sql%rowcount, 'Y');  
+        log_msg(p_runid, 'End MAP_VARIANT_BIOSAMPLES_HPDS WES '||sql%rowcount, 'Y');  
                INSERT INTO act_bch_ontology_map (  data_type,
                     act_concept_path,
                     act_name_char,
@@ -651,7 +651,7 @@ PROCEDURE MAP_TISSUE_GIC_BIOSAMPLES_HPDS (
                     (SELECT c_fullname, c_name, c_basecode, hpds_path
                     FROM gic_biosamples_hpds
                     WHERE c_fullname like '\Variant Data Type\WGS%' ) hpds ;
-        log_msg(p_runid, 'End MAP_GNOME_GIC_BIOSAMPLES_HPDS WGS '||sql%rowcount, 'Y');          
+        log_msg(p_runid, 'End MAP_VARIANT_BIOSAMPLES_HPDS WGS '||sql%rowcount, 'Y');          
             INSERT INTO act_bch_ontology_map (  data_type,
                     act_concept_path,
                     act_name_char,
@@ -673,9 +673,9 @@ PROCEDURE MAP_TISSUE_GIC_BIOSAMPLES_HPDS (
                     FROM gic_biosamples_hpds
                     WHERE c_fullname like '\Variant Data Type\Genotype%' ) hpds ;      
 
-        log_msg(p_runid, 'End MAP_GNOME_GIC_BIOSAMPLES_HPDS Genotype '||sql%rowcount, 'Y'); 
+        log_msg(p_runid, 'End MAP_VARIANT_BIOSAMPLES_HPDS Genotype '||sql%rowcount, 'Y'); 
         COMMIT;
-               log_msg(p_runid, 'End MAP_GNOME_GIC_BIOSAMPLES_HPDS Genotype ', 'Y'); 
+               log_msg(p_runid, 'End MAP_VARIANT_BIOSAMPLES_HPDS Genotype ', 'Y'); 
   END;
 
   PROCEDURE MAP_CSF_GIC_BIOSAMPLES_HPDS (
@@ -1026,7 +1026,7 @@ log_msg(p_runid,'Start Run_MAP_Data_Load   ','X');
 
          MAP_CSF_GIC_BIOSAMPLES_HPDS ( p_runid );
 
-         MAP_GNOME_GIC_BIOSAMPLES_HPDS ( p_runid );
+         MAP_VARIANT_BIOSAMPLES_HPDS ( p_runid );
 
          MAP_PLASMA_GIC_BIOSAMPLES_HPDS ( p_runid );
 
@@ -1061,7 +1061,7 @@ PROCEDURE           EXTRCT_HPDS_EXOMES_IDS (
 ) AS
 
 Begin
-null;
+
  log_msg(p_runid,'EXTRCT_HPDS_EXOMES_IDS Start  ','X'); 
        INSERT into HPDS_DATA_LATEST( PATIENT_NUM,CONCEPT_PATH,NVAL_NUM,TVAL_CHAR,start_date)      
        SELECT DISTINCT fact1.patient_num,  act_concept_path, null nval_num, 'True' act_name_char,cast( start_date as date) start_date
