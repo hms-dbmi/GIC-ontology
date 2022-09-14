@@ -33,7 +33,7 @@ HPDS_PATH|Varchar2(4000)|Expanded standard ontology path for given c_fullname
 
 * Using the above created ontology mapping extract your institute’s fact data with GIC ACT ontology into allConcepts.csv file, listed are the details on the data attributes of the file.
 * This file should have a header: "PATIENT_NUM","CONCEPT_PATH","NVAL_NUM","TVAL_CHAR","TIMESTAMP" 
-* Data has to be sorted by concept_cd, patient_num,TIMESTAMP
+* Data has to be sorted by concept_path, patient_num,TIMESTAMP
  
 HPDS Header| Details
 ----|----
