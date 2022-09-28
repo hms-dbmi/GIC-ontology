@@ -46,7 +46,7 @@ Biosample | Path | Value
 WGS | \Variant Data Type\WGS\ | True
 WES | \Variant Data Type\WES\ | True
 Genotype array |  \Variant Data Type\Genotype array\ | True
-Low coverage WGS |  \Variant Data Type\low coverage WGS\ | True
+Low coverage WGS |  \Variant Data Type\Low coverage WGS\ | True
 Extracted DNA | \Bio Specimens\NucleicAcid\DNA\ | True
 Wholeblood | \Bio Specimens\HumanFluid\Blood (Whole)\SPECIMENS:HF.BLD.000 Quantity\ | Quantity
 Plasma | \Bio Specimens\HumanFluid\Plasma\SPECIMENS:HF.PLS.000 Quantity\ | Quantity
