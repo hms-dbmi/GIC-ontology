@@ -1,0 +1,6 @@
+"C_FULLNAME";"C_NAME";"C_BASECODE";"HPDS_PATH"
+"\Variant Data Type\WGS\";"WGS Available";"VARIANT.DATA.WGS Available";"\Variant Data Type\WGS\"
+"\Variant Data Type\WES\";"WES Available";"VARIANT.DATA.WES Available";"\Variant Data Type\WES\"
+"\Variant Data Type\Genotype array\";"GENOTYPE_ARRAY Available";"VARIANT.DATA.GENOTYPE_ARRAY Available";"\Variant Data Type\Genotype array\"
+"\Variant Data Type\Low coverage WGS\";"LOW COVERAGE WGS Available";"VARIANT.DATA.LOW COVERAGE WGS Available";"\Variant Data Type\Low coverage WGS\"
+
