@@ -1,0 +1,289 @@
+C_FULLNAME;C_NAME;C_BASECODE;HPDS_PATH
+\ACT\Labs\;Lab Test Results;;\ACT Lab Test Results
+\ACT\Labs\LP14855-8\;Virus;LOINC:LP14855-8;\ACT Lab Test Results\Virus
+\ACT\Labs\LP14855-8\LP14306-2\;Hepatitis B virus;LOINC:LP14306-2;\ACT Lab Test Results\Virus\Hepatitis B virus
+\ACT\Labs\LP14855-8\LP14306-2\LP41149-3\;Hepatitis B virus surface Ab;LOINC:LP41149-3;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ab
+\ACT\Labs\LP14855-8\LP14306-2\LP41149-3\10900-9\;Hepatitis B virus surface Ab [Presence] in Serum by Immunoassay;LOINC:10900-9;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ab\Hepatitis B virus surface Ab [Presence] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14306-2\LP41149-3\16935-9\;Hepatitis B virus surface Ab [Units/Volume] in Serum;LOINC:16935-9;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ab\Hepatitis B virus surface Ab [Units/Volume] in Serum
+\ACT\Labs\LP14855-8\LP14306-2\LP41149-3\22322-2\;Hepatitis B virus surface Ab [Presence] in Serum;LOINC:22322-2;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ab\Hepatitis B virus surface Ab [Presence] in Serum
+\ACT\Labs\LP14855-8\LP14306-2\LP41149-3\39535-0\;Hepatitis B virus surface Ab [Presence] in Serum by Radioimmunoassay (RIA);LOINC:39535-0;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ab\Hepatitis B virus surface Ab [Presence] in Serum by Radioimmunoassay (RIA)
+\ACT\Labs\LP14855-8\LP14306-2\LP41149-3\5193-8\;Hepatitis B virus surface Ab [Units/Volume] in Serum by Immunoassay;LOINC:5193-8;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ab\Hepatitis B virus surface Ab [Units/Volume] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14306-2\LP41149-3\5194-6\;Hepatitis B virus surface Ab [Units/Volume] in Serum by Radioimmunoassay (RIA);LOINC:5194-6;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ab\Hepatitis B virus surface Ab [Units/Volume] in Serum by Radioimmunoassay (RIA)
+\ACT\Labs\LP14855-8\LP14306-2\LP42994-1\;Hepatitis B virus core IgG;LOINC:LP2994-1;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core IgG
+\ACT\Labs\LP14855-8\LP14306-2\LP42994-1\13919-6\;Hepatitis B virus core IgG Ab [Units/Volume] in Serum by Immunoassay;LOINC:13919-6;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core IgG\Hepatitis B virus core IgG Ab [Units/Volume] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14306-2\LP42994-1\22318-0\;Hepatitis B virus core IgG Ab [Units/Volume] in Serum;LOINC:22318-0;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core IgG\Hepatitis B virus core IgG Ab [Units/Volume] in Serum
+\ACT\Labs\LP14855-8\LP14306-2\LP42994-1\32685-0\;Hepatitis B virus core IgG Ab [Presence] in Serum;LOINC:32685-0;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core IgG\Hepatitis B virus core IgG Ab [Presence] in Serum
+\ACT\Labs\LP14855-8\LP14306-2\LP42994-1\40725-4\;Hepatitis B virus core IgG Ab [Presence] in Serum by Immunoassay;LOINC:40725-4;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core IgG\Hepatitis B virus core IgG Ab [Presence] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14306-2\LP43016-2\;Hepatitis B virus core Ab;LOINC:LP43016-2;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core Ab
+\ACT\Labs\LP14855-8\LP14306-2\LP43016-2\13952-7\;Hepatitis B virus core Ab [Presence] in Serum by Immunoassay;LOINC:13952-7;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core Ab\Hepatitis B virus core Ab [Presence] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14306-2\LP43016-2\16933-4\;Hepatitis B virus core Ab [Presence] in Serum;LOINC:16933-4;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core Ab\Hepatitis B virus core Ab [Presence] in Serum
+\ACT\Labs\LP14855-8\LP14306-2\LP43016-2\22316-4\;Hepatitis B virus core Ab [Units/Volume] in Serum;LOINC:22316-4;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core Ab\Hepatitis B virus core Ab [Units/Volume] in Serum
+\ACT\Labs\LP14855-8\LP14306-2\LP43016-2\5187-0\;Hepatitis B virus core Ab [Units/Volume] in Serum by Immunoassay;LOINC:5187-0;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core Ab\Hepatitis B virus core Ab [Units/Volume] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14306-2\LP43016-2\5188-8\;Hepatitis B virus core Ab [Units/Volume] in Serum by Radioimmunoassay (RIA);LOINC:5188-8;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core Ab\Hepatitis B virus core Ab [Units/Volume] in Serum by Radioimmunoassay (RIA)
+\ACT\Labs\LP14855-8\LP14306-2\LP47055-6\;Hepatitis B virus core IgM;LOINC:LP47055-6;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core IgM
+\ACT\Labs\LP14855-8\LP14306-2\LP47055-6\22319-8\;Hepatitis B virus core IgM Ab [Units/Volume] in Serum;LOINC:22319-8;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core IgM\Hepatitis B virus core IgM Ab [Units/Volume] in Serum
+\ACT\Labs\LP14855-8\LP14306-2\LP47055-6\24113-3\;Hepatitis B virus core IgM Ab [Presence] in Serum or Plasma by Immunoassay;LOINC:24113-3;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core IgM\Hepatitis B virus core IgM Ab [Presence] in Serum or Plasma by Immunoassay
+\ACT\Labs\LP14855-8\LP14306-2\LP47055-6\31204-1\;Hepatitis B virus core IgM Ab [Presence] in Serum;LOINC:31204-1;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core IgM\Hepatitis B virus core IgM Ab [Presence] in Serum
+\ACT\Labs\LP14855-8\LP14306-2\LP47055-6\5185-4\;Hepatitis B virus core IgM Ab [Units/Volume] in Serum by Immunoassay;LOINC:5185-4;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core IgM\Hepatitis B virus core IgM Ab [Units/Volume] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14306-2\LP47055-6\5186-2\;Hepatitis B virus core IgM Ab [Units/Volume] in Serum by Radioimmunoassay (RIA);LOINC:5186-2;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core IgM\Hepatitis B virus core IgM Ab [Units/Volume] in Serum by Radioimmunoassay (RIA)
+\ACT\Labs\LP14855-8\LP14306-2\LP54058-0\;Hepatitis B virus surface Ag;LOINC:LP54058-0;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ag
+\ACT\Labs\LP14855-8\LP14306-2\LP54058-0\5195-3\;Hepatitis B virus surface Ag [Presence] in Serum;LOINC:5195-3;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ag\Hepatitis B virus surface Ag [Presence] in Serum
+\ACT\Labs\LP14855-8\LP14306-2\LP54058-0\5196-1\;Hepatitis B virus surface Ag [Presence] in Serum by Immunoassay;LOINC:5196-1;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ag\Hepatitis B virus surface Ag [Presence] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14306-2\LP54058-0\5197-9\;Hepatitis B virus surface Ag [Presence] in Serum by Radioimmunoassay (RIA);LOINC:5197-9;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ag\Hepatitis B virus surface Ag [Presence] in Serum by Radioimmunoassay (RIA)
+\ACT\Labs\LP14855-8\LP14306-2\LP54058-0\58452-4\;Hepatitis B virus surface Ag [Units/Volume] in Serum;LOINC:58452-4 ;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ag\Hepatitis B virus surface Ag [Units/Volume] in Serum
+\ACT\Labs\LP14855-8\LP14306-2\LP54058-0\63557-3\;Hepatitis B virus surface Ag [Units/Volume] in Serum by Immunoassay;LOINC:63557-3;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ag\Hepatitis B virus surface Ag [Units/Volume] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14306-2\LP54058-0\65633-0\;Hepatitis B virus surface Ag [Presence] in Serum or Plasma by Confirmatory method;LOINC:65633-0;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ag\Hepatitis B virus surface Ag [Presence] in Serum or Plasma by Confirmatory method
+\ACT\Labs\LP14855-8\LP14306-2\LP54058-0\70154-0\;Hepatitis B virus surface Ag [Neutralization] in Serum or Plasma by Confirmatory method;LOINC:70154-0;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ag\Hepatitis B virus surface Ag [Neutralization] in Serum or Plasma by Confirmatory method
+\ACT\Labs\LP14855-8\LP14306-2\LP54058-0\7905-3\;Hepatitis B virus surface Ag [Presence] in Serum or Plasma by Neutralization test;LOINC:7905-3;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus surface Ag\Hepatitis B virus surface Ag [Presence] in Serum or Plasma by Neutralization test
+\ACT\Labs\LP14855-8\LP14306-2\LP66853-0\;Hepatitis B virus core;LOINC:LP66853-0;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core
+\ACT\Labs\LP14855-8\LP14306-2\LP66853-0\51914-0\;Hepatitis B virus core [Presence] in Serum;LOINC:51914-0;\ACT Lab Test Results\Virus\Hepatitis B virus\Hepatitis B virus core\Hepatitis B virus core [Presence] in Serum
+\ACT\Labs\LP14855-8\LP14400-3\;Hepatitis C virus;LOINC:LP14400-3;\ACT Lab Test Results\Virus\Hepatitis C virus
+\ACT\Labs\LP14855-8\LP14400-3\LP38332-0\16128-1\;Hepatitis C virus Ab [Presence] in Serum;LOINC:16128-1;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus Ab [Presence] in Serum
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\;Hepatitis C virus RNA;LOINC:LP40983-6;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\10676-5\;Hepatitis C virus RNA [Units/volume] by Probe with amplification IU/mL;LOINC:10676-5;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [Units/volume] by Probe with amplification IU/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\11011-4\;Hepatitis C virus RNA [Units/volume] by Probe and target amplification Thous IU/mL;LOINC:11011-4;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [Units/volume] by Probe and target amplification Thous IU/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\11259-9\;Hepatitis C virus RNA [Presence] by Probe and target amplification;LOINC:11259-9;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [Presence] by Probe and target amplification
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\20416-4\;Hepatitis C virus RNA [#/volume] by Probe and target amplification copies/mL;LOINC:20416-4;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [#/volume] by Probe and target amplification copies/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\20571-6\;Hepatitis C virus RNA [#/volume]  by Probe and signal amplification 10*6 eq/mL;LOINC:20571-6;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [#/volume]  by Probe and signal amplification 10*6 eq/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\29609-5\;Hepatitis C virus RNA [Units/volume] by Probe and signal amplification IU/mL;LOINC:29609-5;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [Units/volume] by Probe and signal amplification IU/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\34703-9\;Hepatitis C virus RNA [Units/volume] by Probe and target amplification detection limit = 500 IU/mL;LOINC:34703-9;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [Units/volume] by Probe and target amplification detection limit = 500 IU/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\34704-7\;Hepatitis C virus RNA [Units/volume] by Probe and target amplification detection limit = 50 IU/mL;LOINC:34704-7;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [Units/volume] by Probe and target amplification detection limit = 50 IU/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\38180-6\;Hepatitis C virus RNA [Log units/volume] by Probe and target amplification log IU/mL;LOINC:38180-6;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [Log units/volume] by Probe and target amplification log IU/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\42003-4\;Hepatitis C virus RNA [Log #/volume] by Probe and signal amplification log copies/mL;LOINC:42003-4;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [Log #/volume] by Probe and signal amplification log copies/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\42617-1\;Hepatitis C virus RNA [Log units/volume] by Probe and signal amplification log IU/mL;LOINC:42617-1;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [Log units/volume] by Probe and signal amplification log IU/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\47252-2\;Hepatitis C virus RNA [Log #/volume] by Probe and target amplification log copies/mL;LOINC:47252-2;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [Log #/volume] by Probe and target amplification log copies/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP40983-6\49758-6\;Hepatitis C virus RNA [Units/volume] by Probe and target amplification detection limit = 5 IU/mL;LOINC:49758-6;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus RNA\Hepatitis C virus RNA [Units/volume] by Probe and target amplification detection limit = 5 IU/mL
+\ACT\Labs\LP14855-8\LP14400-3\LP43019-6\;Hepatitis C virus Ab;LOINC:LP43019-6;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus Ab
+\ACT\Labs\LP14855-8\LP14400-3\LP43019-6\13955-0\;Hepatitis C virus Ab [Presence] in Serum by Immunoassay;LOINC:13955-0;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus Ab\Hepatitis C virus Ab [Presence] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14400-3\LP43019-6\16128-1\;Hepatitis C virus Ab [Presence] in Serum;LOINC:16128-1;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus Ab\Hepatitis C virus Ab [Presence] in Serum
+\ACT\Labs\LP14855-8\LP14400-3\LP43019-6\22327-1\;Hepatitis C virus Ab [Units/Volume] in Serum;LOINC:22327-1;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus Ab\Hepatitis C virus Ab [Units/Volume] in Serum
+\ACT\Labs\LP14855-8\LP14400-3\LP43019-6\5198-7\;Hepatitis C virus Ab [Units/Volume] in Serum by Immunoassay;LOINC:5198-7;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus Ab\Hepatitis C virus Ab [Units/Volume] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14400-3\LP43019-6\5199-5\;Hepatitis C virus Ab [Presence] in Serum by Immunoblot (IB);LOINC:5199-5;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus Ab\Hepatitis C virus Ab [Presence] in Serum by Immunoblot (IB)
+\ACT\Labs\LP14855-8\LP14400-3\LP43019-6\72376-7\;Hepatitis C virus Ab [Presence] in Serum by Rapid immunoassay;LOINC:72376-7;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus Ab\Hepatitis C virus Ab [Presence] in Serum by Rapid immunoassay
+\ACT\Labs\LP14855-8\LP14400-3\LP44597-0\;Hepatitis C virus IgG;LOINC:LP44597-0;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus IgG
+\ACT\Labs\LP14855-8\LP14400-3\LP44597-0\16129-9\;Hepatitis C virus IgG Ab [Presence] in Serum;LOINC:16129-9;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus IgG\Hepatitis C virus IgG Ab [Presence] in Serum
+\ACT\Labs\LP14855-8\LP14400-3\LP44597-0\16936-7\;Hepatitis C virus IgG Ab [Units/Volume] in Serum;LOINC:16936-7;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus IgG\Hepatitis C virus IgG Ab [Units/Volume] in Serum
+\ACT\Labs\LP14855-8\LP14400-3\LP44597-0\33462-3\;Hepatitis C virus IgG Ab [Presence] in Serum by Immunoblot (IB);LOINC:33462-3;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus IgG\Hepatitis C virus IgG Ab [Presence] in Serum by Immunoblot (IB)
+\ACT\Labs\LP14855-8\LP14400-3\LP44597-0\40726-2\;Hepatitis C virus IgG Ab [Presence] in Serum by Immunoassay;LOINC:40726-2;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus IgG\Hepatitis C virus IgG Ab [Presence] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14400-3\LP44597-0\57006-9\;Hepatitis C virus IgG Ab [Units/Volume] in Serum by Immunoassay;LOINC:57006-9;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus IgG\Hepatitis C virus IgG Ab [Units/Volume] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14400-3\LP66758-1\;Hepatitis C virus IgM;LOINC:LP66758-1;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus IgM
+\ACT\Labs\LP14855-8\LP14400-3\LP66758-1\51824-1\;Hepatitis C virus IgM Ab [Units/Volume] in Serum by Immunoassay;LOINC:51824-1;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus IgM\Hepatitis C virus IgM Ab [Units/Volume] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP14400-3\LP66758-1\53376-0\;Hepatitis C virus IgM Ab [Units/Volume] in Serum;LOINC:53376-0;\ACT Lab Test Results\Virus\Hepatitis C virus\Hepatitis C virus IgM\Hepatitis C virus IgM Ab [Units/Volume] in Serum
+\ACT\Labs\LP14855-8\LP17126-1\;HIV;LOINC:LP17126-1;\ACT Lab Test Results\Virus\HIV
+\ACT\Labs\LP14855-8\LP17126-1\LP42700-2\;HIV 1 Ab;LOINC:LP42700-2;\ACT Lab Test Results\Virus\HIV\HIV 1 Ab
+\ACT\Labs\LP14855-8\LP17126-1\LP42700-2\14092-1\;HIV 1 Ab [Presence] in Serum by Immunofluorescence;LOINC:14092-1;\ACT Lab Test Results\Virus\HIV\HIV 1 Ab\HIV 1 Ab [Presence] in Serum by Immunofluorescence
+\ACT\Labs\LP14855-8\LP17126-1\LP42700-2\22356-0\;HIV 1 Ab [Units/Volume] in Serum;LOINC:22356-0;\ACT Lab Test Results\Virus\HIV\HIV 1 Ab\HIV 1 Ab [Units/Volume] in Serum
+\ACT\Labs\LP14855-8\LP17126-1\LP42700-2\29893-5\;HIV 1 Ab [Presence] in Serum by Immunoassay;LOINC:29893-5;\ACT Lab Test Results\Virus\HIV\HIV 1 Ab\HIV 1 Ab [Presence] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP17126-1\LP42700-2\43599-0\;HIV 1 Ab [Units/Volume] in Serum by Immunofluorescence;LOINC:43599-0;\ACT Lab Test Results\Virus\HIV\HIV 1 Ab\HIV 1 Ab [Units/Volume] in Serum by Immunofluorescence
+\ACT\Labs\LP14855-8\LP17126-1\LP42700-2\5220-9\;HIV 1 Ab [Units/Volume] in Serum by Immunoassay;LOINC:5220-9;\ACT Lab Test Results\Virus\HIV\HIV 1 Ab\HIV 1 Ab [Units/Volume] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP17126-1\LP42700-2\5221-7\;HIV 1 Ab [Presence] in Serum by Immunoblot (IB);LOINC:5221-7;\ACT Lab Test Results\Virus\HIV\HIV 1 Ab\HIV 1 Ab [Presence] in Serum by Immunoblot (IB)
+\ACT\Labs\LP14855-8\LP17126-1\LP42700-2\68961-2\;HIV 1 Ab [Presence] in Serum, Plasma or Blood by Rapid immunoassay;LOINC:68961-2;\ACT Lab Test Results\Virus\HIV\HIV 1 Ab\HIV 1 Ab [Presence] in Serum, Plasma or Blood by Rapid immunoassay
+\ACT\Labs\LP14855-8\LP17126-1\LP42700-2\7917-8\;HIV 1 Ab [Presence] in Serum;LOINC:7917-8;\ACT Lab Test Results\Virus\HIV\HIV 1 Ab\HIV 1 Ab [Presence] in Serum
+\ACT\Labs\LP14855-8\LP17126-1\LP45066-5\;HIV 1 Ag;LOINC:LP45066-5;\ACT Lab Test Results\Virus\HIV\HIV 1 Ag
+\ACT\Labs\LP14855-8\LP17126-1\LP45066-5\16976-3\;HIV 1 Ag [Units/Volume] in Serum;LOINC:16976-3;\ACT Lab Test Results\Virus\HIV\HIV 1 Ag\HIV 1 Ag [Units/Volume] in Serum
+\ACT\Labs\LP14855-8\LP17126-1\LP45066-5\24012-7\;HIV 1 Ag [Presence] in Serum;LOINC:24012-7;\ACT Lab Test Results\Virus\HIV\HIV 1 Ag\HIV 1 Ag [Presence] in Serum
+\ACT\Labs\LP14855-8\LP17126-1\LP45066-5\5222-5\;HIV 1 Ag [Presence] in Serum by Immunoassay;LOINC:5222-5;\ACT Lab Test Results\Virus\HIV\HIV 1 Ag\HIV 1 Ag [Presence] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP17126-1\LP47065-5\;HIV 2 Ab;LOINC:LP47065-5;\ACT Lab Test Results\Virus\HIV\HIV 2 Ab
+\ACT\Labs\LP14855-8\LP17126-1\LP47065-5\22358-6\;HIV 2 Ab [Units/Volume] in Serum;LOINC:22358-6;\ACT Lab Test Results\Virus\HIV\HIV 2 Ab\HIV 2 Ab [Units/Volume] in Serum
+\ACT\Labs\LP14855-8\LP17126-1\LP47065-5\30361-0\;HIV 2 Ab [Presence] in Serum by Immunoassay;LOINC:30361-0;\ACT Lab Test Results\Virus\HIV\HIV 2 Ab\HIV 2 Ab [Presence] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP17126-1\LP47065-5\5224-1\;HIV 2 Ab [Units/Volume] in Serum by Immunoassay;LOINC:5224-1;\ACT Lab Test Results\Virus\HIV\HIV 2 Ab\HIV 2 Ab [Units/Volume] in Serum by Immunoassay
+\ACT\Labs\LP14855-8\LP17126-1\LP47065-5\5225-8\;HIV 2 Ab [Presence] in Serum by Immunoblot (IB);LOINC:5225-8;\ACT Lab Test Results\Virus\HIV\HIV 2 Ab\HIV 2 Ab [Presence] in Serum by Immunoblot (IB)
+\ACT\Labs\LP14855-8\LP17126-1\LP47065-5\7919-4\;HIV 2 Ab [Presence] in Serum;LOINC:7919-4;\ACT Lab Test Results\Virus\HIV\HIV 2 Ab\HIV 2 Ab [Presence] in Serum
+\ACT\Labs\LP14855-8\LP17126-1\LP55190-0\;HIV DNA;LOINC:LP55190-0;\ACT Lab Test Results\Virus\HIV\HIV DNA
+\ACT\Labs\LP14855-8\LP17126-1\LP55190-0\9836-8\;HIV DNA [Presence] by Probe with amplification;LOINC:9836-8;\ACT Lab Test Results\Virus\HIV\HIV DNA\HIV DNA [Presence] by Probe with amplification
+\ACT\Labs\LP31755-9\;Microbiology;LOINC:LP31755-9;\ACT Lab Test Results\Microbiology
+\ACT\Labs\LP31755-9\LP18171-6\;Tuberculosis Interferon;LOINC:LP18171-6;\ACT Lab Test Results\Microbiology\Tuberculosis Interferon
+\ACT\Labs\LP31755-9\LP18171-6\LP149695-1\;Mycobacterium tuberculosis stimulated gamma interferon;LOINC:LP149695-1;\ACT Lab Test Results\Microbiology\Tuberculosis Interferon\Mycobacterium tuberculosis stimulated gamma interferon
+\ACT\Labs\LP31755-9\LP18171-6\LP149695-1\46217-6\;Mycobacterium tuberculosis stimulated gamma interferon [Units/Volume] in Blood;LOINC:46217-6;\ACT Lab Test Results\Microbiology\Tuberculosis Interferon\Mycobacterium tuberculosis stimulated gamma interferon\Mycobacterium tuberculosis stimulated gamma interferon [Units/Volume] in Blood
+\ACT\Labs\LP31755-9\LP18171-6\LP149695-1\71773-6\;Mycobacterium tuberculosis stimulated gamma interferon [Presence] in Blood;LOINC:71773-6;\ACT Lab Test Results\Microbiology\Tuberculosis Interferon\Mycobacterium tuberculosis stimulated gamma interferon\Mycobacterium tuberculosis stimulated gamma interferon [Presence] in Blood
+\ACT\Labs\LP31755-9\LP18171-6\LP71013-4\;Mycobacterium tuberculosis Mitogen stimulated gamma interferon;LOINC:LP71013-4;\ACT Lab Test Results\Microbiology\Tuberculosis Interferon\Mycobacterium tuberculosis Mitogen stimulated gamma interferon
+\ACT\Labs\LP31755-9\LP18171-6\LP71013-4\39017-9\;Mycobacterium tuberculosis Mitogen stimulated gamma interferon [Units/Volume] in Blood;LOINC:39017-9;\ACT Lab Test Results\Microbiology\Tuberculosis Interferon\Mycobacterium tuberculosis Mitogen stimulated gamma interferon\Mycobacterium tuberculosis Mitogen stimulated gamma interferon [Units/Volume] in Blood
+\ACT\Labs\LP31755-9\LP18171-6\LP71013-4\45323-3\;Mycobacterium tuberculosis Mitogen stimulated gamma interferon  [Presence] in Blood;LOINC:45323-3;\ACT Lab Test Results\Microbiology\Tuberculosis Interferon\Mycobacterium tuberculosis Mitogen stimulated gamma interferon\Mycobacterium tuberculosis Mitogen stimulated gamma interferon  [Presence] in Blood
+\ACT\Labs\LP31755-9\LP39544-9\;Reagin Ab;LOINC:LP39544-9;\ACT Lab Test Results\Microbiology\Reagin Ab
+\ACT\Labs\LP31755-9\LP39544-9\LP41330-9\;Reagin Ab in serum;LOINC:LP41330-9;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in serum
+\ACT\Labs\LP31755-9\LP39544-9\LP41330-9\11084-1\;Reagin Ab [Titer] in Serum;LOINC:11084-1;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in serum\Reagin Ab [Titer] in Serum
+\ACT\Labs\LP31755-9\LP39544-9\LP41330-9\20507-0\;Reagin Ab [Presence] in Serum by RPR;LOINC:20507-0;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in serum\Reagin Ab [Presence] in Serum by RPR
+\ACT\Labs\LP31755-9\LP39544-9\LP41330-9\20508-8\;Reagin Ab [Units/Volume] in Serum by RPR;LOINC:20508-8;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in serum\Reagin Ab [Units/Volume] in Serum by RPR
+\ACT\Labs\LP31755-9\LP39544-9\LP41330-9\22461-8\;Reagin Ab [Presence] in Serum;LOINC:22461-8;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in serum\Reagin Ab [Presence] in Serum
+\ACT\Labs\LP31755-9\LP39544-9\LP41330-9\22462-6\;Reagin Ab [Units/Volume] in Serum;LOINC:22462-6;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in serum\Reagin Ab [Units/Volume] in Serum
+\ACT\Labs\LP31755-9\LP39544-9\LP41330-9\31147-2\;Reagin Ab [Titer] in Serum by RPR;LOINC:31147-2;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in serum\Reagin Ab [Titer] in Serum by RPR
+\ACT\Labs\LP31755-9\LP39544-9\LP41330-9\50690-7\;Reagin Ab [Titer] in Serum by VDRL;LOINC:50690-7;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in serum\Reagin Ab [Titer] in Serum by VDRL
+\ACT\Labs\LP31755-9\LP39544-9\LP41330-9\5291-0\;Reagin Ab [Units/Volume] in Serum by VDRL;LOINC:5291-0;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in serum\Reagin Ab [Units/Volume] in Serum by VDRL
+\ACT\Labs\LP31755-9\LP39544-9\LP41330-9\5292-8\;Reagin Ab [Presence] in Serum by VDRL;LOINC:5292-8;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in serum\Reagin Ab [Presence] in Serum by VDRL
+\ACT\Labs\LP31755-9\LP39544-9\LP47110-9\;Reagin Ab in CSF;LOINC:LP47110-9;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in CSF
+\ACT\Labs\LP31755-9\LP39544-9\LP47110-9\22459-2\;Reagin Ab [Presence] in CSF;LOINC:22459-2;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in CSF\Reagin Ab [Presence] in CSF
+\ACT\Labs\LP31755-9\LP39544-9\LP47110-9\22460-0\;Reagin Ab [Units/Volume] in CSF;LOINC:22460-0;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in CSF\Reagin Ab [Units/Volume] in CSF
+\ACT\Labs\LP31755-9\LP39544-9\LP47110-9\31146-4\;Reagin Ab [Titer] in CSF by VDRL;LOINC:31146-4;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in CSF\Reagin Ab [Titer] in CSF by VDRL
+\ACT\Labs\LP31755-9\LP39544-9\LP47110-9\46203-6\;Reagin Ab [Titer] in CSF;LOINC:46203-6;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in CSF\Reagin Ab [Titer] in CSF
+\ACT\Labs\LP31755-9\LP39544-9\LP47110-9\5289-4\;Reagin Ab [Units/Volume] in CSF by VDRL;LOINC:5289-4;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in CSF\Reagin Ab [Units/Volume] in CSF by VDRL
+\ACT\Labs\LP31755-9\LP39544-9\LP47110-9\5290-2\;Reagin Ab [Presence] in CSF by VDRL;LOINC:5290-2;\ACT Lab Test Results\Microbiology\Reagin Ab\Reagin Ab in CSF\Reagin Ab [Presence] in CSF by VDRL
+\ACT\Labs\LP31756-7\;Hematology/Coagulation;LOINC:LP31756-7;\ACT Lab Test Results\Hematology/Coagulation
+\ACT\Labs\LP31756-7\LP30786-5\;Hematology;LOINC:LP30786-5;\ACT Lab Test Results\Hematology/Coagulation\Hematology
+\ACT\Labs\LP31756-7\LP30786-5\LP100945-7\;Hemoglobin A1c;LOINC:LP100945-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Hemoglobin A1c
+\ACT\Labs\LP31756-7\LP30786-5\LP100945-7\17855-8\;Hemoglobin A1c in Blood by calculation;LOINC:17855-8;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Hemoglobin A1c\Hemoglobin A1c in Blood by calculation
+\ACT\Labs\LP31756-7\LP30786-5\LP100945-7\17856-6\;Hemoglobin A1c in Blood by HPLC;LOINC:17856-6;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Hemoglobin A1c\Hemoglobin A1c in Blood by HPLC
+\ACT\Labs\LP31756-7\LP30786-5\LP100945-7\4548-4\;Hemoglobin A1c in Blood;LOINC:4548-4;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Hemoglobin A1c\Hemoglobin A1c in Blood
+\ACT\Labs\LP31756-7\LP30786-5\LP100945-7\59261-8\;Hemoglobin A1c in Blood by IFCC protocol;LOINC:59261-8;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Hemoglobin A1c\Hemoglobin A1c in Blood by IFCC protocol
+\ACT\Labs\LP31756-7\LP30786-5\LP100945-7\62388-4\;Hemoglobin A1c in Blood by JDS/JSCC protocol;LOINC:62388-4;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Hemoglobin A1c\Hemoglobin A1c in Blood by JDS/JSCC protocol
+\ACT\Labs\LP31756-7\LP30786-5\LP43135-0\;Hemoglobin;LOINC:LP43135-0;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Hemoglobin
+\ACT\Labs\LP31756-7\LP30786-5\LP43135-0\718-7\;Hemoglobin;LOINC:718-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Hemoglobin\Hemoglobin
+\ACT\Labs\LP31756-7\LP30786-5\LP45040-0\;Hematocrit;LOINC:LP45040-0;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Hematocrit
+\ACT\Labs\LP31756-7\LP30786-5\LP45040-0\20570-8\;Hematocrit;LOINC:20570-8;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Hematocrit\Hematocrit
+\ACT\Labs\LP31756-7\LP30786-5\LP45040-0\4544-3\;Hematocrit by Automated count;LOINC:4544-3;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Hematocrit\Hematocrit by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP45671-2\;ESR;LOINC:LP45671-2;\ACT Lab Test Results\Hematology/Coagulation\Hematology\ESR
+\ACT\Labs\LP31756-7\LP30786-5\LP45671-2\18184-2\;ESR by 2H Westergren method;LOINC:18184-2;\ACT Lab Test Results\Hematology/Coagulation\Hematology\ESR\ESR by 2H Westergren method
+\ACT\Labs\LP31756-7\LP30786-5\LP45671-2\30341-2\;ESR;LOINC:30341-2;\ACT Lab Test Results\Hematology/Coagulation\Hematology\ESR\ESR
+\ACT\Labs\LP31756-7\LP30786-5\LP45671-2\43402-7\;ESR by 15 minute reading;LOINC:43402-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\ESR\ESR by 15 minute reading
+\ACT\Labs\LP31756-7\LP30786-5\LP45671-2\4537-7\;ESR by Westergren method;LOINC:4537-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\ESR\ESR by Westergren method
+\ACT\Labs\LP31756-7\LP30786-5\LP45671-2\4538-5\;ESR by Wintrobe method;LOINC:4538-5;\ACT Lab Test Results\Hematology/Coagulation\Hematology\ESR\ESR by Wintrobe method
+\ACT\Labs\LP31756-7\LP30786-5\LP46692-7\;RDW;LOINC:LP46692-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\RDW
+\ACT\Labs\LP31756-7\LP30786-5\LP46692-7\21000-5\;RDW by Automated count;LOINC:21000-5;\ACT Lab Test Results\Hematology/Coagulation\Hematology\RDW\RDW by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP46692-7\30384-2\;RDW;LOINC:30384-2;\ACT Lab Test Results\Hematology/Coagulation\Hematology\RDW\RDW
+\ACT\Labs\LP31756-7\LP30786-5\LP47720-5\;Neutrophils;LOINC:LP47720-5;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Neutrophils
+\ACT\Labs\LP31756-7\LP30786-5\LP47720-5\23761-0\;Neutrophils/100 leukocytes by Manual count;LOINC:23761-0;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Neutrophils\Neutrophils/100 leukocytes by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP47720-5\26499-4\;Neutrophils;LOINC:26499-4;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Neutrophils\Neutrophils
+\ACT\Labs\LP31756-7\LP30786-5\LP47720-5\26511-6\;Neutrophils/100 leukocytes;LOINC:26511-6;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Neutrophils\Neutrophils/100 leukocytes
+\ACT\Labs\LP31756-7\LP30786-5\LP47720-5\751-8\;Neutrophils by Automated count;LOINC:751-8;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Neutrophils\Neutrophils by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP47720-5\753-4\;Neutrophils by Manual count;LOINC:753-4;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Neutrophils\Neutrophils by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP47720-5\770-8\;Neutrophils/100 leukocytes by Automated count;LOINC:770-8;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Neutrophils\Neutrophils/100 leukocytes by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP48336-9\;Basophils;LOINC:LP48336-9;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Basophils
+\ACT\Labs\LP31756-7\LP30786-5\LP48336-9\26444-0\;Basophils;LOINC:26444-0;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Basophils\Basophils
+\ACT\Labs\LP31756-7\LP30786-5\LP48336-9\30180-4\;Basophils/100 leukocytes;LOINC:30180-4;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Basophils\Basophils/100 leukocytes
+\ACT\Labs\LP31756-7\LP30786-5\LP48336-9\704-7\;Basophils by Automated count;LOINC:704-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Basophils\Basophils by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP48336-9\705-4\;Basophils by Manual count;LOINC:705-4;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Basophils\Basophils by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP48336-9\706-2\;Basophils/100 leukocytes by Automated count;LOINC:706-2;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Basophils\Basophils/100 leukocytes by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP48336-9\707-0\;Basophils/100 leukocytes by Manual count;LOINC:707-0;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Basophils\Basophils/100 leukocytes by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP48337-7\;Eosinophils;LOINC:LP48337-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Eosinophils
+\ACT\Labs\LP31756-7\LP30786-5\LP48337-7\26449-9\;Eosinophils;LOINC:26449-9;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Eosinophils\Eosinophils
+\ACT\Labs\LP31756-7\LP30786-5\LP48337-7\26450-7\;Eosinophils/100 leukocytes;LOINC:26450-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Eosinophils\Eosinophils/100 leukocytes
+\ACT\Labs\LP31756-7\LP30786-5\LP48337-7\711-2\;Eosinophils by Automated count;LOINC:711-2;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Eosinophils\Eosinophils by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP48337-7\712-0\;Eosinophils by Manual count;LOINC:712-0;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Eosinophils\Eosinophils by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP48337-7\713-8\;Eosinophils/100 leukocytes by Automated count;LOINC:713-8;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Eosinophils\Eosinophils/100 leukocytes by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP48337-7\714-6\;Eosinophils/100 leukocytes by Manual count;LOINC:714-6;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Eosinophils\Eosinophils/100 leukocytes by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP48347-6\;Lymphocytes;LOINC:LP48347-6;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Lymphocytes
+\ACT\Labs\LP31756-7\LP30786-5\LP48347-6\26474-7\;Lymphocytes;LOINC:26474-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Lymphocytes\Lymphocytes
+\ACT\Labs\LP31756-7\LP30786-5\LP48347-6\26478-8\;Lymphocytes/100 leukocytes;LOINC:26478-8;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Lymphocytes\Lymphocytes/100 leukocytes
+\ACT\Labs\LP31756-7\LP30786-5\LP48347-6\731-0\;Lymphocytes by Automated count;LOINC:731-0;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Lymphocytes\Lymphocytes by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP48347-6\732-8\;Lymphocytes by Manual count;LOINC:732-8;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Lymphocytes\Lymphocytes by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP48347-6\736-9\;Lymphocytes/100 leukocytes by Automated count;LOINC:736-9;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Lymphocytes\Lymphocytes/100 leukocytes by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP48347-6\737-7\;Lymphocytes/100 leukocytes by Manual count;LOINC:737-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Lymphocytes\Lymphocytes/100 leukocytes by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP48349-2\;Monocytes;LOINC:LP48349-2;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Monocytes
+\ACT\Labs\LP31756-7\LP30786-5\LP48349-2\26484-6\;Monocytes;LOINC:26484-6;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Monocytes\Monocytes
+\ACT\Labs\LP31756-7\LP30786-5\LP48349-2\26485-3\;Monocytes/100 leukocytes;LOINC:26485-3;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Monocytes\Monocytes/100 leukocytes
+\ACT\Labs\LP31756-7\LP30786-5\LP48349-2\5905-5\;Monocytes/100 leukocytes by Automated count;LOINC:5905-5;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Monocytes\Monocytes/100 leukocytes by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP48349-2\742-7\;Monocytes by Automated count;LOINC:742-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Monocytes\Monocytes by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP48349-2\743-5\;Monocytes by Manual count;LOINC:743-5;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Monocytes\Monocytes by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP48349-2\744-3\;Monocytes/100 leukocytes by Manual count;LOINC:744-3;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Monocytes\Monocytes/100 leukocytes by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP48918-4\;MCH;LOINC:LP48918-4;\ACT Lab Test Results\Hematology/Coagulation\Hematology\MCH
+\ACT\Labs\LP31756-7\LP30786-5\LP48918-4\28539-5\;MCH;LOINC:28539-5;\ACT Lab Test Results\Hematology/Coagulation\Hematology\MCH\MCH
+\ACT\Labs\LP31756-7\LP30786-5\LP48918-4\785-6\;MCH by Automated count;LOINC:785-6;\ACT Lab Test Results\Hematology/Coagulation\Hematology\MCH\MCH by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP48919-2\;MCHC;LOINC:LP48919-2;\ACT Lab Test Results\Hematology/Coagulation\Hematology\MCHC
+\ACT\Labs\LP31756-7\LP30786-5\LP48919-2\28540-3\;MCHC;LOINC:28540-3;\ACT Lab Test Results\Hematology/Coagulation\Hematology\MCHC\MCHC
+\ACT\Labs\LP31756-7\LP30786-5\LP48919-2\786-4\;MCHC by Automated count;LOINC:786-4;\ACT Lab Test Results\Hematology/Coagulation\Hematology\MCHC\MCHC by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP7536-8\;RBC Count;LOINC:LP7536-8;\ACT Lab Test Results\Hematology/Coagulation\Hematology\RBC Count
+\ACT\Labs\LP31756-7\LP30786-5\LP7536-8\789-8\;RBC by Automated count;LOINC:789-8;\ACT Lab Test Results\Hematology/Coagulation\Hematology\RBC Count\RBC by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP7536-8\790-6\;RBC by Manual count;LOINC:790-6;\ACT Lab Test Results\Hematology/Coagulation\Hematology\RBC Count\RBC by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP7631-7\;Platelet Count;LOINC:LP7631-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Platelet Count
+\ACT\Labs\LP31756-7\LP30786-5\LP7631-7\777-3\;Platelet by Automated count;LOINC:777-3;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Platelet Count\Platelet by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP7631-7\778-1\;Platelet by Manual count;LOINC:778-1;\ACT Lab Test Results\Hematology/Coagulation\Hematology\Platelet Count\Platelet by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP7720-8\;WBC Count;LOINC:LP7720-8;\ACT Lab Test Results\Hematology/Coagulation\Hematology\WBC Count
+\ACT\Labs\LP31756-7\LP30786-5\LP7720-8\6690-2\;WBC by Automated count;LOINC:6690-2;\ACT Lab Test Results\Hematology/Coagulation\Hematology\WBC Count\WBC by Automated count
+\ACT\Labs\LP31756-7\LP30786-5\LP7720-8\804-5\;WBC by Manual count;LOINC:804-5;\ACT Lab Test Results\Hematology/Coagulation\Hematology\WBC Count\WBC by Manual count
+\ACT\Labs\LP31756-7\LP30786-5\LP99254-2\;MCV;LOINC:LP99254-2;\ACT Lab Test Results\Hematology/Coagulation\Hematology\MCV
+\ACT\Labs\LP31756-7\LP30786-5\LP99254-2\30428-7\;MCV;LOINC:30428-7;\ACT Lab Test Results\Hematology/Coagulation\Hematology\MCV\MCV
+\ACT\Labs\LP31756-7\LP30786-5\LP99254-2\787-2\;MCV by Automated count;LOINC:787-2;\ACT Lab Test Results\Hematology/Coagulation\Hematology\MCV\MCV by Automated count
+\ACT\Labs\LP32744-2\;Urinalysis;LOINC:LP32744-2;\ACT Lab Test Results\Urinalysis
+\ACT\Labs\LP32744-2\20454-5\;Protein in Urine by Test strip;LOINC:20454-5;\ACT Lab Test Results\Urinalysis\Protein in Urine by Test strip
+\ACT\Labs\LP32744-2\21482-5\;Protein [Mass/Volume] in 24 hour Urine;LOINC:21482-5;\ACT Lab Test Results\Urinalysis\Protein [Mass/Volume] in 24 hour Urine
+\ACT\Labs\LP32744-2\2888-6\;Protein in Urine;LOINC:2888-6;\ACT Lab Test Results\Urinalysis\Protein in Urine
+\ACT\Labs\LP32744-2\2889-4\;Protein [Mass/Time] in 24 hour Urine;LOINC:2889-4;\ACT Lab Test Results\Urinalysis\Protein [Mass/Time] in 24 hour Urine
+\ACT\Labs\LP40271-6\;Chemistry;LOINC:LP40271-6;\ACT Lab Test Results\Chemistry
+\ACT\Labs\LP40271-6\LP15705-4\;Lipids;LOINC:LP15705-4;\ACT Lab Test Results\Chemistry\Lipids
+\ACT\Labs\LP40271-6\LP15705-4\LP42275-5\;Triglyceride;LOINC:LP42275-5;\ACT Lab Test Results\Chemistry\Lipids\Triglyceride
+\ACT\Labs\LP40271-6\LP15705-4\LP42275-5\12951-0\;Triglyceride in Serum or Plasma by calculation;LOINC:12951-0;\ACT Lab Test Results\Chemistry\Lipids\Triglyceride\Triglyceride in Serum or Plasma by calculation
+\ACT\Labs\LP40271-6\LP15705-4\LP42275-5\2571-8\;Triglyceride in Serum or Plasma;LOINC:2571-8;\ACT Lab Test Results\Chemistry\Lipids\Triglyceride\Triglyceride in Serum or Plasma
+\ACT\Labs\LP40271-6\LP15705-4\LP43571-6\;Cholesterol Total;LOINC:LP43571-6;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol Total
+\ACT\Labs\LP40271-6\LP15705-4\LP43571-6\2093-3\;Cholesterol total in Serum or Plasma;LOINC:2093-3;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol Total\Cholesterol total in Serum or Plasma
+\ACT\Labs\LP40271-6\LP15705-4\LP43571-6\48620-9\;Cholesterol total in Serum or Plasma ultracentrifugate;LOINC:48620-9;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol Total\Cholesterol total in Serum or Plasma ultracentrifugate
+\ACT\Labs\LP40271-6\LP15705-4\LP44836-2\;Cholesterol/HDL Ratio;LOINC:LP44836-2;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol/HDL Ratio
+\ACT\Labs\LP40271-6\LP15705-4\LP44836-2\9830-1\;Cholesterol/HDL Ratio in Serum or Plasma;LOINC:9830-1;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol/HDL Ratio\Cholesterol/HDL Ratio in Serum or Plasma
+\ACT\Labs\LP40271-6\LP15705-4\LP52754-6\;Cholesterol non HDL;LOINC:LP52754-6;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol non HDL
+\ACT\Labs\LP40271-6\LP15705-4\LP52754-6\43396-1\;Cholesterol non HDL in Serum or Plasma;LOINC:43396-1;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol non HDL\Cholesterol non HDL in Serum or Plasma
+\ACT\Labs\LP40271-6\LP15705-4\LP99407-6\;Cholesterol in LDL;LOINC:LP99407-6;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol in LDL
+\ACT\Labs\LP40271-6\LP15705-4\LP99407-6\13457-7\;Cholesterol in LDL in Serum or Plasma by calculation;LOINC:13457-7;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol in LDL\Cholesterol in LDL in Serum or Plasma by calculation
+\ACT\Labs\LP40271-6\LP15705-4\LP99407-6\18261-8\;Cholesterol in LDL in Serum or Plasma ultracentrifugate;LOINC:18261-8;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol in LDL\Cholesterol in LDL in Serum or Plasma ultracentrifugate
+\ACT\Labs\LP40271-6\LP15705-4\LP99407-6\2089-1\;Cholesterol in LDL in Serum or Plasma;LOINC:2089-1;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol in LDL\Cholesterol in LDL in Serum or Plasma
+\ACT\Labs\LP40271-6\LP15705-4\LP99407-6\49132-4\;Cholesterol in LDL in Serum or Plasma by Electrophoresis;LOINC:49132-4;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol in LDL\Cholesterol in LDL in Serum or Plasma by Electrophoresis
+\ACT\Labs\LP40271-6\LP15705-4\LP99408-4\;Cholesterol in HDL;LOINC:LP99408-4;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol in HDL
+\ACT\Labs\LP40271-6\LP15705-4\LP99408-4\18263-4\;Cholesterol in HDL in Serum or Plasma ultracentrifugate;LOINC:18263-4;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol in HDL\Cholesterol in HDL in Serum or Plasma ultracentrifugate
+\ACT\Labs\LP40271-6\LP15705-4\LP99408-4\2085-9\;Cholesterol in HDL in Serum or Plasma;LOINC:2085-9;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol in HDL\Cholesterol in HDL in Serum or Plasma
+\ACT\Labs\LP40271-6\LP15705-4\LP99408-4\49130-8\;Cholesterol in HDL in Serum or Plasma by Electrophoresis;LOINC:49130-8;\ACT Lab Test Results\Chemistry\Lipids\Cholesterol in HDL\Cholesterol in HDL in Serum or Plasma by Electrophoresis
+\ACT\Labs\LP40271-6\LP15838-3\;Protein;LOINC:LP15838-3;\ACT Lab Test Results\Chemistry\Protein
+\ACT\Labs\LP40271-6\LP15838-3\LP41279-8\;C reactive protein;LOINC:LP41279-8;\ACT Lab Test Results\Chemistry\Protein\C reactive protein
+\ACT\Labs\LP40271-6\LP15838-3\LP41279-8\1988-5\;C reactive protein in Serum or Plasma;LOINC:1988-5;\ACT Lab Test Results\Chemistry\Protein\C reactive protein\C reactive protein in Serum or Plasma
+\ACT\Labs\LP40271-6\LP15838-3\LP41279-8\30522-7\;C reactive protein in Serum or Plasma by High sensitivity method;LOINC:30522-7;\ACT Lab Test Results\Chemistry\Protein\C reactive protein\C reactive protein in Serum or Plasma by High sensitivity method
+\ACT\Labs\LP40271-6\LP15838-3\LP41279-8\71426-1\;C reactive protein in Blood by High sensitivity method;LOINC:71426-1;\ACT Lab Test Results\Chemistry\Protein\C reactive protein\C reactive protein in Blood by High sensitivity method
+\ACT\Labs\LP40271-6\LP15838-3\LP43038-6\;Albumin;LOINC:LP43038-6;\ACT Lab Test Results\Chemistry\Protein\Albumin
+\ACT\Labs\LP40271-6\LP15838-3\LP43038-6\1751-7\;Albumin in Serum or Plasma;LOINC:1751-7;\ACT Lab Test Results\Chemistry\Protein\Albumin\Albumin in Serum or Plasma
+\ACT\Labs\LP40271-6\LP15838-3\LP43038-6\2862-1\;Albumin in Serum or Plasma by Electrophoresis;LOINC:2862-1;\ACT Lab Test Results\Chemistry\Protein\Albumin\Albumin in Serum or Plasma by Electrophoresis
+\ACT\Labs\LP40271-6\LP15838-3\LP69961-8\;Protein;LOINC:LP69961-8;\ACT Lab Test Results\Chemistry\Protein\Protein
+\ACT\Labs\LP40271-6\LP15838-3\LP69961-8\2885-2\;Protein in Serum or Plasma;LOINC:2885-2;\ACT Lab Test Results\Chemistry\Protein\Protein\Protein in Serum or Plasma
+\ACT\Labs\LP40271-6\LP19403-2\;Electrolytes;LOINC:LP19403-2;\ACT Lab Test Results\Chemistry\Electrolytes
+\ACT\Labs\LP40271-6\LP19403-2\LP41281-4\;Creatinine;LOINC:LP41281-4;\ACT Lab Test Results\Chemistry\Electrolytes\Creatinine
+\ACT\Labs\LP40271-6\LP19403-2\LP41281-4\2160-0\;Creatinine in Serum or Plasma;LOINC:2160-0;\ACT Lab Test Results\Chemistry\Electrolytes\Creatinine\Creatinine in Serum or Plasma
+\ACT\Labs\LP40271-6\LP19403-2\LP41281-4\38483-4\;Creatinine in Blood;LOINC:38483-4;\ACT Lab Test Results\Chemistry\Electrolytes\Creatinine\Creatinine in Blood
+\ACT\Labs\LP40271-6\LP19403-2\LP41307-7\;Urea nitrogen;LOINC:LP41307-7;\ACT Lab Test Results\Chemistry\Electrolytes\Urea nitrogen
+\ACT\Labs\LP40271-6\LP19403-2\LP41307-7\3094-0\;Urea nitrogen in Serum or Plasma;LOINC:3094-0;\ACT Lab Test Results\Chemistry\Electrolytes\Urea nitrogen\Urea nitrogen in Serum or Plasma
+\ACT\Labs\LP40271-6\LP19403-2\LP41307-7\6299-2\;Urea nitrogen in Blood;LOINC:6299-2;\ACT Lab Test Results\Chemistry\Electrolytes\Urea nitrogen\Urea nitrogen in Blood
+\ACT\Labs\LP40271-6\LP19403-2\LP42107-0\;Glucose;LOINC:LP42107-0;\ACT Lab Test Results\Chemistry\Electrolytes\Glucose
+\ACT\Labs\LP40271-6\LP19403-2\LP42107-0\2339-0\;Glucose in Blood;LOINC:2339-0;\ACT Lab Test Results\Chemistry\Electrolytes\Glucose\Glucose in Blood
+\ACT\Labs\LP40271-6\LP19403-2\LP42107-0\2345-7\;Glucose in Serum or Plasma;LOINC:2345-7;\ACT Lab Test Results\Chemistry\Electrolytes\Glucose\Glucose in Serum or Plasma
+\ACT\Labs\LP40271-6\LP19403-2\LP42189-8\;Potassium;LOINC:LP42189-8;\ACT Lab Test Results\Chemistry\Electrolytes\Potassium
+\ACT\Labs\LP40271-6\LP19403-2\LP42189-8\2823-3\;Potassium in Serum or Plasma;LOINC:2823-3;\ACT Lab Test Results\Chemistry\Electrolytes\Potassium\Potassium in Serum or Plasma
+\ACT\Labs\LP40271-6\LP19403-2\LP42189-8\6298-4\;Potassium in Blood;LOINC:6298-4;\ACT Lab Test Results\Chemistry\Electrolytes\Potassium\Potassium in Blood
+\ACT\Labs\LP40271-6\LP19403-2\LP42656-6 \;Calcium;LOINC:LP42656-6 ;\ACT Lab Test Results\Chemistry\Electrolytes\Calcium
+\ACT\Labs\LP40271-6\LP19403-2\LP42656-6 \17861-6\;Calcium in Serum or Plasma;LOINC:17861-6;\ACT Lab Test Results\Chemistry\Electrolytes\Calcium\Calcium in Serum or Plasma
+\ACT\Labs\LP40271-6\LP19403-2\LP42656-6 \49765-1\;Calcium in Blood;LOINC:49765-1;\ACT Lab Test Results\Chemistry\Electrolytes\Calcium\Calcium in Blood
+\ACT\Labs\LP40271-6\LP19403-2\LP43710-0\;Phosphate;LOINC:LP43710-0;\ACT Lab Test Results\Chemistry\Electrolytes\Phosphate
+\ACT\Labs\LP40271-6\LP19403-2\LP43710-0\2774-8\;Phosphate in Blood;LOINC:2774-8;\ACT Lab Test Results\Chemistry\Electrolytes\Phosphate\Phosphate in Blood
+\ACT\Labs\LP40271-6\LP19403-2\LP43710-0\2777-1\;Phosphate in Serum or Plasma;LOINC:2777-1;\ACT Lab Test Results\Chemistry\Electrolytes\Phosphate\Phosphate in Serum or Plasma
+\ACT\Labs\LP40271-6\LP19403-2\LP43752-2\;Urate;LOINC:LP43752-2;\ACT Lab Test Results\Chemistry\Electrolytes\Urate
+\ACT\Labs\LP40271-6\LP19403-2\LP43752-2\3084-1\;Urate in Serum or Plasma;LOINC:3084-1;\ACT Lab Test Results\Chemistry\Electrolytes\Urate\Urate in Serum or Plasma
+\ACT\Labs\LP40271-6\LP19403-2\LP46218-1\;Bicarbonate;LOINC:LP46218-1;\ACT Lab Test Results\Chemistry\Electrolytes\Bicarbonate
+\ACT\Labs\LP40271-6\LP19403-2\LP46218-1\1959-6\;Bicarbonate in Blood;LOINC:1959-6;\ACT Lab Test Results\Chemistry\Electrolytes\Bicarbonate\Bicarbonate in Blood
+\ACT\Labs\LP40271-6\LP19403-2\LP46218-1\1962-0\;Bicarbonate in Plasma;LOINC:1962-0;\ACT Lab Test Results\Chemistry\Electrolytes\Bicarbonate\Bicarbonate in Plasma
+\ACT\Labs\LP40271-6\LP19403-2\LP46218-1\1963-8\;Bicarbonate in Serum;LOINC:1963-8;\ACT Lab Test Results\Chemistry\Electrolytes\Bicarbonate\Bicarbonate in Serum
+\ACT\Labs\LP40271-6\LP19403-2\LP46218-1\2028-9\;Carbon dioxide in Serum or Plasma;LOINC:2028-9;\ACT Lab Test Results\Chemistry\Electrolytes\Bicarbonate\Carbon dioxide in Serum or Plasma
+\ACT\Labs\LP40271-6\LP19403-2\LP46433-6\;Chloride;LOINC:LP46433-6;\ACT Lab Test Results\Chemistry\Electrolytes\Chloride
+\ACT\Labs\LP40271-6\LP19403-2\LP46433-6\2069-3\;Chloride in Blood;LOINC:2069-3;\ACT Lab Test Results\Chemistry\Electrolytes\Chloride\Chloride in Blood
+\ACT\Labs\LP40271-6\LP19403-2\LP46433-6\2075-0\;Chloride in Serum or Plasma;LOINC:2075-0;\ACT Lab Test Results\Chemistry\Electrolytes\Chloride\Chloride in Serum or Plasma
+\ACT\Labs\LP40271-6\LP19403-2\LP48861-6\;Sodium;LOINC:LP48861-6;\ACT Lab Test Results\Chemistry\Electrolytes\Sodium
+\ACT\Labs\LP40271-6\LP19403-2\LP48861-6\2947-0\;Sodium in Blood;LOINC:2947-0;\ACT Lab Test Results\Chemistry\Electrolytes\Sodium\Sodium in Blood
+\ACT\Labs\LP40271-6\LP19403-2\LP48861-6\2951-2\;Sodium in Serum or Plasma;LOINC:2951-2;\ACT Lab Test Results\Chemistry\Electrolytes\Sodium\Sodium in Serum or Plasma
+\ACT\Labs\LP40271-6\LP31392-1\;Enzymes;LOINC:LP31392-1;\ACT Lab Test Results\Chemistry\Enzymes
+\ACT\Labs\LP40271-6\LP31392-1\LP43656-5\;LDH;LOINC:LP43656-5;\ACT Lab Test Results\Chemistry\Enzymes\LDH
+\ACT\Labs\LP40271-6\LP31392-1\LP43656-5\14804-9\;LDH in Serum or Plasma by Lactate to pyruvate reaction;LOINC:14804-9;\ACT Lab Test Results\Chemistry\Enzymes\LDH\LDH in Serum or Plasma by Lactate to pyruvate reaction
+\ACT\Labs\LP40271-6\LP31392-1\LP43656-5\14805-6\;LDH in Serum or Plasma by Pyruvate to lactate reaction;LOINC:14805-6;\ACT Lab Test Results\Chemistry\Enzymes\LDH\LDH in Serum or Plasma by Pyruvate to lactate reaction
+\ACT\Labs\LP40271-6\LP31392-1\LP43656-5\2532-0\;LDH in Serum or Plasma;LOINC:2532-0;\ACT Lab Test Results\Chemistry\Enzymes\LDH\LDH in Serum or Plasma
+\ACT\Labs\LP40271-6\LP31392-1\LP44699-4\;ALT;LOINC:LP44699-4;\ACT Lab Test Results\Chemistry\Enzymes\ALT
+\ACT\Labs\LP40271-6\LP31392-1\LP44699-4\1742-6\;ALT in Serum or Plasma;LOINC:1742-6;\ACT Lab Test Results\Chemistry\Enzymes\ALT\ALT in Serum or Plasma
+\ACT\Labs\LP40271-6\LP31392-1\LP44699-4\1743-4\;ALT in Serum or Plasma With P-5-P;LOINC:1743-4;\ACT Lab Test Results\Chemistry\Enzymes\ALT\ALT in Serum or Plasma With P-5-P
+\ACT\Labs\LP40271-6\LP31392-1\LP44699-4\1744-2\;ALT in Serum or Plasma Without P-5-P;LOINC:1744-2;\ACT Lab Test Results\Chemistry\Enzymes\ALT\ALT in Serum or Plasma Without P-5-P
+\ACT\Labs\LP40271-6\LP31392-1\LP45609-2\;ALP;LOINC:LP45609-2;\ACT Lab Test Results\Chemistry\Enzymes\ALP
+\ACT\Labs\LP40271-6\LP31392-1\LP45609-2\1783-0\;ALP in Blood;LOINC:1783-0;\ACT Lab Test Results\Chemistry\Enzymes\ALP\ALP in Blood
+\ACT\Labs\LP40271-6\LP31392-1\LP45609-2\6768-6\;ALP in Serum or Plasma;LOINC:6768-6;\ACT Lab Test Results\Chemistry\Enzymes\ALP\ALP in Serum or Plasma
+\ACT\Labs\LP40271-6\LP31392-1\LP45656-3\;AST;LOINC:LP45656-3;\ACT Lab Test Results\Chemistry\Enzymes\AST
+\ACT\Labs\LP40271-6\LP31392-1\LP45656-3\1920-8\;AST in Serum or Plasma;LOINC:1920-8;\ACT Lab Test Results\Chemistry\Enzymes\AST\AST in Serum or Plasma
+\ACT\Labs\LP40271-6\LP31392-1\LP45656-3\30239-8\;AST in Serum or Plasma With P-5-P;LOINC:30239-8;\ACT Lab Test Results\Chemistry\Enzymes\AST\AST in Serum or Plasma With P-5-P
+\ACT\Labs\LP40271-6\LP31392-1\LP47479-8\;GGT;LOINC:LP47479-8;\ACT Lab Test Results\Chemistry\Enzymes\GGT
+\ACT\Labs\LP40271-6\LP31392-1\LP47479-8\2324-2\;GGT in Serum or Plasma;LOINC:2324-2;\ACT Lab Test Results\Chemistry\Enzymes\GGT\GGT in Serum or Plasma
+\ACT\Labs\LP40271-6\LP31397-0\;Liver function;LOINC:LP31397-0;\ACT Lab Test Results\Chemistry\Liver function
+\ACT\Labs\LP40271-6\LP31397-0\LP43561-7\;Bilirubin;LOINC:LP43561-7;\ACT Lab Test Results\Chemistry\Liver function\Bilirubin
+\ACT\Labs\LP40271-6\LP31397-0\LP43561-7\15152-2\;Bilirubin conjugated in Serum or Plasma;LOINC:15152-2;\ACT Lab Test Results\Chemistry\Liver function\Bilirubin\Bilirubin conjugated in Serum or Plasma
+\ACT\Labs\LP40271-6\LP31397-0\LP43561-7\1975-2\;Bilirubin total in Serum or Plasma;LOINC:1975-2;\ACT Lab Test Results\Chemistry\Liver function\Bilirubin\Bilirubin total in Serum or Plasma
+\ACT\Labs\LP40271-6\LP31397-0\LP43561-7\42719-5\;Bilirubin total;LOINC:42719-5;\ACT Lab Test Results\Chemistry\Liver function\Bilirubin\Bilirubin total
+\ACT\Labs\LP40271-6\LP31403-6\;Neuromuscular;LOINC:LP31403-6;\ACT Lab Test Results\Chemistry\Neuromuscular
+\ACT\Labs\LP40271-6\LP31403-6\LP14685-9\;Myelin basic protein;LOINC:LP14685-9;\ACT Lab Test Results\Chemistry\Neuromuscular\Myelin basic protein
+\ACT\Labs\LP40271-6\LP31403-6\LP14685-9\2638-5\;Myelin basic protein in CSF;LOINC:2638-5;\ACT Lab Test Results\Chemistry\Neuromuscular\Myelin basic protein\Myelin basic protein in CSF
+\ACT\Labs\LP40271-6\LP31403-6\LP14685-9\56661-2\;Myelin basic protein in Serum;LOINC:56661-2;\ACT Lab Test Results\Chemistry\Neuromuscular\Myelin basic protein\Myelin basic protein in Serum
+\ACT\Labs\Version\;  ACT_2.0.1_UMLS_2018AA;;\ACT Lab Test Results\  ACT_2.0.1_UMLS_2018AA
