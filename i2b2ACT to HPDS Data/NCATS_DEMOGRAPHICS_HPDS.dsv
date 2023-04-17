@@ -1,0 +1,25 @@
+C_FULLNAME;C_NAME;C_BASECODE;HPDS_PATH
+\ACT\Demographics\;Demographics;;\ACT Demographics
+\ACT\Demographics\Age\;Age; ;\ACT Demographics\Age
+\ACT\Demographics\Age\Not recorded\;Not recorded;DEM|AGE:-1;\ACT Demographics\Age\Not recorded
+\ACT\Demographics\Hispanic\;Hispanic; ;\ACT Demographics\Hispanic
+\ACT\Demographics\Hispanic\No Information\;No Information;DEM|HISP:NI;\ACT Demographics\Hispanic\No Information
+\ACT\Demographics\Hispanic\No\;No;DEM|HISP:N;\ACT Demographics\Hispanic\No
+\ACT\Demographics\Hispanic\Yes\;Yes;DEM|HISP:Y;\ACT Demographics\Hispanic\Yes
+\ACT\Demographics\Race\;Race; ;\ACT Demographics\Race
+\ACT\Demographics\Race\American Indian or Alaska Native\;American Indian or Alaska Native;DEM|RACE:NA;\ACT Demographics\Race\American Indian or Alaska Native
+\ACT\Demographics\Race\Asian\;Asian;DEM|RACE:AS;\ACT Demographics\Race\Asian
+\ACT\Demographics\Race\Black or African American\;Black or African American;DEM|RACE:B;\ACT Demographics\Race\Black or African American
+\ACT\Demographics\Race\Multiple race\;Multiple race;DEM|RACE:M;\ACT Demographics\Race\Multiple race
+\ACT\Demographics\Race\Native Hawaiian or Other Pacific Islander\;Native Hawaiian or Other Pacific Islander;DEM|RACE:H;\ACT Demographics\Race\Native Hawaiian or Other Pacific Islander
+\ACT\Demographics\Race\No Information\;No Information;DEM|RACE:NI;\ACT Demographics\Race\No Information
+\ACT\Demographics\Race\White\;White;DEM|RACE:W;\ACT Demographics\Race\White
+\ACT\Demographics\Sex\;Sex; ;\ACT Demographics\Sex
+\ACT\Demographics\Sex\Ambiguous\;Ambiguous;DEM|SEX:A;\ACT Demographics\Sex\Ambiguous
+\ACT\Demographics\Sex\Female\;Female;DEM|SEX:F;\ACT Demographics\Sex\Female
+\ACT\Demographics\Sex\Male\;Male;DEM|SEX:M;\ACT Demographics\Sex\Male
+\ACT\Demographics\Sex\No Information\;No Information;DEM|SEX:NI;\ACT Demographics\Sex\No Information
+\ACT\Demographics\Sex\Other\;Other;DEM|SEX:O;\ACT Demographics\Sex\Other
+\ACT\Demographics\Version\;ACT_2.0.1_20181212;;\ACT Demographics\ACT_2.0.1_20181212
+\ACT\Demographics\Vital Status\;Vital Status;;\ACT Demographics\Vital Status
+\ACT\Demographics\Vital Status\Known Deceased\;Known Deceased;DEM|VITAL STATUS:D;\ACT Demographics\Vital Status\Known Deceased
