@@ -1,0 +1,6 @@
+"C_FULLNAME";"C_NAME";"C_BASECODE";"HPDS_PATH"
+"\Bio Specimens\NucleicAcid\DNA\";"Extracted DNA Available";"BIOSPECIMEN:DNA Available";"\Bio Specimens\NucleicAcid\DNA\True"
+"\Bio Specimens\HumanTissue\";"Tissue Available";"BIOSPECIMEN:HT.TS.000 Available";"\Bio Specimens\HumanTissue\True"
+"\Bio Specimens\HumanFluid\Brain\Cerebro-Spinal Fluid (CSF)\SPECIMENS:HF.BRN.004\";"CSF Available";"BIOSPECIMEN:HF.CSF.000 Available";"\Bio Specimens\HumanFluid\Brain\Cerebro-Spinal Fluid (CSF)\SPECIMENS:HF.BRN.004\True"
+"\Bio Specimens\HumanFluid\Blood (Whole)\SPECIMENS:HF.BLD.000 Quantity\";"Wholeblood Quantity";"BIOSPECIMEN:HF.BLD.000 Quantity";"\Bio Specimens\HumanFluid\Blood (Whole)\SPECIMENS:HF.BLD.000 Quantity\"
+"\Bio Specimens\HumanFluid\Plasma\SPECIMENS:HF.PLS.000 Quantity\";"Plasma Quantity";"BIOSPECIMEN:HF.PLS.000 Quantity";"\Bio Specimens\HumanFluid\Plasma\SPECIMENS:HF.PLS.000 Quantity\"
