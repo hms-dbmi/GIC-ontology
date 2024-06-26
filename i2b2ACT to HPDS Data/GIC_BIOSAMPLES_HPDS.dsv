@@ -4,3 +4,8 @@
 "\Bio Specimens\HumanFluid\Brain\Cerebro-Spinal Fluid (CSF)\SPECIMENS:HF.BRN.004\";"CSF Available";"BIOSPECIMEN:HF.CSF.000 Available";"\Bio Specimens\HumanFluid\Brain\Cerebro-Spinal Fluid (CSF)\SPECIMENS:HF.BRN.004\True"
 "\Bio Specimens\HumanFluid\Blood (Whole)\SPECIMENS:HF.BLD.000 Quantity\";"Wholeblood Quantity";"BIOSPECIMEN:HF.BLD.000 Quantity";"\Bio Specimens\HumanFluid\Blood (Whole)\SPECIMENS:HF.BLD.000 Quantity\"
 "\Bio Specimens\HumanFluid\Plasma\SPECIMENS:HF.PLS.000 Quantity\";"Plasma Quantity";"BIOSPECIMEN:HF.PLS.000 Quantity";"\Bio Specimens\HumanFluid\Plasma\SPECIMENS:HF.PLS.000 Quantity\"
+"\Bio Specimens\NucleicAcid\RNA\";"Extracted RNA Available";"BIOSPECIMEN:RNA Available";"\Bio Specimens\NucleicAcid\RNA\True" 
+"\Bio Specimens\HumanFluid\Serum\Quantity\";"Serum Quantity";"Quantity";"\Bio Specimens\HumanFluid\Serum\Quantity\"
+"\Bio Specimens\HumanFluid\Urine\Quantity\";"Urine Quantity";"Quantity";"\Bio Specimens\HumanFluid\Urine\Quantity\"
+"\Bio Specimens\HumanFluid\Amniotic fluid\Quantity\";"Amniotic fluid Quantity";"Quantity";"\Bio Specimens\HumanFluid\Amniotic fluid\Quantity\"
+"\Bio Specimens\HumanFluid\Peripheral blood mononuclear cells\Quantity\";"Peripheral blood mononuclear cells Quantity";"Quantity";"\Bio Specimens\HumanFluid\Peripheral blood mononuclear cells\Quantity\"
