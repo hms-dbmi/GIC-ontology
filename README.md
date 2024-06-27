@@ -52,3 +52,9 @@ Wholeblood | \Bio Specimens\HumanFluid\Blood (Whole)\SPECIMENS:HF.BLD.000 Quanti
 Plasma | \Bio Specimens\HumanFluid\Plasma\SPECIMENS:HF.PLS.000 Quantity\ | Quantity
 Tissue | \Bio Specimens\HumanTissue\ | True
 CSF | \Bio Specimens\HumanFluid\Brain\Cerebro-Spinal Fluid (CSF)\SPECIMENS:HF.BRN.004\ |True
+Extracted RNA | \Bio Specimens\NucleicAcid\RNA\ |True
+Serum | \Bio Specimens\HumanFluid\Serum\Quantity\ |Quantity
+Urine | \Bio Specimens\HumanFluid\Urine\Quantity\ |Quantity
+Amniotic fluid | \Bio Specimens\HumanFluid\Amniotic fluid\Quantity\ |Quantity
+Peripheral blood mononuclear cells | \Bio Specimens\HumanFluid\Peripheral blood mononuclear cells\Quantity\ |Quantity
+
