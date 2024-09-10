@@ -1,0 +1,11 @@
+ACT_C_FULLNAME	OMOP_S_CONCEPT_ID	OMOP_NS_CONCEPT_ID	C_NAME	C_BASECODE	HPDS_PATH	type	values
+\Bio Specimens\NucleicAcid\RNA\			Extracted RNA Available	BIOSPECIMEN:RNA Available	\Bio Specimens\NucleicAcid\RNA\	categorical	True
+\Bio Specimens\NucleicAcid\DNA\			Extracted DNA Available	BIOSPECIMEN:DNA Available	\Bio Specimens\NucleicAcid\DNA\	categorical	True
+\Bio Specimens\HumanTissue\			Tissue Available	BIOSPECIMEN:Tissue Available	\Bio Specimens\HumanTissue\	categorical	True
+\Bio Specimens\HumanFluid\Cerebro-Spinal Fluid (CSF)\			CSF Available	BIOSPECIMEN:CSF Available	\Bio Specimens\HumanFluid\Cerebro-Spinal Fluid (CSF)\	categorical	True
+\Bio Specimens\HumanFluid\Whole Blood\Quantity\			Wholeblood Quantity	BIOSPECIMEN:Wholeblood Quantity	\Bio Specimens\HumanFluid\Whole Blood\	continuous	[1,6000]
+\Bio Specimens\HumanFluid\Plasma\Quantity\			Plasma Quantity	BIOSPECIMEN:Plasma Quantity	\Bio Specimens\HumanFluid\Plasma\	continuous	[1,6000]
+\Bio Specimens\HumanFluid\Serum\Quantity\			Serum Quantity	BIOSPECIMEN:Serum Quantity	\Bio Specimens\HumanFluid\Serum\	continuous	[1,6000]
+\Bio Specimens\HumanFluid\Urine\Quantity\			Urine Quantity	BIOSPECIMEN:Urine Quantity	\Bio Specimens\HumanFluid\Urine\	continuous	[1,6000]
+\Bio Specimens\HumanFluid\Amniotic fluid\Quantity\			Amniotic fluid Quantity	BIOSPECIMEN:Amniotic fluid Quantity	\Bio Specimens\HumanFluid\Amniotic fluid\	continuous	[1,6000]
+\Bio Specimens\HumanFluid\Peripheral blood mononuclear cells\Quantity\			Peripheral blood mononuclear cells Quantity	BIOSPECIMEN:Peripheral blood mononuclear cells Quantity	\Bio Specimens\HumanFluid\Peripheral blood mononuclear cells\	continuous	[1,6000]
