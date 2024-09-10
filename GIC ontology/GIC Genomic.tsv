@@ -1,0 +1,7 @@
+ACT_C_FULLNAME	OMOP_S_CONCEPT_ID	OMOP_NS_CONCEPT_ID	C_NAME	C_BASECODE	HPDS_PATH	type	values
+\Variant Data Type\WGS\			WGS Available	VARIANT.DATA.WGS Available	\Variant Data Type\	categorical	WGS
+\Variant Data Type\WES\			WES Available	VARIANT.DATA.WES Available	\Variant Data Type\	categorical	WES
+\Variant Data Type\Genotype array\			GENOTYPE_ARRAY Available	VARIANT.DATA.GENOTYPE_ARRAY Available	\Variant Data Type\	categorical	Genotype array
+\Variant Data Type\Low coverage WGS\			LOW COVERAGE WGS Available	VARIANT.DATA.LOW COVERAGE WGS Available	\Variant Data Type\	categorical	Low coverage WGS
+\Variant Data Type\Clinical-grade WGS\			Clinical-grade WGS Available	VARIANT.DATA.Clinical-grade WGS Available	\Variant Data Type\	categorical	Clinical-grade WGS
+\Variant Data Type\Clinical-grade WES\			Clinical-grade WES Available	VARIANT.DATA.Clinical-grade WES Available	\Variant Data Type\	categorical	Clinical-grade WES
