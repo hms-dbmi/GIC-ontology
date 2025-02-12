@@ -11,6 +11,7 @@ Answer: Below are the differences between the ACT ontology used in GIC:
 * Age: Age is a numeric value in GIC, not a categorical value. This allows researchers to search more dynamically. 
 * GIC uses only icd_10 and not icd_10 and icd10_icd9. This is to avoid misleading investigators as patients at some institutes can be mapped to both icd_10 and icd10_icd9. icd_10 will only include diagnosis after 2015.
 * ‘ACT’ is prefixed in the root node path in GIC ontology.
+* To ensure data alignment across the GIC sites, free text should not be loaded into GIC. Any free text should be mapped to the values in the GIC ACT ontology and loaded into GIC. 
 * In the Covid file, "&#x7C" has been replaced with a pipe in the GIC ontology. Example:  \ACT COVID-19\Course Of Illness\Illness Severity\Severe Illness\Severe Lab Tests\Carbon dioxide <b>&#x7C</b>  blood arterial\Carbon dioxide:PPres:Pt:BldA:Qn
 
 
