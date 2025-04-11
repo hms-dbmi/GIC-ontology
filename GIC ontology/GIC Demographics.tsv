@@ -1,5 +1,5 @@
 ACT_C_FULLNAME	OMOP_S_CONCEPT_ID	OMOP_NS_CONCEPT_ID	C_NAME	C_BASECODE	HPDS_PATH	type	values
-ACT Demographics\Age\					\ACT Demographics\Age\	continuous	[1,200]
+\ACT Demographics\Age\					\ACT Demographics\Age\	continuous	[1,200]
 \ACT Demographics\Age\Not recorded\			Not recorded		\ACT Demographics\Age\	categorical	Not recorded
 \ACT\Demographics\Hispanic\No Information\	0	0	No Information	DEM|HISP:NI	\ACT Demographics\Hispanic\	categorical	No Information
 \ACT\Demographics\Hispanic\No\	38003564	38003564	No	DEM|HISP:N	\ACT Demographics\Hispanic\	categorical	No
