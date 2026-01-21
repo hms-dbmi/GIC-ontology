@@ -41,6 +41,21 @@ Answer: The phenotypic data should be loaded first. The genomic data should be l
 <b>Question: Can I load additional columns to HPDS for my institute to assist with mapping, etc?</b><br>
 Answer: Yes, you can load additional columns into your institute’s instance of HPDS. 
 
+<b>Question: How should variable value (TVAL-CHAR) be mapped when loading the data?</b><br>
+Answer: If the concept path has the TVAL_CHAR in it, HPDS reads the concept path as including the TVAL_CHAR. Therefore, you have three options to loading the data, as shown below:
+Options | PATIENT_NUM | CONCEPT_PATH | NVAL_NUM | TVAL_CHAR | TIMESTAMP
+:--- | :--- | :--- | :--- | :--- | :--- 
+Option 1 | 1530172 | \Consent Type\Waiver of consent\ | NULL | Yes | 1.6149E+12
+Option 2 | 1530172 | \Consent Type\Waiver of consent\Yes | NULL | Yes | 1.6149E+12
+Option 3 | 1530172 | \Consent Type\Waiver of consent\Yes\ | NULL | Yes | 1.6149E+12
+
+
+
+<b>Question: Is TVAL-CHAR case sensitive?</b><br>
+Answer: TVAL_CHAR is case-sensitive, therefore it is imperative that the sites use the same ontology provided. In the example below, one site has loaded the data with an upper case “True” and the other site has loaded the data with lower case “true”. 
+![image](https://github.com/hms-dbmi/i2b2ACTtoHPDS/assets/64793765/402adb2e-e7f1-4d01-9393-feb221c3a810)
+
+
 <b>Question: What are the values for the biosamples mapping?</b><br>
 Biosample | Path | Value
 :--- | :--- | :--- 
